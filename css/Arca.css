@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 1440px;
+  
   height: 2965px;
   background-color: white;
   box-shadow: 0 3px 6px 0 rgba(18, 15, 40, 0.12);
@@ -43,12 +44,7 @@ body {
   width: 487px;
   min-width: 0;
 }
-.arca .flexColTitleContentDiv {
-  display: flex;
-  flex-direction: column;
-  gap: 14px 0;
-  width: 100%;
-}
+
 .arca .dogCareTitleH2 {
   display: flex;
   justify-content: center;
@@ -102,11 +98,7 @@ body {
   width: 195px;
   min-width: 0;
 }
-.arca .brandingBoxDiv {
-  display: flex;
-  flex-direction: column;
-  margin: 0 1px 0 0;
-}
+
 .arca .flexRowBrandingDiv {
   display: flex;
   align-items: center;
@@ -129,21 +121,12 @@ body {
   width: 458px;
   min-width: 0;
 }
-.arca .navigationBoxDiv {
-  display: flex;
-  flex-direction: column;
-}
+
 .arca .flexRowNavigationDiv {
   display: flex;
   gap: 0 1px;
 }
-.arca .serviceItemDiv {
-  display: flex;
-  flex-direction: column;
-  width: 103px;
-  min-width: 0;
-  border-radius: 4px;
-}
+
 .arca .serviceLabelP {
   display: flex;
   justify-content: center;
@@ -153,13 +136,7 @@ body {
   color: white;
   text-align: center;
 }
-.arca .aboutUsItemDiv {
-  display: flex;
-  flex-direction: column;
-  width: 145px;
-  min-width: 0;
-  border-radius: 4px;
-}
+
 .arca .aboutUsLabelP {
   display: flex;
   justify-content: center;
@@ -169,13 +146,7 @@ body {
   color: white;
   text-align: center;
 }
-.arca .locationItemDiv {
-  display: flex;
-  flex-direction: column;
-  width: 104px;
-  min-width: 0;
-  border-radius: 4px;
-}
+
 .arca .locationLabelP {
   display: flex;
   justify-content: center;
@@ -185,13 +156,7 @@ body {
   color: white;
   text-align: center;
 }
-.arca .contactItemDiv {
-  display: flex;
-  flex-direction: column;
-  width: 103px;
-  min-width: 0;
-  border-radius: 4px;
-}
+
 .arca .contactLabelP {
   display: flex;
   justify-content: center;
@@ -201,12 +166,7 @@ body {
   color: white;
   text-align: center;
 }
-.arca .registrationGroupDiv {
-  display: flex;
-  flex-direction: column;
-  width: 113px;
-  min-width: 0;
-}
+
 .arca .registerBtn {
   display: flex;
   justify-content: center;
@@ -218,13 +178,7 @@ body {
   border-radius: 22px;
   padding: 9px 16px;
 }
-.arca .loginGroupDiv {
-  display: flex;
-  flex-direction: column;
-  margin: 0 80px 0 0;
-  width: 128px;
-  min-width: 0;
-}
+
 .arca .loginBtn {
   display: flex;
   justify-content: center;
@@ -306,14 +260,8 @@ body {
   gap: 24px 0;
   margin: 24px;
 }
-.arca .placeholder5 {
-  width: 36px;
-  min-height: 36px;
-}
-.arca .flex_col2 {
-  display: flex;
-  flex-direction: column;
-}
+
+
 .arca .subtitle {
   font: 600 20px/1.5 "Red Hat Display", Helvetica, Arial, serif;
   color: #2e0e73;
@@ -352,13 +300,10 @@ body {
 .arca .section4 {
   display: flex;
   flex-direction: column;
-}
-.arca .section41 {
-  display: flex;
-  flex-direction: column;
   margin: 72px 0;
   background-color: #2e0e73;
 }
+
 .arca .flex_row1 {
   display: flex;
   justify-content: space-between;
@@ -476,11 +421,7 @@ body {
   margin: 62px auto 48px;
   width: 81.67%;
 }
-.arca .content_box {
-  display: flex;
-  flex-direction: column;
-  width: 24.06%;
-}
+
 .arca .flex_row5 {
   display: flex;
   align-items: center;
