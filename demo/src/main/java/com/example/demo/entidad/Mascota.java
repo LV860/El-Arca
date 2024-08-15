@@ -9,6 +9,8 @@ public class Mascota {
     private String enfermedad;
     private String urlImagen;
 
+    
+
 
 
     
