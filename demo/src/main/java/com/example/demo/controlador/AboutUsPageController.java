@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/home")
 @Controller
-public class AboutUsPage {
+public class AboutUsPageController {
     @GetMapping("aboutUsPage")
     public String landingPage (){
         return "html/aboutUsPage";
