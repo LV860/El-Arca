@@ -29,9 +29,18 @@
         <div class="title-bar">
             <h1>Información Clientes</h1>
             <div class="buttons-group">
-                <button class="btnAzul">Añadir</button>
-                <button class="btnVerde">Editar Cliente</button>
-                <button class="btnRojo">Eliminar Cliente</button>
+                <!-- Botón para añadir cliente -->
+                <a href="../html/createClientes.html">
+                    <button class="btnAzul">Añadir Cliente</button>
+                </a>
+                <!-- Botón para editar cliente -->
+                <a href="../html/updateClientes.html">
+                    <button class="btnVerde">Editar Cliente</button>
+                </a>
+                <!-- Botón para eliminar cliente -->
+                <a href="#" onclick="mostrarEliminarClientePopup()">
+                    <button class="btnRojo">Eliminar Cliente</button>
+                </a>
             </div>
         </div>
         <div class="client-table">
@@ -49,6 +58,27 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Popup para eliminar cliente -->
+        <div id="eliminarClientePopup" style="display:none;">
+            <h3>Escribe la cédula del cliente que deseas eliminar</h3>
+            <input type="text" id="cedulaEliminar" placeholder="Cédula">
+            <button class="btnRojo" onclick="eliminarCliente()">Eliminar Cliente</button>
+        </div>
     </main>
+
+    <script>
+        function mostrarEliminarClientePopup() {
+            document.getElementById('eliminarClientePopup').style.display = 'block';
+        }
+
+        function eliminarCliente() {
+            const cedula = document.getElementById('cedulaEliminar').value;
+            // Aquí deberías enviar la cédula al backend para eliminar el cliente
+            // Ejemplo: fetch('/eliminarCliente', { method: 'POST', body: JSON.stringify({ cedula }) });
+            alert('Cliente con cédula ' + cedula + ' ha sido eliminado');
+            document.getElementById('eliminarClientePopup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

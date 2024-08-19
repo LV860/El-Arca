@@ -1,0 +1,221 @@
+/*------------------------------------------- Body ------------------------------------------*/
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  margin: 20px 100px 20px 100px;
+}
+
+/*------------------------------------------- Header ------------------------------------------*/
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #2e0e73ff;
+}
+
+.navigationBarLogo img {
+  border-radius: 36px;
+}
+
+.navigationBarLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  margin-left: 132px;
+  flex-grow: 5;
+}
+
+.navigationBarLogo h1 {
+  font-size: 32px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+
+.navigationBarLogo a {
+  text-decoration: none;
+  color: white;
+}
+
+.navigationBarLogo a:visited {
+  color: white;
+}
+
+.navigationBarMenuOptions {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 5;
+}
+.navigationBarMenuOptions h3 {
+  margin-left: 16px;
+  margin-right: 16px;
+  font-family: "Manrope", sans-serif;
+  font-weight: normal;
+  font-size: 17px;
+}
+.navigationBarMenuOptions a {
+  text-decoration: none;
+  color: white;
+}
+
+.navigationBarMenuOptions a:visited {
+  color: white;
+}
+.navigationBarButtons {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.btnYellow {
+  background-color: #f2ba03ff;
+  font-family: "Manrope", sans-serif;
+  margin: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btnYellow h3 {
+  font-weight: normal;
+  color: #544101ff;
+  margin: 0;
+}
+
+.btnBlue {
+  background-color: #379ae6ff;
+  font-family: "Manrope", sans-serif;
+  font-weight: normal;
+  margin: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btnBlue h3 {
+  font-weight: normal;
+  color: white;
+  margin: 0;
+}
+
+button {
+  border-radius: 26px;
+  border: none;
+}
+
+h1 {
+  font-family: "Red Hat Display", sans-serif;
+}
+
+.btnPurple {
+  background-color: #2e0e73ff;
+  font-family: "Manrope", sans-serif;
+  font-weight: normal;
+  color: white;
+  margin: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/*------------------------------------------- Footer ------------------------------------------*/
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 100px 10px 100px;
+  background-color: rgb(46, 14, 115);
+  bottom: 0;
+  font-family: "Manrope", Helvetica, Arial, serif;
+}
+
+.copyright {
+  width: 35%;
+  justify-content: space-between;
+  color: white;
+}
+
+.FooterLogo img {
+  border-radius: 36px;
+}
+
+.FooterLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  width: 30%;
+  flex-grow: 5;
+}
+
+.FooterLogo h1 {
+  font-size: 32px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 20px;
+}
+
+.FooterLogo a {
+  text-decoration: none;
+  color: white;
+}
+
+.FooterOptions {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 5;
+  width: 30%;
+}
+.FooterOptions ul {
+  font-family: "Manrope", sans-serif;
+  font-weight: normal;
+  font-size: 17px;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  list-style-type: none;
+  margin-bottom: 0;
+}
+.FooterLogo a:visited {
+  color: rgb(255, 255, 255);
+}
+
+.FooterOptionsList a {
+  text-decoration: none;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+}
+
+#redes {
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: right;
+}
+
+#redes a {
+  text-decoration: none;
+  padding: 20px;
+}
+
+.FooterOptionsList a:visited {
+  color: white;
+}
