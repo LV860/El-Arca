@@ -26,25 +26,29 @@
     </header>
 
     <main>
-        <div class="header-container">
+        <div class="title-bar">
             <h1>Información Clientes</h1>
-            <a href="createClientes.html">
-                <button class="btn-add-client">Añadir</button>
-            </a>
+            <div class="buttons-group">
+                <button class="btnAzul">Añadir</button>
+                <button class="btnVerde">Editar Cliente</button>
+                <button class="btnRojo">Eliminar Cliente</button>
+            </div>
         </div>
-        <table class="clients-table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cédula</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí se agregarán las filas de la tabla -->
-            </tbody>
-        </table>
+        <div class="client-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán dinámicamente las filas de los clientes -->
+                </tbody>
+            </table>
+        </div>
     </main>
 </body>
 </html>
