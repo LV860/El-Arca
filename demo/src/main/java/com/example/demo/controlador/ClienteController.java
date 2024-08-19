@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.servicio.ClienteService;
-
-@RequestMapping("/clientes")
+@RequestMapping("/cliente")
 @Controller
 public class ClienteController {
 
@@ -20,38 +19,32 @@ public class ClienteController {
 
     @GetMapping("/all")
     public String mostrarClientes(Model model) {
-        model.addAttribute("clientes", clienteService.findAll());
-        return "html/tabla_Clientes"; // Nombre del archivo HTML para la lista de clientes
+        model.addAttribute("clientes", clienteService.SearchAll());
+        return "html/tabla_Clientes"; 
     }
 
     @GetMapping("/find/{id}")
-    public String mostrarInfoCliente(Model model, @PathVariable("id") Long id) {
-        Cliente cliente = clienteService.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
-        model.addAttribute("cliente", cliente);
-        return "html/mostrarClientePage"; // Nombre del archivo HTML para mostrar información del cliente
+    public String mostrarInfoCliente(Model model, @PathVariable("id") int id) {
+        model.addAttribute("cliente", clienteService.SearchById(id));
+        return "html/mostrarClientePage"; 
     }
 
     @GetMapping("/find")
-    public String mostrarInfoCliente2(Model model, @RequestParam("id") Long id) {
-        Cliente cliente = clienteService.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
-        model.addAttribute("cliente", cliente);
-        return "html/mostrarClientePage"; // Nombre del archivo HTML para mostrar información del cliente
+    public String mostrarInfoCliente2(Model model, @RequestParam("id") int id) {
+        model.addAttribute("cliente", clienteService.SearchById(0));
+        return "html/mostrarClientePage";
     }
 
     @GetMapping("/editar/{id}")
     public String editarCliente(@PathVariable("id") Long id, Model model) {
-        Cliente cliente = clienteService.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
-        model.addAttribute("cliente", cliente);
+        model.addAttribute("cliente", clienteService.SearchAll());
         return "html/editarCliente"; // Nombre del archivo HTML para editar cliente
     }
-
+/*
     @PostMapping("/editar")
     public String guardarCambios(@RequestParam("id") Long id, @RequestParam("nombre") String nombre,
                                  @RequestParam("correo") String correo, @RequestParam("celular") String celular) {
-        Cliente cliente = clienteService.findById(id)
+        Cliente cliente = clienteService.SearchById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
         cliente.setNombre(nombre);
         cliente.setCorreo(correo);
@@ -64,5 +57,5 @@ public class ClienteController {
     public String eliminarCliente(@PathVariable("id") Long id) {
         clienteService.deleteById(id);
         return "redirect:/clientes/all"; // Redirige a la lista de clientes después de eliminar
-    }
+    }*/
 }

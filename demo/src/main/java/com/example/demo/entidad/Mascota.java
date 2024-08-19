@@ -8,11 +8,6 @@ public class Mascota {
     private double peso;
     private String enfermedad;
     private String urlImagen;
-
-    
-
-
-
     
     public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
         this.nombre = nombre;
