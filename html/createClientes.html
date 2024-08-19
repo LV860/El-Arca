@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Arca - Añadir Cliente</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/createClientes.css">
+</head>
+<body>
+    <header>
+        <div class="navigationBarLogo">
+            <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+            <a href="../html/landingPage.html"><h1>El Arca</h1></a>
+        </div>
+        <div class="navigationBarMenuOptions">
+            <a href="../html/perfilVeterinario.html"><h3>Perfil</h3></a>
+            <a href="../html/veterinarioClientes.html"><h3>Clientes</h3></a>
+            <a href="../html/aboutUsPage.html"><h3>Mascotas</h3></a>
+        </div>
+        <div class="navigationBarButtons">
+            <a href="../html/landingPage.html">
+                <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="add-client-form">
+            <h1>Añadir Cliente</h1>
+            <form action="../html/veterinarioClientes.html">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Cédula</label>
+                        <input type="text" id="cedula" name="cedula" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Número de Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <button type="submit" class="btnSubmit">Añadir</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
