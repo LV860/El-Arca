@@ -19,7 +19,12 @@ public class ClienteRepository {
     }
 
     public Cliente findByCedula(String cedula){
-        return data.get(cedula);
+        for (Cliente cliente : data.values()){
+            if(cliente.getCedula().equalsIgnoreCase(cedula)){
+                return cliente;
+            }
+        }
+        return null;
     }
     
     public Collection<Cliente> findAll(){
@@ -32,6 +37,14 @@ public class ClienteRepository {
     
     public void delete(String cedula) {
         data.remove(cedula);
+    }
+
+    public void update(Cliente cliente) {
+        // Verificar si el cliente existe en el mapa
+        if (data.containsKey(cliente.getCedula())) {
+            // Actualizar el cliente existente
+            data.put(cliente.getCedula(), cliente);
+        }
     }
 
 }
