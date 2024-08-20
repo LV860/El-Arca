@@ -27,7 +27,8 @@ public class ClienteController {
 
     @GetMapping("/añadir")
     public String mostrarFormularioAñadir(Model model) {
-        model.addAttribute("cliente", new Cliente());
+        Cliente cliente = new Cliente();
+        model.addAttribute("cliente", cliente);
         return "../html/createClientes"; 
     }
     @PostMapping("/añadir")
