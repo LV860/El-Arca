@@ -16,27 +16,28 @@ import com.example.demo.repositorio.ClienteRepository;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
-    
-    @GetMapping("/all")
-    public String mostrarClientes(Model model) {
+
+    @GetMapping
+    public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteRepository.findAll());
-        return "html/tabla_Clientes";
+        return "../html/veterinarioClientes"; 
     }
-    
+
     @GetMapping("/añadir")
-    public String mostrarFormularioAñadirCliente(Model model) {
-        model.addAttribute("cliente", new Cliente());
-        return "html/createClientes";
+    public String mostrarFormularioAñadir(Model model) {
+        Cliente cliente = new Cliente();
+        model.addAttribute("cliente", cliente);
+        return "../html/createClientes"; 
     }
-    
     @PostMapping("/añadir")
     public String añadirCliente(@ModelAttribute Cliente cliente) {
         clienteRepository.save(cliente);
-        return "redirect:/clientes/all";
+        return "../html/veterinarioClientes";
     }
+
     
     @GetMapping("/editar")
     public String mostrarFormularioEditarCliente(@RequestParam("cedula") String cedula, Model model) {
@@ -44,23 +45,19 @@ public class ClienteController {
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
             return "html/updateClientes";
-            //return "redirect:/clientes/all"; 
-        }else{
-            //http://localhost:8080/clientes/editar?cedula=12345
-            throw new NotFoundException(cedula);
         }
-        
+        return "redirect:/clientes/all"; 
     }
     
     @PostMapping("/editar")
-    public String editarCliente(@ModelAttribute Cliente cliente) {
+    public String actualizarCliente(@ModelAttribute Cliente cliente) {
         clienteRepository.save(cliente);
-        return "redirect:/clientes/all";
+        return "../html/veterinarioClientes"; 
     }
-    
+
     @PostMapping("/eliminar")
-    public String eliminarCliente(@RequestParam("cedula") String cedula) {
-        clienteRepository.delete(cedula);
-        return "redirect:/clientes/all";
+    public String eliminarCliente(@RequestParam("id") String id) {
+        clienteRepository.delete(id);
+        return "../html/veterinarioClientes"; 
     }
 }
