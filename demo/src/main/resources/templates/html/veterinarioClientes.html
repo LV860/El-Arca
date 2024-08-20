@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Arca - Clientes</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/veterinarioClientes.css">
+</head>
+<body>
+    <header>
+        <div class="navigationBarLogo">
+            <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+            <a href="../html/landingPage.html"><h1>El Arca</h1></a>
+        </div>
+        <div class="navigationBarMenuOptions">
+            <a href="../html/perfilVeterinario.html"><h3>Perfil</h3></a>
+            <a href="../html/veterinarioClientes.html"><h3>Clientes</h3></a>
+            <a href="../html/aboutUsPage.html"><h3>Mascotas</h3></a>
+        </div>
+        <div class="navigationBarButtons">
+            <a href="../html/landingPage.html">
+                <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="title-bar">
+            <h1>Información Clientes</h1>
+            <div class="buttons-group">
+                <a href="../html/createClientes.html">
+                    <button class="btnAzul">Añadir Cliente</button>
+                </a>
+                <!-- Los botones para editar y eliminar clientes se pueden gestionar aquí -->
+            </div>
+        </div>
+        <div class="client-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cédula</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterar sobre clientes y mostrar en la tabla -->
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.nombre}"></td>
+                        <td th:text="${cliente.cedula}"></td>
+                        <td th:text="${cliente.correo}"></td>
+                        <td th:text="${cliente.celular}"></td>
+                        <td>
+                            <a th:href="@{/clientes/editar(cedula=${cliente.cedula})}">
+                                <button class="btnVerde">Editar</button>
+                            </a>
+                            <form action="/clientes/eliminar" method="post" style="display:inline;">
+                                <input type="hidden" name="cedula" th:value="${cliente.cedula}" />
+                                <button type="submit" class="btnRojo">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
