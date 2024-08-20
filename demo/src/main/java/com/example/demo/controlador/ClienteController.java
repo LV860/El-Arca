@@ -15,47 +15,46 @@ import com.example.demo.repositorio.ClienteRepository;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
-    
+
     @Autowired
     private ClienteRepository clienteRepository;
-    
-    @GetMapping("/all")
-    public String mostrarClientes(Model model) {
+
+    @GetMapping
+    public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteRepository.findAll());
-        return "html/tabla_Clientes";
+        return "../html/veterinarioClientes"; 
     }
-    
+
     @GetMapping("/añadir")
-    public String mostrarFormularioAñadirCliente(Model model) {
+    public String mostrarFormularioAñadir(Model model) {
         model.addAttribute("cliente", new Cliente());
-        return "html/createClientes";
+        return "../html/createClientes"; 
     }
-    
     @PostMapping("/añadir")
     public String añadirCliente(@ModelAttribute Cliente cliente) {
         clienteRepository.save(cliente);
-        return "redirect:/clientes/all";
+        return "../html/veterinarioClientes";
     }
+
     
     @GetMapping("/editar")
-    public String mostrarFormularioEditarCliente(@RequestParam("cedula") String cedula, Model model) {
-        Cliente cliente = clienteRepository.findByCedula(cedula);
-        if (cliente != null) {
-            model.addAttribute("cliente", cliente);
-            return "html/updateClientes";
-        }
-        return "redirect:/clientes/all"; 
-    }
-    
+    public String mostrarFormularioEdicion(@RequestParam("id") String id, Model model) {
+
+    Cliente cliente = clienteRepository.findByCedula(id);
+    model.addAttribute("cliente", cliente);    
+    return "../html/updateClientes"; 
+}
+
+
     @PostMapping("/editar")
-    public String editarCliente(@ModelAttribute Cliente cliente) {
+    public String actualizarCliente(@ModelAttribute Cliente cliente) {
         clienteRepository.save(cliente);
-        return "redirect:/clientes/all";
+        return "../html/veterinarioClientes"; 
     }
-    
+
     @PostMapping("/eliminar")
-    public String eliminarCliente(@RequestParam("cedula") String cedula) {
-        clienteRepository.delete(cedula);
-        return "redirect:/clientes/all";
+    public String eliminarCliente(@RequestParam("id") String id) {
+        clienteRepository.delete(id);
+        return "../html/veterinarioClientes"; 
     }
 }
