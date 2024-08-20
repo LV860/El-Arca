@@ -46,7 +46,10 @@ public class ClienteController {
             model.addAttribute("cliente", cliente);
             return "html/updateClientes";
         }
-        return "redirect:/clientes/all"; 
+        else {
+            throw new NotFoundException(cedula);
+        }
+        //return "redirect:/clientes/all"; 
     }
     
     @PostMapping("/editar")
