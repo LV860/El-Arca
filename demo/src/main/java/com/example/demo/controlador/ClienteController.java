@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.NotFoundException;
 import com.example.demo.repositorio.ClienteRepository;
 
 @Controller
@@ -43,8 +44,12 @@ public class ClienteController {
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
             return "html/updateClientes";
+            //return "redirect:/clientes/all"; 
+        }else{
+            //http://localhost:8080/clientes/editar?cedula=12345
+            throw new NotFoundException(cedula);
         }
-        return "redirect:/clientes/all"; 
+        
     }
     
     @PostMapping("/editar")
