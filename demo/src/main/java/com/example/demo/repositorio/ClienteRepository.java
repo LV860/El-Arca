@@ -1,35 +1,36 @@
 package com.example.demo.repositorio;
 
-import com.example.demo.entidad.Cliente;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.entidad.Cliente;
 
 @Repository
 public class ClienteRepository {
 
-    private List<Cliente> clientes = new ArrayList<>();
-
-    public List<Cliente> findAll() {
-        return clientes;
+    private Map<String, Cliente> data = new HashMap<>();
+    
+    public ClienteRepository() {        
+        data.put("1", new Cliente("123456789", "pipe_140@gmail.com", "555-1234", "Daniel Felipe Bello Navas"));
+        data.put("2", new Cliente("987654321", "juan_101@gmail.com", "555-5678", "Juan Andres Orjuela Bello"));
     }
 
-    public Optional<Cliente> findByCedula(String cedula) {
-        return clientes.stream().filter(cliente -> cliente.getCedula().equals(cedula)).findFirst();
+    public Cliente findByCedula(String cedula){
+        return data.get(cedula);
     }
-
+    
+    public Collection<Cliente> findAll(){
+        return data.values();
+    }
+    
     public void save(Cliente cliente) {
-        clientes.add(cliente);
+        data.put(cliente.getCedula(), cliente);
     }
-
-    public void deleteByCedula(String cedula) {
-        clientes.removeIf(cliente -> cliente.getCedula().equals(cedula));
-    }
-
-    public void update(Cliente cliente) {
-        deleteByCedula(cliente.getCedula());
-        save(cliente);
+    
+    public void delete(String cedula) {
+        data.remove(cedula);
     }
 }

@@ -4,58 +4,58 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.demo.servicio.ClienteService;
-@RequestMapping("/cliente")
+import com.example.demo.entidad.Cliente;
+import com.example.demo.repositorio.ClienteRepository;
+
 @Controller
+@RequestMapping("/clientes")
 public class ClienteController {
-
+    
     @Autowired
-    private ClienteService clienteService;
-
+    private ClienteRepository clienteRepository;
+    
     @GetMapping("/all")
     public String mostrarClientes(Model model) {
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "html/tabla_Clientes"; 
+        model.addAttribute("clientes", clienteRepository.findAll());
+        return "html/tabla_Clientes";
     }
-
-    @GetMapping("/find/{id}")
-    public String mostrarInfoCliente(Model model, @PathVariable("id") int id) {
-        model.addAttribute("cliente", clienteService.SearchById(id));
-        return "html/mostrarClientePage"; 
+    
+    @GetMapping("/añadir")
+    public String mostrarFormularioAñadirCliente(Model model) {
+        model.addAttribute("cliente", new Cliente());
+        return "html/createClientes";
     }
-
-    @GetMapping("/find")
-    public String mostrarInfoCliente2(Model model, @RequestParam("id") int id) {
-        model.addAttribute("cliente", clienteService.SearchById(0));
-        return "html/mostrarClientePage";
+    
+    @PostMapping("/añadir")
+    public String añadirCliente(@ModelAttribute Cliente cliente) {
+        clienteRepository.save(cliente);
+        return "redirect:/clientes/all";
     }
-
-    @GetMapping("/editar/{id}")
-    public String editarCliente(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("cliente", clienteService.SearchAll());
-        return "html/editarCliente"; // Nombre del archivo HTML para editar cliente
+    
+    @GetMapping("/editar")
+    public String mostrarFormularioEditarCliente(@RequestParam("cedula") String cedula, Model model) {
+        Cliente cliente = clienteRepository.findByCedula(cedula);
+        if (cliente != null) {
+            model.addAttribute("cliente", cliente);
+            return "html/updateClientes";
+        }
+        return "redirect:/clientes/all"; 
     }
-/*
+    
     @PostMapping("/editar")
-    public String guardarCambios(@RequestParam("id") Long id, @RequestParam("nombre") String nombre,
-                                 @RequestParam("correo") String correo, @RequestParam("celular") String celular) {
-        Cliente cliente = clienteService.SearchById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cliente no encontrado"));
-        cliente.setNombre(nombre);
-        cliente.setCorreo(correo);
-        cliente.setCelular(celular);
-        clienteService.save(cliente);
-        return "redirect:/clientes/all"; // Redirige a la lista de clientes después de guardar
+    public String editarCliente(@ModelAttribute Cliente cliente) {
+        clienteRepository.save(cliente);
+        return "redirect:/clientes/all";
     }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable("id") Long id) {
-        clienteService.deleteById(id);
-        return "redirect:/clientes/all"; // Redirige a la lista de clientes después de eliminar
-    }*/
+    
+    @PostMapping("/eliminar")
+    public String eliminarCliente(@RequestParam("cedula") String cedula) {
+        clienteRepository.delete(cedula);
+        return "redirect:/clientes/all";
+    }
 }
