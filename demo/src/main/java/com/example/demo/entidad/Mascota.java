@@ -8,14 +8,23 @@ public class Mascota {
     private double peso;
     private String enfermedad;
     private String urlImagen;
+    //Nuevo para id's
+    private Integer idMascota;
     
-    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
+    public Mascota(Integer idMascota, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
+        this.idMascota = idMascota;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
         this.peso = peso;
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
+    }
+    public Integer getIdMascota() {
+        return idMascota;
+    }
+    public void setIdMascota(Integer idMascota) {
+        this.idMascota = idMascota;
     }
     public String getNombre() {
         return nombre;
