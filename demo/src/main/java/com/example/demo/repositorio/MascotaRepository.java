@@ -35,6 +35,20 @@ public class MascotaRepository {
         return data.values();
     }
 
+    //NUEVOS METODOS
+    public void deleteById(int id){
+        data.remove(id);
+    }
+    public void update(Mascota mascota){
+        data.put(mascota.getId(), mascota);
+    }
+    public void add(Mascota mascota){
+        int tam =data.size();
+        int lastId = data.get(tam).getId();
+        mascota.setId(lastId+1);
+    }
+
+
     
 
 }

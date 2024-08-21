@@ -2,17 +2,18 @@ package com.example.demo.entidad;
 
 public class Mascota {
     
+    //Nuevo para id's
+    private Integer id;
     private String nombre;
     private String raza;
     private int edad;
     private double peso;
     private String enfermedad;
     private String urlImagen;
-    //Nuevo para id's
-    private Integer idMascota;
     
-    public Mascota(Integer idMascota, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
-        this.idMascota = idMascota;
+    
+    public Mascota(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
+        this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -20,11 +21,11 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
     }
-    public Integer getIdMascota() {
-        return idMascota;
+    public Integer getId() {
+        return id;
     }
-    public void setIdMascota(Integer idMascota) {
-        this.idMascota = idMascota;
+    public void setId(Integer id) {
+        this.id = id;
     }
     public String getNombre() {
         return nombre;

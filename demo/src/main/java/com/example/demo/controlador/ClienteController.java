@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.NotFoundException;
-import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.servicio.ClienteService;
 
 @Controller

@@ -32,8 +32,9 @@ table {
   font-size: 22px;
 }
 
-button {
+.tablaSection a {
   font-size: 22px !important;
+  margin: 5px;
 }
 
 .editButtonContainer {

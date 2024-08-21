@@ -55,7 +55,14 @@
             </td>
             <td>
               <div class="editButtonContainer">
-                <button type="button" class="btn btn-warning">Editar</button>
+                <a type="button" class="btn btn-warning" th:href="@{/mascota/update/{id}(id=${mascota.id})}">Editar</a>
+                <a
+                  type="button"
+                  class="btn btn-danger"
+                  th:href="@{/mascota/delete/{id}(id=${mascota.id})}"
+                >
+                  Eliminar
+                </a>
               </div>
             </td>
           </tr>
