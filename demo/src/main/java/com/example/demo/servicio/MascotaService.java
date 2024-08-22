@@ -14,5 +14,7 @@ public interface MascotaService {
     public void update(Mascota mascota);
 
     public void save(Mascota mascota);
+
+    public Collection<Mascota> findMascotaByCedulaDuenho(String cedula);
     
 } 

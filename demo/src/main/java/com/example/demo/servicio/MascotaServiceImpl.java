@@ -36,12 +36,14 @@ public class MascotaServiceImpl implements MascotaService {
         repo.update(mascota);
     }
 
-
     @Override
     public void save(Mascota mascota) {
         repo.save(mascota);
     }
 
-    
+    @Override
+    public Collection<Mascota> findMascotaByCedulaDuenho(String cedula) {
+        return repo.findMascotaByCedulaDuenho(cedula);
+    }
     
 }

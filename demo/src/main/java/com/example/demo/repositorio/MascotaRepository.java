@@ -3,6 +3,7 @@ package com.example.demo.repositorio;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -86,4 +87,12 @@ public class MascotaRepository {
         
         return lastId+1;
     }
+
+    //ENCONTRAR COINCIDENCIAS CON CEDULA, RELACION CLIENTEXMASCOTA
+    public Collection<Mascota> findMascotaByCedulaDuenho(String cedula) {
+        return data.values().stream()
+            .filter(mascota -> mascota.getCedulaDuenho().equals(cedula))
+            .collect(Collectors.toList());
+    }
+
 }
