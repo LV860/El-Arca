@@ -20,7 +20,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
         return "html/veterinarioClientes"; 
@@ -65,5 +65,11 @@ public class ClienteController {
         clienteService.delete(cedula);
         model.addAttribute("clientes", clienteService.SearchAll());
         return "html/veterinarioClientes"; 
+    }
+
+
+    @GetMapping("perfil")
+    public String landingPage (){
+        return "html/perfilVeterinario";
     }
 }

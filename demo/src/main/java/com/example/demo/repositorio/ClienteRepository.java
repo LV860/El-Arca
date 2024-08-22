@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entidad.Cliente;
-
+import com.example.demo.entidad.NotFoundException;
 @Repository
 public class ClienteRepository {
 
@@ -36,15 +36,48 @@ public class ClienteRepository {
     }
     
     public void delete(String cedula) {
-        data.remove(cedula);
-    }
-
-    public void update(Cliente cliente) {
-        // Verificar si el cliente existe en el mapa
-        if (data.containsKey(cliente.getCedula())) {
-            // Actualizar el cliente existente
-            data.put(cliente.getCedula(), cliente);
+        // Encontrar la clave correspondiente al cliente con la misma cédula
+        String keyToDelete = null;
+    
+        for (Map.Entry<String, Cliente> entry : data.entrySet()) {
+            if (entry.getValue().getCedula().equals(cedula)) {
+                keyToDelete = entry.getKey();
+                break;
+            }
+        }
+    
+        if (keyToDelete != null) {
+            // Eliminar el cliente del HashMap
+            data.remove(keyToDelete);
+            System.out.println("Cliente con cédula " + cedula + " eliminado.");
+        } else {
+            throw new NotFoundException(cedula);
         }
     }
+    
+
+    public void update(Cliente clienteActualizado) {
+        // Encontrar la clave correspondiente al cliente con la misma cédula
+        String keyToUpdate = null;
+        
+        for (Map.Entry<String, Cliente> entry : data.entrySet()) {
+            if (entry.getValue().getCedula().equals(clienteActualizado.getCedula())) {
+                keyToUpdate = entry.getKey();
+                break;
+            }
+        }
+        
+        if (keyToUpdate != null) {
+            // Actualizar el cliente en el HashMap
+            data.put(keyToUpdate, clienteActualizado);
+            System.out.println("Cliente con cédula " + clienteActualizado.getCedula() + " actualizado.");
+        } else {
+            // Cliente no encontrado
+            throw new NotFoundException(clienteActualizado.getCedula());
+        }
+    }
+    
+    
+
 
 }
