@@ -10,9 +10,10 @@ public class Mascota {
     private double peso;
     private String enfermedad;
     private String urlImagen;
+    private String cedulaDuenho;
     
     
-    public Mascota(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen) {
+    public Mascota(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -20,6 +21,7 @@ public class Mascota {
         this.peso = peso;
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
+        this.cedulaDuenho = cedulaDuenho;
     }
     public Mascota() {
         // Constructor vacío necesario para Thymeleaf y otras instancias
@@ -67,7 +69,14 @@ public class Mascota {
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
+    public String getCedulaDuenho() {
+        return cedulaDuenho;
+    }
+    public void setCedulaDuenho(String cedulaDuenho) {
+        this.cedulaDuenho = cedulaDuenho;
+    }
 
+    
     
 
 
