@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,16 +37,15 @@ public class MascotaController {
     @GetMapping("/add")
     public String mostrarFormularioCrearMascota(Model model){
 
-        Mascota mascota = new Mascota(0,"", "", 0, 0, "", "");
+        Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
-
         return "html/addMascota";
     }
 
     @PostMapping("/add")
-    public String agregarMascota(@ModelAttribute("mascota") Mascota mascota){
-
-        mascotaService.add(mascota);
+    public String agregarMascota(@ModelAttribute Mascota mascota, Model model){
+        mascotaService.save(mascota);
+        model.addAttribute("clientes", mascotaService.SearchAll());
         return "redirect:/mascota/all";
     }
 

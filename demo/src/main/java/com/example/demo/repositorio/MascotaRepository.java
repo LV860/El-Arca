@@ -46,4 +46,9 @@ public class MascotaRepository {
         int lastId = data.get(tam).getId();
         mascota.setId(lastId+1);
     }
+
+
+    public void save(Mascota mascota) {
+        data.put(mascota.getId(), mascota);
+    }
 }
