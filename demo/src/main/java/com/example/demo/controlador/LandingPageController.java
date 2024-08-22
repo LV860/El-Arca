@@ -11,4 +11,9 @@ public class LandingPageController {
     public String landingPage (){
         return "html/landingPage";
     }
+
+    @GetMapping("loginCliente")
+    public String loginCliente (){
+        return "html/loginCliente";
+    }
 }
