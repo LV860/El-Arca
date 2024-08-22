@@ -21,6 +21,10 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
     }
+    public Mascota() {
+        // Constructor vacío necesario para Thymeleaf y otras instancias
+    }
+    
     public Integer getId() {
         return id;
     }

@@ -11,7 +11,6 @@ import com.example.demo.entidad.Mascota;
 @Repository
 public class MascotaRepository {
 
-    //MINUTO 4
     private Map<Integer, Mascota> data = new HashMap<>();
     
     public MascotaRepository() {
@@ -47,8 +46,4 @@ public class MascotaRepository {
         int lastId = data.get(tam).getId();
         mascota.setId(lastId+1);
     }
-
-
-    
-
 }

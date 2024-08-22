@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Arca - Editar Cliente</title>
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/updateClientes.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navigationBarLogo">
+        <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+        <a href=""><h1>El Arca</h1></a>
+      </div>
+      <div class="navigationBarMenuOptions">
+        <a href="/clientes/perfil"><h3>Perfil</h3></a>
+        <a href="/clientes/all"><h3>Clientes</h3></a>
+        <a href="/mascota/all"><h3>Mascotas</h3></a>
+      </div>
+      <div class="navigationBarButtons">
+        <a href="/home/landingPage">
+          <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="add-cliente-form">
+        <h1>Añadir Mascota</h1>
+        <form th:object="${mascota}" th:action="@{/mascota/add}" method="post">
+          >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre:</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                th:field="${mascota.nombre}"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="raza">Raza:</label>
+              <input
+                type="text"
+                id="raza"
+                name="raza"
+                th:field="${mascota.raza}"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edad">Edad:</label>
+              <input
+                type="number"
+                id="edad"
+                name="edad"
+                th:field="${mascota.edad}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="peso">Peso:</label>
+              <input
+                type="double"
+                id="peso"
+                name="peso"
+                th:field="${mascota.peso}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="enfermedad">Enfermedad:</label>
+              <input
+                type="text"
+                id="enfermedad"
+                name="enfermedad"
+                th:field="${mascota.enfermedad}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="urlImagen">Url Imagen:</label>
+              <input
+                type="text"
+                id="urlImagen"
+                name="urlImagen"
+                th:field="${mascota.urlImagen}"
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" class="btnSubmit">Añadir</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

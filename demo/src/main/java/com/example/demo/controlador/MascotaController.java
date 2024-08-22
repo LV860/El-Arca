@@ -41,8 +41,7 @@ public class MascotaController {
         Mascota mascota = new Mascota(0,"", "", 0, 0, "", "");
         model.addAttribute("mascota", mascota);
 
-        //NO SE HA CREADO EL HTML PARA CREAR MASCOTA
-        return "html/crearMascotaPage";
+        return "html/addMascota";
     }
 
     @PostMapping("/add")
