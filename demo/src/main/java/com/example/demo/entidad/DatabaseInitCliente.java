@@ -1,5 +1,7 @@
 package com.example.demo.entidad;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.servicio.ClienteService;
 
 import jakarta.transaction.Transactional;
 
@@ -80,12 +83,40 @@ public class DatabaseInitCliente implements ApplicationRunner {
             mascotaRepository.save(new Mascota("Firulais", "Siberiano", 4, 30, "Cáncer", "https://static.vecteezy.com/system/resources/thumbnails/008/951/892/small_2x/cute-puppy-pomeranian-mixed-breed-pekingese-dog-run-on-the-grass-with-happiness-photo.jpg", "123456789"));
             mascotaRepository.save(new Mascota("Rex", "Labrador", 3, 35, "Parvovirus", "https://cdn.pixabay.com/photo/2023/08/18/15/02/dog-8198719_640.jpg", "0"));
         */
-        Cliente asociar = clienteRepository.findById(1L).get();
-
-        for(Mascota m : mascotaRepository.findAll()){
-            m.setCliente(asociar);
-            mascotaRepository.save(m);
+        List<Cliente> asociar = clienteRepository.findAll();
+        for (Cliente cliente : asociar) {
+            
         }
+        int cont = 0;
+int clienteIndex = 0;
+List<Cliente> clientes = clienteRepository.findAll(); // Asumiendo que tienes una forma de obtener todos los clientes
+
+for (Mascota m : mascotaRepository.findAll()) {
+    if (cont >= 100) {
+        break;
+    }
+
+    // Asocia la mascota con el cliente actual
+    m.setCliente(clientes.get(clienteIndex));
+
+    // Guarda la mascota en el repositorio
+    mascotaRepository.save(m);
+
+    cont++;
+    
+    // Actualiza el índice del cliente
+    clienteIndex++;
+    
+    // Reinicia el índice si es necesario
+    if (clienteIndex >= clientes.size()) {
+        clienteIndex = 0;
+    }
+    
+    if (cont >= 100) {
+        break;
+    }
+}
+
     }
     
 }
