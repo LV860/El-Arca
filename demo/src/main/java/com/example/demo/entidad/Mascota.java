@@ -42,6 +42,9 @@ public class Mascota {
         this.urlImagen = urlImagen;
         this.cedulaDuenho = cedulaDuenho;
     }
+
+
+    
     public Mascota() {
         // Constructor vacío necesario para Thymeleaf y otras instancias
     }
