@@ -23,7 +23,7 @@ public class DuenhoController {
     @PostMapping("/perfilCliente")
     public String mostrarPerfilCliente(@ModelAttribute Cliente cliente, Model model) {
     
-        Cliente duenho = clienteService.findById(cliente.getId());
+        Cliente duenho = clienteService.findByCedula(cliente.getCedula());
 
         if (duenho != null) {
             model.addAttribute("cliente", duenho);
