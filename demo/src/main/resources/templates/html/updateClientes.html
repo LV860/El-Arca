@@ -28,8 +28,9 @@
     <main>
         <div class="edit-client-form">
             <h1>Editar Cliente</h1>
-            <form action="/clientes/editar" method="post">
-                
+            <!-- La ruta ahora incluye el ID del cliente en la URL -->
+            <form action="/clientes/editar/${cliente.id}" method="post">
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nombre">Nombre:</label>
@@ -37,6 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="cedula">Cédula:</label>
+                        <!-- El campo de cédula es de solo lectura, como estaba antes -->
                         <input type="text" id="cedula" name="cedula" th:value="${cliente.cedula}" readonly>
                     </div>
                 </div>

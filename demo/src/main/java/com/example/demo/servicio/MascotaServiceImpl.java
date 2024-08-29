@@ -1,13 +1,10 @@
 package com.example.demo.servicio;
 
 import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.entidad.Mascota;
 import com.example.demo.repositorio.MascotaRepository;
-
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
@@ -16,9 +13,8 @@ public class MascotaServiceImpl implements MascotaService {
     MascotaRepository repo;
 
     @Override
-    public Mascota SearchById(int id) {
-        return repo.findById(id);
-
+    public Mascota SearchById(Long id) {
+        return repo.findById(id).orElse(null);
     }
 
     @Override
@@ -27,13 +23,13 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) { 
         repo.deleteById(id);
     }
 
     @Override
     public void update(Mascota mascota) {
-        repo.update(mascota);
+        repo.save(mascota);
     }
 
     @Override
@@ -43,7 +39,6 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Collection<Mascota> findMascotaByCedulaDuenho(String cedula) {
-        return repo.findMascotaByCedulaDuenho(cedula);
+        return repo.findByCedulaDuenho(cedula);
     }
-    
 }

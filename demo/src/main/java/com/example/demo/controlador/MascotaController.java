@@ -16,56 +16,57 @@ import com.example.demo.servicio.MascotaService;
 @RequestMapping("/mascota")
 @Controller
 public class MascotaController {
+    
     @Autowired
     MascotaService mascotaService;
 
     @GetMapping("/all")
-    public String mostrarMascotas(Model model){
+    public String mostrarMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.SearchAll());
         return "html/tabla_Mascotas";
     }
-    @GetMapping("/find/{id}")
-    public String mostrarInfoMascota(Model model, @PathVariable("id") int identification){
-        model.addAttribute("mascotas", mascotaService.SearchById(identification));
-        return "html/mostrarMascotaPage";
-    }
-    @GetMapping("/find")
-    public String mostrarInfoMascota2(Model model, @RequestParam("id") int identification){
-        model.addAttribute("mascotas", mascotaService.SearchById(identification));
-        return "html/mostrarMascotaPage";
-    }
-    @GetMapping("/add")
-    public String mostrarFormularioCrearMascota(Model model){
 
+    @GetMapping("/find/{id}")
+    public String mostrarInfoMascota(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("mascota", mascotaService.SearchById(id));
+        return "html/mostrarMascotaPage";
+    }
+
+    @GetMapping("/find")
+    public String mostrarInfoMascota2(Model model, @RequestParam("id") Long id) {
+        model.addAttribute("mascota", mascotaService.SearchById(id));
+        return "html/mostrarMascotaPage";
+    }
+
+    @GetMapping("/add")
+    public String mostrarFormularioCrearMascota(Model model) {
         Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
         return "html/addMascota";
     }
 
     @PostMapping("/add")
-    public String agregarMascota(@ModelAttribute Mascota mascota, Model model){
+    public String agregarMascota(@ModelAttribute Mascota mascota, Model model) {
         mascotaService.save(mascota);
-        model.addAttribute("clientes", mascotaService.SearchAll());
+        model.addAttribute("mascotas", mascotaService.SearchAll());
         return "redirect:/mascota/all";
     }
 
     @GetMapping("/delete/{id}")
-    public String borrarMascota(@PathVariable("id") int id){
+    public String borrarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
         return "redirect:/mascota/all";
     }
 
     @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(@PathVariable("id") int id, Model model){
+    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
         return "html/updateMascota";
     }
 
     @PostMapping("/update/{id}")
-    public String updateMascota(@PathVariable("id") int id, @ModelAttribute("mascota") Mascota mascota){
+    public String updateMascota(@PathVariable("id") int id, @ModelAttribute("mascota") Mascota mascota) {
         mascotaService.update(mascota);
         return "redirect:/mascota/all";
     }
-
-
 }

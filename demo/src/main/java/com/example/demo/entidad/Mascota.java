@@ -1,9 +1,13 @@
 package com.example.demo.entidad;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Mascota {
     
     //Nuevo para id's
-    private Integer id;
     private String nombre;
     private String raza;
     private int edad;
@@ -11,10 +15,22 @@ public class Mascota {
     private String enfermedad;
     private String urlImagen;
     private String cedulaDuenho;
+    @Id
+    @GeneratedValue
+    private Long id;
     
-    
-    public Mascota(Integer id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
+    public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
         this.id = id;
+        this.nombre = nombre;
+        this.raza = raza;
+        this.edad = edad;
+        this.peso = peso;
+        this.enfermedad = enfermedad;
+        this.urlImagen = urlImagen;
+        this.cedulaDuenho = cedulaDuenho;
+    }
+    
+    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -27,10 +43,10 @@ public class Mascota {
         // Constructor vacío necesario para Thymeleaf y otras instancias
     }
     
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {
