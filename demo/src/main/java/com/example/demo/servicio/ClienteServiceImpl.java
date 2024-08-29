@@ -1,8 +1,10 @@
 package com.example.demo.servicio;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.demo.entidad.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
 
@@ -10,21 +12,16 @@ import com.example.demo.repositorio.ClienteRepository;
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
-    ClienteRepository repo;
+    private ClienteRepository repo;
 
     @Override
     public Cliente findById(Long id) {
-        return repo.findById(id).orElse(null); 
+        return repo.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Cliente> SearchAll() {
         return repo.findAll();
-    }
-
-    @Override
-    public void save(Cliente cliente) {
-        repo.save(cliente);
     }
 
     @Override
@@ -34,6 +31,11 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void update(Cliente cliente) {
-        repo.save(cliente); 
+        repo.save(cliente);
+    }
+
+    @Override
+    public void save(Cliente cliente) {
+        repo.save(cliente);
     }
 }

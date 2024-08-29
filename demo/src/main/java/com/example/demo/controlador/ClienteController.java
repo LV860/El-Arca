@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.ClienteService;
@@ -25,42 +26,49 @@ public class ClienteController {
         return "html/veterinarioClientes"; 
     }
 
-    @GetMapping("/añadir")
-    public String mostrarFormularioAñadir(Model model) {
+     @GetMapping("/find/{id}")
+    public String mostrarInfoCliente(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("cliente", clienteService.findById(id));
+        return "html/mostrarClientePage";
+    }
+
+    @GetMapping("/find")
+    public String mostrarInfoCliente2(Model model, @RequestParam("id") Long id) {
+        model.addAttribute("cliente", clienteService.findById(id));
+        return "html/mostrarClientePage";
+    }
+
+    @GetMapping("/createClientes")
+    public String mostrarFormularioCrearCliente(Model model) {
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
-        return "html/createClientes"; 
+        return "html/createClientes";
     }
 
-    @PostMapping("/añadir")
-    public String añadirCliente(@ModelAttribute Cliente cliente) {
+    @PostMapping("/add")
+    public String agregarCliente(@ModelAttribute Cliente cliente, Model model) {
         clienteService.save(cliente);
-        return "redirect:/clientes/all"; 
+        model.addAttribute("clientes", clienteService.SearchAll());
+        return "redirect:/clientes/all";
     }
 
-    @GetMapping("/editar/{id}")
-    public String mostrarFormularioEditarCliente(@PathVariable("id") Long id, Model model) {
-        Cliente cliente = clienteService.findById(id);
-        if (cliente != null) {
-            model.addAttribute("cliente", cliente);
-            return "html/updateClientes";
-        } else {
-            // Manejo de error, podrías redirigir a una página de error o mostrar un mensaje
-            return "redirect:/clientes/all";
-        }
-    }
-
-    @PostMapping("/editar/{id}")
-    public String actualizarCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
-        cliente.setId(id); 
-        clienteService.update(cliente);
-        return "redirect:/clientes/all"; 
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable("id") Long id) {
+    @GetMapping("/delete/{id}")
+    public String borrarCliente(@PathVariable("id") Long id) {
         clienteService.delete(id);
-        return "redirect:/clientes/all"; 
+        return "redirect:/cliente/all";
+    }
+
+    @GetMapping("/update/{id}")
+    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("cliente", clienteService.findById(id));
+        return "html/updateClientes";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateCliente(@PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
+        cliente.setId(id); // Asegura que el ID se mantenga al actualizar
+        clienteService.update(cliente);
+        return "redirect:/clientes/all";
     }
 
     @GetMapping("/perfil")

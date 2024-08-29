@@ -3,7 +3,7 @@ package com.example.demo.entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToOne;
 @Entity
 public class Mascota {
     
@@ -18,6 +18,9 @@ public class Mascota {
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    private Cliente cliente;
     
     public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
         this.id = id;
@@ -90,10 +93,13 @@ public class Mascota {
     }
     public void setCedulaDuenho(String cedulaDuenho) {
         this.cedulaDuenho = cedulaDuenho;
+    }   
+
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    
-    
-
-
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }

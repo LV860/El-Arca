@@ -1,8 +1,12 @@
 package com.example.demo.entidad;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -14,6 +18,9 @@ public class Cliente {
     @Id
     @GeneratedValue
     private Long id;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente() {
     }
@@ -81,7 +88,11 @@ public class Cliente {
         this.nombre = nombre;
     }
     
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
+    }
 }
-
-
-
