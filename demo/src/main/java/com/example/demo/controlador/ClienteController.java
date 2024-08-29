@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.NotFoundException;
 import com.example.demo.servicio.ClienteService;
 
 @Controller
@@ -35,10 +33,9 @@ public class ClienteController {
     }
 
     @PostMapping("/añadir")
-    public String añadirCliente(@ModelAttribute Cliente cliente, Model model) {
+    public String añadirCliente(@ModelAttribute Cliente cliente) {
         clienteService.save(cliente);
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "redirect:/clientes/all"; // Redirige después de añadir
+        return "redirect:/clientes/all"; 
     }
 
     @GetMapping("/editar/{id}")
@@ -48,23 +45,22 @@ public class ClienteController {
             model.addAttribute("cliente", cliente);
             return "html/updateClientes";
         } else {
-            throw new NotFoundException(id.toString());
+            // Manejo de error, podrías redirigir a una página de error o mostrar un mensaje
+            return "redirect:/clientes/all";
         }
     }
-    
+
     @PostMapping("/editar/{id}")
-    public String actualizarCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente, Model model) {
-        cliente.setId(id); // Asegúrate de que el id se setee correctamente
+    public String actualizarCliente(@PathVariable("id") Long id, @ModelAttribute Cliente cliente) {
+        cliente.setId(id); 
         clienteService.update(cliente);
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "redirect:/clientes/all"; // Redirige después de actualizar
+        return "redirect:/clientes/all"; 
     }
 
-    @PostMapping("/eliminar/{id}")
-    public String eliminarCliente(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/eliminar/{id}")
+    public String eliminarCliente(@PathVariable("id") Long id) {
         clienteService.delete(id);
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "redirect:/clientes/all"; // Redirige después de eliminar
+        return "redirect:/clientes/all"; 
     }
 
     @GetMapping("/perfil")

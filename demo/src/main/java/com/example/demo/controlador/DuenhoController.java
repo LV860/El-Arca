@@ -14,26 +14,23 @@ import com.example.demo.servicio.MascotaService;
 @Controller
 @RequestMapping("/dueño")
 public class DuenhoController {
-    
 
     @Autowired
     private ClienteService clienteService;
     @Autowired
     private MascotaService mascotaService;
-    
 
     @PostMapping("/perfilCliente")
-    public String añadirCliente(@ModelAttribute Cliente cliente, Model model) {
-        Cliente duenho = clienteService.findByCedula(cliente.getCedula());
+    public String mostrarPerfilCliente(@ModelAttribute Cliente cliente, Model model) {
+    
+        Cliente duenho = clienteService.findById(cliente.getId());
 
-        if(duenho != null) {
+        if (duenho != null) {
             model.addAttribute("cliente", duenho);
-            model.addAttribute("mascotas", mascotaService.findMascotaByCedulaDuenho(cliente.getCedula()));
+            model.addAttribute("mascotas", mascotaService.findMascotaByClienteId(cliente.getId()));
             return "html/perfilCliente";
         } else {
             return "redirect:/home/loginCliente";
         }
-
     }
-
 }

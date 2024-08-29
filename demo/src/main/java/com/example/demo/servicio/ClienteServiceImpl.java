@@ -33,12 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void update(Cliente cliente){
+    public void update(Cliente cliente) {
         repo.save(cliente); 
-    }
-
-    @Override
-    public Cliente findByCedula(String cedula) {
-        return repo.findByCedula(cedula);
     }
 }

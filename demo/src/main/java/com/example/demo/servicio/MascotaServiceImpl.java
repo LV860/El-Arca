@@ -38,7 +38,7 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public Collection<Mascota> findMascotaByCedulaDuenho(String cedula) {
-        return repo.findByCedulaDuenho(cedula);
+    public Collection<Mascota> findMascotaByClienteId(Long id) {
+        return repo.findMascotaByClienteId(id);
     }
 }

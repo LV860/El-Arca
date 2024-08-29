@@ -12,9 +12,7 @@ public interface MascotaService {
     public Collection<Mascota> SearchAll();
     public void deleteById(Long id);
     public void update(Mascota mascota);
-
     public void save(Mascota mascota);
-
-    public Collection<Mascota> findMascotaByCedulaDuenho(String cedula);
+    public Collection<Mascota> findMascotaByClienteId(Long id);
     
 } 
