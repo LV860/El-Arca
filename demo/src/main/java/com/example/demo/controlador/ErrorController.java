@@ -12,7 +12,7 @@ public class ErrorController {
     @ExceptionHandler(NotFoundException.class)
     public String error(Model model, NotFoundException e) {
         model.addAttribute("cedula", e.getCedula());
-        return "html/pagina_error";
+        return "/pagina_error";
     }
     
 }

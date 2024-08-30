@@ -23,26 +23,26 @@ public class ClienteController {
     @GetMapping("/all")
     public String listarClientes(Model model) {
         model.addAttribute("clientes", clienteService.SearchAll());
-        return "html/veterinarioClientes"; 
+        return "/veterinarioClientes"; 
     }
 
      @GetMapping("/find/{id}")
     public String mostrarInfoCliente(Model model, @PathVariable("id") Long id) {
         model.addAttribute("cliente", clienteService.findById(id));
-        return "html/mostrarClientePage";
+        return "/mostrarClientePage";
     }
 
     @GetMapping("/find")
     public String mostrarInfoCliente2(Model model, @RequestParam("id") Long id) {
         model.addAttribute("cliente", clienteService.findById(id));
-        return "html/mostrarClientePage";
+        return "/mostrarClientePage";
     }
 
     @GetMapping("/createClientes")
     public String mostrarFormularioCrearCliente(Model model) {
         Cliente cliente = new Cliente();
         model.addAttribute("cliente", cliente);
-        return "html/createClientes";
+        return "/createClientes";
     }
 
     @PostMapping("/add")
@@ -61,7 +61,7 @@ public class ClienteController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.findById(id));
-        return "html/updateClientes";
+        return "/updateClientes";
     }
 
     @PostMapping("/update/{id}")
@@ -73,6 +73,6 @@ public class ClienteController {
 
     @GetMapping("/perfil")
     public String landingPage() {
-        return "html/perfilVeterinario";
+        return "/perfilVeterinario";
     }
 }

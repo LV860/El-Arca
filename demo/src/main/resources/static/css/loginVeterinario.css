@@ -1,3 +1,11 @@
+main{
+    width: 100%;
+    height: 100%;
+    background-color: #1dd75b;
+}
+
+
+
 /* Estilos específicos para la pantalla de login */
 .login-section {
     width: 100%;

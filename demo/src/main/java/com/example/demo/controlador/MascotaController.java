@@ -23,26 +23,26 @@ public class MascotaController {
     @GetMapping("/all")
     public String mostrarMascotas(Model model) {
         model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "html/tabla_Mascotas";
+        return "/tabla_Mascotas";
     }
 
     @GetMapping("/find/{id}")
     public String mostrarInfoMascota(Model model, @PathVariable("id") Long id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "html/mostrarMascotaPage";
+        return "/mostrarMascotaPage";
     }
 
     @GetMapping("/find")
     public String mostrarInfoMascota2(Model model, @RequestParam("id") Long id) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "html/mostrarMascotaPage";
+        return "/mostrarMascotaPage";
     }
 
     @GetMapping("/add")
     public String mostrarFormularioCrearMascota(Model model) {
         Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
-        return "html/addMascota";
+        return "/addMascota";
     }
 
     @PostMapping("/add")
@@ -61,7 +61,7 @@ public class MascotaController {
     @GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "html/updateMascota";
+        return "/updateMascota";
     }
 
     @PostMapping("/update/{id}")

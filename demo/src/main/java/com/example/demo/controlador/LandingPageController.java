@@ -9,11 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LandingPageController {
     @GetMapping("landingPage")
     public String landingPage (){
-        return "html/landingPage";
+        return "/landingPage";
     }
 
     @GetMapping("loginCliente")
     public String loginCliente (){
-        return "html/loginCliente";
+        return "/loginCliente";
+    }
+
+    @GetMapping("aboutUsPage")
+    public String aboutUsPage (){
+        return "/aboutUsPage";
+    }
+
+    @GetMapping("contactPage")
+    public String contactPage (){
+        return "/contactPage";
     }
 }
