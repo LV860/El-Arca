@@ -27,7 +27,9 @@ public class DuenhoController {
 
         if (duenho != null) {
             model.addAttribute("cliente", duenho);
-            //model.addAttribute("mascotas", mascotaService.findMascotaByClienteId(cliente.getCedula()));
+            model.addAttribute("mascotas", duenho.getMascotas());
+            System.out.println("mascotas" + duenho.getMascotas().size());
+            System.out.println("mascotas" + duenho.getCedula());
             return "/perfilCliente";
         } else {
             return "redirect:/home/loginCliente";

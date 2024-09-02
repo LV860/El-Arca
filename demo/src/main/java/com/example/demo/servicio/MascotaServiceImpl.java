@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
 
 @Service
@@ -11,6 +12,9 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
     MascotaRepository repo;
+
+    @Autowired
+    ClienteRepository clienteRepository;
 
     @Override
     public Mascota SearchById(Long id) {
@@ -29,11 +33,15 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public void update(Mascota mascota) {
+        //Vuelve a buscar la mascota original antes de ser editada para obtener la cedula del dueño
+        mascota.setCedulaDuenho(repo.findById(mascota.getId()).orElse(null).getCedulaDuenho());
+        mascota.setCliente(repo.findById(mascota.getId()).orElse(null).getCliente());
         repo.save(mascota);
     }
 
     @Override
     public void save(Mascota mascota) {
+        mascota.setCliente(clienteRepository.findById(mascota.getCedulaDuenho()).orElse(null));
         repo.save(mascota);
     }
 /* 

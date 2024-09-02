@@ -188,13 +188,10 @@ public class DatabaseInit implements ApplicationRunner {
 
         for (int j = 0; j < mascotasAsociar.size(); j++) {
             for (int i = 0; i < asociar.size(); i++) {
-            
-                
                 if (mascotasAsociar.get(j).getCedulaDuenho().equals(asociar.get(i).getCedula())) {
                     mascotasAsociar.get(j).setCliente(asociar.get(i));
                     mascotaRepository.save(mascotasAsociar.get(j));
                 }
-                    
             }
         }
 
