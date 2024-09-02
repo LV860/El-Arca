@@ -3,6 +3,7 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -17,7 +18,8 @@ public class Cliente {
     @Id
     private Long cedula;
 
-    @OneToMany(mappedBy = "cliente")
+    //CASCADE para evitar problemas de foreign key.
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente() {

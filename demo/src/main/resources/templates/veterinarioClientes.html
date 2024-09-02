@@ -29,7 +29,7 @@
       <div class="title-bar">
         <h1>Información Clientes</h1>
         <div class="buttons-group">
-          <a href="/clientes/add">
+          <a href="/clientes/createClientes">
             <button class="btnAzul">Añadir Cliente</button>
           </a>
           <!-- Los botones para editar y eliminar clientes se pueden gestionar aquí -->
@@ -54,21 +54,21 @@
               <td th:text="${cliente.correo}"></td>
               <td th:text="${cliente.celular}"></td>
               <td>
-                <a th:href="@{/clientes/update(cedula=${cliente.cedula})}">
-                  <button class="btnVerde">Editar</button>
-                </a>
-                <form
-                  action="/clientes/delete"
-                  method="post"
-                  style="display: inline"
-                >
-                  <input
-                    type="hidden"
-                    name="cedula"
-                    th:value="${cliente.cedula}"
-                  />
-                  <button type="submit" class="btnRojo">Eliminar</button>
-                </form>
+                <div class="editButtonContainer">
+                  <a
+                    type="button"
+                    class="btn btn-warning"
+                    th:href="@{/clientes/update/{id}(id=${cliente.cedula})}"
+                    >Editar</a
+                  >
+                  <a
+                    type="button"
+                    class="btn btn-danger"
+                    th:href="@{/clientes/delete/{id}(id=${cliente.cedula})}"
+                  >
+                    Eliminar
+                  </a>
+                </div>
               </td>
             </tr>
           </tbody>

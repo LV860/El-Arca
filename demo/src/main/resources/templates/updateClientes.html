@@ -29,7 +29,7 @@
       <div class="edit-client-form">
         <h1>Editar Cliente</h1>
         <form
-          th:action="@{/clientes/update/{id}(id=${cliente.id})}"
+          th:action="@{/clientes/update/{id}(id=${cliente.cedula})}"
           method="post"
         >
           <div class="form-row">

@@ -55,7 +55,7 @@ public class ClienteController {
     @GetMapping("/delete/{id}")
     public String borrarCliente(@PathVariable("id") Long id) {
         clienteService.delete(id);
-        return "redirect:/cliente/all";
+        return "redirect:/clientes/all";
     }
 
     @GetMapping("/update/{id}")
