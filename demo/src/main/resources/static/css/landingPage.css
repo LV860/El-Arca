@@ -117,9 +117,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #340068; /* Color de fondo similar al de la imagen */
+  background-color: #613b87; /* Color de fondo similar al de la imagen */
   padding: 20px;
-  border-radius: 8px; /* Para darle un borde redondeado */
+  border-radius: 30px; /* Para darle un borde redondeado */
   margin-top: 20px;
   width: 80%;
   margin: 0 auto;
@@ -190,3 +190,5 @@
 #ballBlu2 {
   margin-left: 100px;
 }
+
+
