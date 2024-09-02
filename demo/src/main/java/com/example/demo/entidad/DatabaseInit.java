@@ -80,7 +80,7 @@ public class DatabaseInit implements ApplicationRunner {
 
 
         
-        mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "Parvovirus", "https://example.com/labrador.jpg", 1L));
+        mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "Parvovirus", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 1L));
         mascotaRepository.save(new Mascota("Bella", "Beagle", 5, 15.0, "Otitis", "https://example.com/beagle.jpg", 2L));
         mascotaRepository.save(new Mascota("Charlie", "Bulldog", 3, 25.0, "Dermatitis", "https://example.com/bulldog.jpg", 3L));
         mascotaRepository.save(new Mascota("Lucy", "Poodle", 2, 10.0, "Enfermedad renal", "https://example.com/poodle.jpg", 4L));
@@ -129,8 +129,8 @@ public class DatabaseInit implements ApplicationRunner {
         mascotaRepository.save(new Mascota("Riley", "Schnauzer", 4, 11.0, "Problemas dentales", "https://example.com/schnauzer.jpg", 47L));
         mascotaRepository.save(new Mascota("Luna", "Bull Terrier", 5, 30.0, "Cáncer", "https://example.com/bull_terrier.jpg", 48L));
         mascotaRepository.save(new Mascota("Zoe", "Jack Russell Terrier", 3, 6.0, "Problemas digestivos", "https://example.com/jack_russell_terrier.jpg", 49L));
-        mascotaRepository.save(new Mascota("Mia", "Pekingese", 4, 9.0, "Cálculos renales", "https://example.com/pekingese.jpg", 050L));
-        mascotaRepository.save(new Mascota("Sophie", "Australian Cattle Dog", 3, 22.0, "Problemas cardíacos", "https://example.com/australian_cattle_dog.jpg", 1L));
+        mascotaRepository.save(new Mascota("Mia", "Pekingese", 4, 9.0, "Cálculos renales", "https://example.com/pekingese.jpg", 50L));
+        mascotaRepository.save(new Mascota("Sophie", "Australian Cattle Dog", 3, 22.0, "Problemas cardíacos", "https://as2.ftcdn.net/v2/jpg/00/45/24/35/1000_F_45243551_VzCoEIqsbrDUtJ5d7tjdOnbO9CLZlpk7.jpg", 1L));
         mascotaRepository.save(new Mascota("Rocky", "Akita", 4, 33.0, "Problemas articulares", "https://example.com/akita.jpg", 2L));
         mascotaRepository.save(new Mascota("Charlie", "Labrador", 5, 30.0, "Enfermedad renal", "https://example.com/labrador.jpg", 3L));
         mascotaRepository.save(new Mascota("Daisy", "Shiba Inu", 6, 25.0, "Problemas respiratorios", "https://example.com/shiba_inu.jpg", 5L));

@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Arca - Perfil Cliente</title>
     <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/perfilVeterinario.css" />
+    <link rel="stylesheet" href="../css/perfilCliente.css" />
     <link rel="stylesheet" href="/css/tabla_Mascotas.css" />
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/updateClientes.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -29,17 +34,22 @@
     <main>
       <div class="profile-section">
         <div class="profile-details">
-          <img
-            src="https://www.himalayacentroamericana.com/sites/default/files/consultaveterinaria.jpg"
-            alt="Foto de Perfil"
-          />
-          <div class="name">
-            <span th:text="${cliente.nombre}"> </span>
-            <img src="../images/logo1.png" alt="Editar" class="edit-icon" />
+          <div class="image-emailName">
+            <img
+              src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/250833_v9_bb.jpg"
+              alt="Foto de Perfil"
+            />
+            <div class="name-email">
+              <span id="nameSpan" th:text="${cliente.nombre}"> </span>
+              <span id="emailSpan" th:text="${cliente.correo}"> </span>
+            </div>
           </div>
-          <div class="email" th:text="${cliente.correo}"></div>
 
           <div class="info-card">
+            <p>
+              <span class="label">Éstado:</span>
+              <span class="tagEstadoPerfilActivo">Activo</span>
+            </p>
             <p>
               <span class="label">Cédula:</span>
               <span class="value" th:text="${cliente.cedula}"></span>
@@ -53,30 +63,44 @@
       </div>
 
       <!-- SECCION QUE PERMITE CARGAR DATOS EN LA TABLA -->
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Raza</th>
-            <th>Edad</th>
-            <th>Peso</th>
-            <th>Enfermedad</th>
-            <th>Foto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota: ${mascotas}">
-            <td th:text="${mascota.nombre}"></td>
-            <td th:text="${mascota.raza}"></td>
-            <td th:text="${mascota.edad}"></td>
-            <td th:text="${mascota.peso}"></td>
-            <td th:text="${mascota.enfermedad}"></td>
-            <td>
-              <img th:src="${mascota.urlImagen}" alt="Imagen de Mascota" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+      <div class="scrollable-container">
+        <div class="card" th:each="mascota : ${mascotas}">
+          <img
+            class="image-scrollable"
+            th:src="${mascota.urlImagen}"
+            alt="Imagen de Mascota"
+          />
+          <div class="image-content">
+            <div class="info-container">
+              <div class="card-nombre-estadoicon">
+                <h3 th:text="${mascota.nombre}"></h3>
+                <p>
+                  <span class="tagEstadoMascotaTratamiento"
+                    >En tratamiento</span
+                  >
+                </p>
+              </div>
+
+              <p>
+                <strong>Raza:</strong> <span th:text="${mascota.raza}"></span>
+              </p>
+              <p>
+                <strong>Enfermedad:</strong>
+                <span th:text="${mascota.enfermedad}"></span>
+              </p>
+              <div class="cardPesoEdad">
+                <p class="cardPesoEdad-Edad">
+                  <strong>Edad:</strong> <span th:text="${mascota.edad}"></span>
+                </p>
+                <p class="cardPesoEdad-Peso">
+                  <strong>Peso:</strong> <span th:text="${mascota.peso}"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>
