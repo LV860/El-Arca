@@ -13,6 +13,6 @@ public interface MascotaService {
     public void deleteById(Long id);
     public void update(Mascota mascota);
     public void save(Mascota mascota);
-    public Collection<Mascota> findMascotaByClienteId(Long id);
+    //public Collection<Mascota> findMascotaByClienteId(Long id);
     
 } 

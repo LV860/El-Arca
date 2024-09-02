@@ -36,9 +36,10 @@ public class MascotaServiceImpl implements MascotaService {
     public void save(Mascota mascota) {
         repo.save(mascota);
     }
-
+/* 
     @Override
     public Collection<Mascota> findMascotaByClienteId(Long id) {
         return repo.findMascotaByClienteId(id);
     }
+        */
 }

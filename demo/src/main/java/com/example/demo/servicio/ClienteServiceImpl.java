@@ -14,10 +14,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository repo;
 
-    @Override
-    public Cliente findByCedula(String cedula) {
-        return repo.findByCedula(cedula); // Use the repository method
-    }
+
 
     @Override
     public Cliente findById(Long id) {

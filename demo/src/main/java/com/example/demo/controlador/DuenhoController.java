@@ -23,11 +23,11 @@ public class DuenhoController {
     @PostMapping("/perfilCliente")
     public String mostrarPerfilCliente(@ModelAttribute Cliente cliente, Model model) {
     
-        Cliente duenho = clienteService.findByCedula(cliente.getCedula());
+        Cliente duenho = clienteService.findById(cliente.getCedula());
 
         if (duenho != null) {
             model.addAttribute("cliente", duenho);
-            model.addAttribute("mascotas", mascotaService.findMascotaByClienteId(cliente.getId()));
+            //model.addAttribute("mascotas", mascotaService.findMascotaByClienteId(cliente.getCedula()));
             return "/perfilCliente";
         } else {
             return "redirect:/home/loginCliente";

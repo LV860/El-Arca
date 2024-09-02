@@ -3,6 +3,7 @@ package com.example.demo.entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 @Entity
 public class Mascota {
@@ -14,7 +15,7 @@ public class Mascota {
     private double peso;
     private String enfermedad;
     private String urlImagen;
-    private String cedulaDuenho;
+    private Long cedulaDuenho;
     @Id
     @GeneratedValue
     private Long id;
@@ -22,7 +23,7 @@ public class Mascota {
     @ManyToOne
     private Cliente cliente;
     
-    public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
+    public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -33,7 +34,7 @@ public class Mascota {
         this.cedulaDuenho = cedulaDuenho;
     }
     
-    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, String cedulaDuenho) {
+    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -91,10 +92,10 @@ public class Mascota {
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
-    public String getCedulaDuenho() {
+    public Long getCedulaDuenho() {
         return cedulaDuenho;
     }
-    public void setCedulaDuenho(String cedulaDuenho) {
+    public void setCedulaDuenho(Long cedulaDuenho) {
         this.cedulaDuenho = cedulaDuenho;
     }   
 

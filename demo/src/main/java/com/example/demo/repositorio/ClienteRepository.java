@@ -8,6 +8,6 @@ import com.example.demo.entidad.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
     
-    Cliente findByCedula(String cedula); // Method to find Cliente by cedula
+    //Cliente findByCedula(String cedula); // Method to find Cliente by cedula
     
 }

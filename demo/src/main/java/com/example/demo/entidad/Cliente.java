@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class Cliente {
 
-    private String cedula;
     private String correo;
     private String celular;
     private String nombre;
+
     @Id
-    @GeneratedValue
-    private Long id;
+    private Long cedula;
 
     @OneToMany(mappedBy = "cliente")
     private List<Mascota> mascotas = new ArrayList<>();
@@ -25,36 +23,28 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, String cedula, String correo, String celular, String nombre) {
-        this.id = id;
+
+    public Cliente(Long cedula, String correo, String celular, String nombre) {
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
         this.nombre = nombre;
     }
 
-    public Cliente(String cedula, String correo, String celular, String nombre) {
-        this.cedula = cedula;
+    public Cliente(String correo, String celular, String nombre) {
+        
         this.correo = correo;
         this.celular = celular;
         this.nombre = nombre;
     }
 
 
-    public Long getId(){
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id= id;
-    }
-
-    public String getCedula() {
+    public Long getCedula() {
         return cedula;
     }
 
 
-    public void setCedula(String cedula) {
+    public void setCedula(Long cedula) {
         this.cedula = cedula;
     }
 

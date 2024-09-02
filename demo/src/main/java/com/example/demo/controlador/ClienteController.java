@@ -66,7 +66,7 @@ public class ClienteController {
 
     @PostMapping("/update/{id}")
     public String updateCliente(@PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
-        cliente.setId(id); // Asegura que el ID se mantenga al actualizar
+        cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
         clienteService.update(cliente);
         return "redirect:/clientes/all";
     }
