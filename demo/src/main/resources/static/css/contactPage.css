@@ -27,6 +27,7 @@
 .solicitaCitaCard img {
   width: auto;
   height: 250px;
+  padding-right: 120px;
 }
 
 .cardImageTitle {
