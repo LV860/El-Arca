@@ -33,6 +33,21 @@ main{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+.login-section a{
+    
+    font-family: Manripe, sans-serif;
+    color: #379ae6ff;
+    text-align: right;
+    text-decoration: none;
+}
+
+
+.login-section a:visited{
+    color: #379ae6ff;
+}
+
+
 .login-section h2 {
     font-family: Manripe, sans-serif;
     color: #2e0e73ff;
@@ -46,9 +61,13 @@ main{
     color: #333;
 }
 
+.login-section form {
+    margin-right: 15px;
+}
+
 .login-section input {
     display: block;
-    width: 98%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 20px;
     
@@ -59,9 +78,9 @@ main{
 
 .login-section .btnBlue {
     display: block;
-    width: 95%;
+    width: 100%;
     padding: 10px;
-    padding-right: 20px;
+    
     background-color: #f2ba03ff;
     color: white;
     font-family: "Manrope", sans-serif;
