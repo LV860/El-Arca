@@ -21,7 +21,9 @@ public class Mascota {
     private Long id;
 
     @ManyToOne
+    //@JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
     
     public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho) {
         this.id = id;

@@ -1,5 +1,15 @@
 package com.example.demo.entidad;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Veterinario {
     private String cedula;
     private String contrasena;
@@ -7,6 +17,34 @@ public class Veterinario {
     private String urlImagen;
     private int numAtenciones;
     private String nombre;
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+
+    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
+
+    
+
+    public Veterinario(Long id, String cedula, String contrasena, String especialidad, String urlImagen, int numAtenciones,
+            String nombre) {
+        this.cedula = cedula;
+        this.contrasena = contrasena;
+        this.especialidad = especialidad;
+        this.urlImagen = urlImagen;
+        this.numAtenciones = numAtenciones;
+        this.nombre = nombre;
+        this.id = id;
+    }
+
+
+
+    public Veterinario() {
+    }
+
+
 
     public Veterinario(String cedula, String contrasena, String especialidad, String urlImagen, int numAtenciones,
             String nombre) {
