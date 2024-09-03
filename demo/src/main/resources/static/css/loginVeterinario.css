@@ -94,3 +94,9 @@ main{
 .login-section .btnBlue:hover {
     background-color: #2e0e73ff;
 }
+
+.mensaje_error {
+    color: red;
+    margin-bottom: 10px;
+    text-align: right;
+}

@@ -24,6 +24,12 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+
+
+        new Veterinario("1234", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s",4,"Hugh Jackman");
+        https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s
         clienteRepository.save(new Cliente(12345L, "juanchito@gmail.com", "3216547414", "Juan Andres Orjueña Bello"));
         clienteRepository.save(new Cliente(67890L, "pipe@gmail.com", "3163597104", "Daniel Felipe Bello Navas"));
 

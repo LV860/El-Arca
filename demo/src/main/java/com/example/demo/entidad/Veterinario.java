@@ -23,6 +23,8 @@ public class Veterinario {
     private Long id;
 
 
+
+
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
@@ -62,6 +64,16 @@ public class Veterinario {
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContrasena() {

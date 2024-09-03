@@ -34,17 +34,20 @@
     <main>
         <div class="profile-section">
             <div class="profile-details">
-                <img src="https://www.himalayacentroamericana.com/sites/default/files/consultaveterinaria.jpg" alt="Foto de Perfil">
-                <div class="name">Elizabeth Bailey <img src="../images/logo1.png" alt="Editar" class="edit-icon"></div>
+                <img th:src="${veterinario.urlImagen}" alt="Foto de Perfil">
+                <div class="name">
+                  <p th:text="${veterinario.nombre}"></p>
+                  <img src="../images/logo1.png" alt="Editar" class="edit-icon">
+                </div>
                 <div class="email">ElizabethBailey@gmail.com</div>
 
                 <div class="info-card">
                     <p><span class="label">Estado:</span> <span class="value">Activo</span></p>
-                    <p><span class="label">Género:</span> <span class="value">Femenino</span></p>
-                    <p><span class="label">Edad:</span> <span class="value">26</span></p>
-                    <p><span class="label">Cédula:</span> <span class="value">123456</span></p>
-                    <p><span class="label">Celular:</span> <span class="value">+57 318 859 5046</span></p>
-                    <p><span class="label">Especialidad:</span> <span class="value">Hola</span></p>
+                    
+                    
+                    <p><span class="label">Cédula:</span> <span class="value" th:text="${veterinario.cedula}"></span></p>
+                    <p><span class="label">Numero de atenciones:</span> <span class="value" th:text="${veterinario.numAtenciones}"></span></p>
+                    <p><span class="label">Especialidad:</span> <span class="value" th:text="${veterinario.especialidad}"></span></p>
                 </div>
             </div>
         </div>

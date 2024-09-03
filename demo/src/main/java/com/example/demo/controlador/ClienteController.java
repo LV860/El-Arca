@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Veterinario;
 import com.example.demo.servicio.ClienteService;
+import com.example.demo.servicio.VeterinarioService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -19,6 +21,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private VeterinarioService veterinarioService;
 
     @GetMapping("/all")
     public String listarClientes(Model model) {
@@ -74,5 +79,27 @@ public class ClienteController {
     @GetMapping("/perfil")
     public String landingPage() {
         return "/perfilVeterinario";
+    }
+
+
+    @PostMapping("/perfil")
+    public String mostrarPerfil(@ModelAttribute Veterinario veterinario, Model model) {
+        try {
+            Veterinario user = veterinarioService.findById(veterinario.getId());
+
+            if (user != null) {
+                model.addAttribute("veterinario", user);
+                
+                return "/perfilVeterinario";
+            } else {
+                model.addAttribute("error", "No se encontró el veterinario con los datos proporcionados.");
+                return "/loginVeterinarioError";
+            }
+        } catch (Exception e) {
+            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de error
+            System.err.println("Ocurrió un error: " + e.getMessage());
+            model.addAttribute("error", "Ocurrió un error al intentar mostrar el perfil del veterinario.");
+            return "/loginVeterinarioError";
+        }
     }
 }
