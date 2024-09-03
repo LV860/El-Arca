@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Arca - Perfil Veterinario</title>
     <link
       rel="stylesheet"
@@ -10,49 +10,58 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="../css/perfilVeterinario.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="../css/perfilVeterinario.css" />
+  </head>
+  <body>
     <header>
-        <div class="navigationBarLogo">
-          <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
-          <a href=""><h1>El Arca</h1></a>
-        </div>
-        <div class="navigationBarMenuOptions">
-          <a href="/clientes/perfil"><h3>Perfil</h3></a>
-          <a href="/clientes/all"><h3>Clientes</h3></a>
-          <a href="/mascota/all"><h3>Mascotas</h3></a>
-        </div>
-        <div class="navigationBarButtons">
-          <a href="/home/landingPage">
-            <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
-          </a>
-        </div>
-      </header>
+      <div class="navigationBarLogo">
+        <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+        <a href=""><h1>El Arca</h1></a>
+      </div>
+      <div class="navigationBarMenuOptions">
+        <a href="/clientes/perfil"><h3>Perfil</h3></a>
+        <a href="/clientes/all"><h3>Clientes</h3></a>
+        <a href="/mascota/all"><h3>Mascotas</h3></a>
+      </div>
+      <div class="navigationBarButtons">
+        <a href="/clientes/logout">
+          <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+        </a>
+      </div>
+    </header>
 
     <main>
-        <div class="profile-section">
-            <div class="profile-details">
-                <img th:src="${veterinario.urlImagen}" alt="Foto de Perfil">
-                <div class="name">
-                  <p th:text="${veterinario.nombre}"></p>
-                  <img src="../images/logo1.png" alt="Editar" class="edit-icon">
-                </div>
-                <div class="email">ElizabethBailey@gmail.com</div>
+      <div class="profile-section">
+        <div class="profile-details">
+          <img th:src="${veterinario.urlImagen}" alt="Foto de Perfil" />
+          <div class="name">
+            <p th:text="${veterinario.nombre}"></p>
+            <img src="../images/logo1.png" alt="Editar" class="edit-icon" />
+          </div>
+          <div class="email"></div>
 
-                <div class="info-card">
-                    <p><span class="label">Estado:</span> <span class="value">Activo</span></p>
-                    
-                    
-                    <p><span class="label">Cédula:</span> <span class="value" th:text="${veterinario.cedula}"></span></p>
-                    <p><span class="label">Numero de atenciones:</span> <span class="value" th:text="${veterinario.numAtenciones}"></span></p>
-                    <p><span class="label">Especialidad:</span> <span class="value" th:text="${veterinario.especialidad}"></span></p>
-                </div>
-            </div>
+          <div class="info-card">
+            <p>
+              <span class="label">Estado:</span>
+              <span class="value">Activo</span>
+            </p>
+
+            <p>
+              <span class="label">Cédula:</span>
+              <span class="value" th:text="${veterinario.cedula}"></span>
+            </p>
+            <p>
+              <span class="label">Numero de atenciones:</span>
+              <span class="value" th:text="${veterinario.numAtenciones}"></span>
+            </p>
+            <p>
+              <span class="label">Especialidad:</span>
+              <span class="value" th:text="${veterinario.especialidad}"></span>
+            </p>
+          </div>
         </div>
+      </div>
     </main>
-
-    
-</body>
+  </body>
 </html>

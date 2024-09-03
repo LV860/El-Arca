@@ -117,6 +117,6 @@ public class ClienteController {
     @GetMapping("/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus) {
         session.invalidate(); // Invalidate the session
-        return "redirect:/login"; // Redirect to login page
+        return "redirect:/home/landingPage"; // Redirect to login page
     }
 }
