@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/clientes")
@@ -77,19 +80,28 @@ public class ClienteController {
     }
 
     @GetMapping("/perfil")
-    public String landingPage() {
-        return "/perfilVeterinario";
+    public String landingPage(HttpSession session, Model model) {
+        Veterinario user = (Veterinario) session.getAttribute("veterinario");
+        if (user != null) {
+            model.addAttribute("veterinario", user);
+            return "/perfilVeterinario";
+        } else {
+            // Handle the case where the user is not logged in
+            model.addAttribute("error", "No estás autenticado.");
+            return "/loginVeterinarioError";
+        }
     }
 
 
     @PostMapping("/perfil")
-    public String mostrarPerfil(@ModelAttribute Veterinario veterinario, Model model) {
+    public String mostrarPerfil(@ModelAttribute Veterinario veterinario, HttpSession session, Model model) {
         try {
             Veterinario user = veterinarioService.findById(veterinario.getId());
 
             if (user != null) {
-                model.addAttribute("veterinario", user);
+                session.setAttribute("veterinario", user); // Store in session
                 
+                model.addAttribute("veterinario", user);
                 return "/perfilVeterinario";
             } else {
                 model.addAttribute("error", "No se encontró el veterinario con los datos proporcionados.");
@@ -101,5 +113,10 @@ public class ClienteController {
             model.addAttribute("error", "Ocurrió un error al intentar mostrar el perfil del veterinario.");
             return "/loginVeterinarioError";
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session, SessionStatus sessionStatus) {
+        session.invalidate(); // Invalidate the session
+        return "redirect:/login"; // Redirect to login page
     }
 }
