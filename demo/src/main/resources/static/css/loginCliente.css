@@ -48,6 +48,7 @@ main{
 }
 
 
+
 .login-section h2 {
     font-family: Manripe, sans-serif;
     color: #2e0e73ff;
@@ -93,4 +94,11 @@ main{
 
 .login-section .btnBlue:hover {
     background-color: #f2ba03ff;
+}
+
+
+.mensaje_error {
+    color: red;
+    margin-bottom: 10px;
+    text-align: right;
 }
