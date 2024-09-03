@@ -16,6 +16,10 @@ public class LandingPageController {
     public String loginCliente (){
         return "/loginCliente";
     }
+    @GetMapping("loginVeterinario")
+    public String loginVeterinario (){
+        return "/loginVeterinario";
+    }
 
     @GetMapping("aboutUsPage")
     public String aboutUsPage (){
