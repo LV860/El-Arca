@@ -11,38 +11,38 @@ import com.example.demo.repositorio.MascotaRepository;
 public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
-    MascotaRepository repo;
+    MascotaRepository mascotaRepositoryJPA;
 
     @Autowired
-    ClienteRepository clienteRepository;
+    ClienteRepository clienteRepositoryJPA;
 
     @Override
     public Mascota SearchById(Long id) {
-        return repo.findById(id).orElse(null);
+        return mascotaRepositoryJPA.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Mascota> SearchAll() {
-        return repo.findAll();
+        return mascotaRepositoryJPA.findAll();
     }
 
     @Override
     public void deleteById(Long id) { 
-        repo.deleteById(id);
+        mascotaRepositoryJPA.deleteById(id);
     }
 
     @Override
     public void update(Mascota mascota) {
         //Vuelve a buscar la mascota original antes de ser editada para obtener la cedula del dueño
-        mascota.setCedulaDuenho(repo.findById(mascota.getId()).orElse(null).getCedulaDuenho());
-        mascota.setCliente(repo.findById(mascota.getId()).orElse(null).getCliente());
-        repo.save(mascota);
+        mascota.setCedulaDuenho(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCedulaDuenho());
+        mascota.setCliente(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCliente());
+        mascotaRepositoryJPA.save(mascota);
     }
 
     @Override
     public void save(Mascota mascota) {
-        mascota.setCliente(clienteRepository.findById(mascota.getCedulaDuenho()).orElse(null));
-        repo.save(mascota);
+        mascota.setCliente(clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null));
+        mascotaRepositoryJPA.save(mascota);
     }
 /* 
     @Override

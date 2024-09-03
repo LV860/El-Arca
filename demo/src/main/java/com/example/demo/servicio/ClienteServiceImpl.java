@@ -12,32 +12,32 @@ import com.example.demo.repositorio.ClienteRepository;
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
-    private ClienteRepository repo;
+    private ClienteRepository repoJPA;
 
 
 
     @Override
     public Cliente findById(Long id) {
-        return repo.findById(id).orElse(null);
+        return repoJPA.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Cliente> SearchAll() {
-        return repo.findAll();
+        return repoJPA.findAll();
     }
 
     @Override
     public void delete(Long id) {
-        repo.deleteById(id);
+        repoJPA.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
-        repo.save(cliente);
+        repoJPA.save(cliente);
     }
 
     @Override
     public void save(Cliente cliente) {
-        repo.save(cliente);
+        repoJPA.save(cliente);
     }
 }
