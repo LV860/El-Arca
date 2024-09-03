@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>El Arca - Editar Cliente</title>
-    <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/updateClientes.css" />
+    <title>El Arca - Añadir Mascota</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/createClientes.css" />
   </head>
   <body>
     <header>
@@ -26,10 +26,10 @@
     </header>
 
     <main>
-      <div class="add-cliente-form">
+      <div class="add-client-form">
         <h1>Añadir Mascota</h1>
         <form th:object="${mascota}" th:action="@{/mascota/add}" method="post">
-          >
+          
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre:</label>
@@ -51,6 +51,10 @@
                 required
               />
             </div>
+          </div>
+
+
+          <div class="form-row">
 
             <div class="form-group">
               <label for="raza">Raza:</label>
@@ -62,8 +66,7 @@
                 required
               />
             </div>
-          </div>
-          <div class="form-row">
+
             <div class="form-group">
               <label for="edad">Edad:</label>
               <input
@@ -74,6 +77,10 @@
                 required
               />
             </div>
+          </div>
+
+          <div class="form-row">
+            
             <div class="form-group">
               <label for="peso">Peso:</label>
               <input
@@ -94,6 +101,11 @@
                 required
               />
             </div>
+            
+          </div>
+
+          <div class="form-row">
+            
             <div class="form-group">
               <label for="urlImagen">Url Imagen:</label>
               <input

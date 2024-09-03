@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="/css/tabla_Mascotas.css" />
     <link rel="stylesheet" href="/css/common.css" />
-    <link rel="stylesheet" href="/css/updateClientes.css" />
+    
     <title>Mascotas</title>
   </head>
   <body>
@@ -34,51 +34,63 @@
       </div>
     </header>
 
-    <section class="tablaSection">
-      <h1>Información Mascotas.</h1>
-      <a class="btn btn-primary" href="/mascota/add">Añadir Mascota</a>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Raza</th>
-            <th>Edad</th>
-            <th>Peso</th>
-            <th>Enfermedad</th>
-            <th>Foto</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="mascota: ${mascotas}">
-            <td th:text="${mascota.nombre}"></td>
-            <td th:text="${mascota.raza}"></td>
-            <td th:text="${mascota.edad}"></td>
-            <td th:text="${mascota.peso}"></td>
-            <td th:text="${mascota.enfermedad}"></td>
-            <td>
-              <img th:src="${mascota.urlImagen}" alt="Imagen de Mascota" />
-            </td>
-            <td>
-              <div class="editButtonContainer">
-                <a
-                  type="button"
-                  class="btn btn-warning"
-                  th:href="@{/mascota/update/{id}(id=${mascota.id})}"
-                  >Editar</a
-                >
-                <a
-                  type="button"
-                  class="btn btn-danger"
-                  th:href="@{/mascota/delete/{id}(id=${mascota.id})}"
-                >
-                  Eliminar
-                </a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+
+    <main>
+      <section class="title-bar">
+        <h1>Información Mascotas</h1>
+        <div class="buttons-group">
+          <a href="/mascota/add">
+            <button class="btnAzul">Añadir Mascota</button>
+          </a>
+          <!-- Los botones para editar y eliminar clientes se pueden gestionar aquí -->
+        </div>
+      </section>
+  
+      <section class="client-table">
+        
+        <table >
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Raza</th>
+              <th>Edad</th>
+              <th>Peso</th>
+              <th>Enfermedad</th>
+              <th>Foto</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="mascota: ${mascotas}">
+              <td th:text="${mascota.nombre}"></td>
+              <td th:text="${mascota.raza}"></td>
+              <td th:text="${mascota.edad}"></td>
+              <td th:text="${mascota.peso}"></td>
+              <td th:text="${mascota.enfermedad}"></td>
+              <td>
+                <img th:src="${mascota.urlImagen}" alt="Imagen de Mascota" />
+              </td>
+              <td>
+                <div class="editButtonContainer">
+                  <a
+                    type="button"
+                    class="btn btn-warning"
+                    th:href="@{/mascota/update/{id}(id=${mascota.id})}"
+                    >Editar</a
+                  >
+                  <a
+                    type="button"
+                    class="btn btn-danger"
+                    th:href="@{/mascota/delete/{id}(id=${mascota.id})}"
+                  >
+                    Eliminar
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
   </body>
 </html>

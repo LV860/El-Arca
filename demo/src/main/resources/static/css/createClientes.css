@@ -18,7 +18,7 @@ body {
 .add-client-form h1 {
     font-family: "Red Hat Display", sans-serif;
     font-size: 28px;
-    color: #d13160;
+    color: #f2ba03ff;
     margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@ body {
 }
 
 .btnSubmit {
-    background-color: #d13160;
+    background-color: #f2ba03ff;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
