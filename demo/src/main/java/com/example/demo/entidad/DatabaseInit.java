@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -22,14 +23,17 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     MascotaRepository mascotaRepository;
 
+    @Autowired
+    VeterinarioRepository veterinarioRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
 
 
 
-        new Veterinario("1234", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s",4,"Hugh Jackman");
-        https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s
+        veterinarioRepository.save(new Veterinario("1234", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s",4,"Hugh Jackman"));
+        
         clienteRepository.save(new Cliente(12345L, "juanchito@gmail.com", "3216547414", "Juan Andres Orjueña Bello"));
         clienteRepository.save(new Cliente(67890L, "pipe@gmail.com", "3163597104", "Daniel Felipe Bello Navas"));
 
