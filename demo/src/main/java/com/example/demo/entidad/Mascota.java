@@ -3,7 +3,6 @@ package com.example.demo.entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 @Entity
 public class Mascota {
@@ -16,6 +15,8 @@ public class Mascota {
     private String enfermedad;
     private String urlImagen;
     private Long cedulaDuenho;
+    //Estado, en tratamiento o inactivo
+    private String estado;
     @Id
     @GeneratedValue
     private Long id;
@@ -25,7 +26,7 @@ public class Mascota {
     private Cliente cliente;
 
     
-    public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho) {
+    public Mascota(Long id, String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho, String estado) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
@@ -34,9 +35,10 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
         this.cedulaDuenho = cedulaDuenho;
+        this.estado = estado;
     }
     
-    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho) {
+    public Mascota(String nombre, String raza, int edad, double peso, String enfermedad, String urlImagen, Long cedulaDuenho, String estado) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -44,6 +46,7 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.urlImagen = urlImagen;
         this.cedulaDuenho = cedulaDuenho;
+        this.estado = estado;
     }
 
 
@@ -108,4 +111,16 @@ public class Mascota {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
+
+    
 }

@@ -75,21 +75,7 @@ body {
   justify-content: center;
 }
 
-.tagEstadoPerfilActivo {
-  color: #117b34ff;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
-  background-color: #abf8c4;
-}
 
-.tagEstadoMascotaTratamiento {
-  color: #896901;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
-  background-color: #fffae8;
-}
 
 .profile-details .name img.edit-icon {
   width: 20px;

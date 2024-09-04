@@ -225,3 +225,41 @@ footer {
 .FooterOptionsList a:visited {
   color: white;
 }
+
+/*------------------------------------------- TAGS DE ESTADOS ------------------------------------------*/
+.tagEstadoPerfilActivo {
+  color: #117b34ff;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  background-color: #abf8c4;
+}
+
+.tagEstadoPerfilInactivo {
+  color: #896901;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  background-color: #fffae8;
+  display: inline-block; /* Change to inline-block */
+}
+
+.tagEstadoMascotaTratamiento {
+  color: #117b34ff;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  background-color: #abf8c4;
+  display: flex;
+  
+}
+
+.tagEstadoMascotaInactiva {
+  color: #896901;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  background-color: #fffae8;
+  display: flex;
+  
+}

@@ -81,6 +81,7 @@
               <th>Peso</th>
               <th>Enfermedad</th>
               <th>Foto</th>
+              <th>Estado</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -95,6 +96,10 @@
               <td>
                 <img th:src="${mascota.urlImagen}" alt="Imagen de Mascota" />
               </td>
+              <td
+                th:text="${mascota.estado}"
+                th:classappend="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
+              ></td>
               <td>
                 <div class="editButtonContainer">
                   <a
