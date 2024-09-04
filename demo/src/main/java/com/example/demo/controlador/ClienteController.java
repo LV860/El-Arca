@@ -119,4 +119,44 @@ public class ClienteController {
         session.invalidate(); // Invalidate the session
         return "redirect:/home/landingPage"; // Redirect to login page
     }
+
+
+    @GetMapping("/search")
+    public String searchClientes(@RequestParam("query") String query, 
+                             @RequestParam("filterBy") String filterBy, 
+                             Model model) {
+
+    // Determine which filter to use
+    switch (filterBy) {
+        case "todos":
+            model.addAttribute("clientes", clienteService.SearchAll());
+            return "/veterinarioClientes"; 
+
+        case "id":
+            try {
+                // Convert query to Long for ID search
+                model.addAttribute("clientes", clienteService.findById(Long.parseLong(query)));
+            } catch (NumberFormatException e) {
+                // Handle invalid number format
+                model.addAttribute("clientes", clienteService.SearchAll());
+            }
+            return "/veterinarioClientes"; 
+
+        case "nombre":
+            model.addAttribute("clientes", clienteService.findClienteByNombre(query));
+            return "/veterinarioClientes"; 
+
+        case "correo":
+            model.addAttribute("clientes", clienteService.findClienteByCorreo(query));
+            return "/veterinarioClientes"; 
+
+        case "telefono":
+            model.addAttribute("clientes", clienteService.findClienteByCelular(query));
+            return "/veterinarioClientes"; 
+
+        default:
+            model.addAttribute("clientes", clienteService.SearchAll());
+            return "/veterinarioClientes"; 
+    }
+}
 }

@@ -40,4 +40,19 @@ public class ClienteServiceImpl implements ClienteService {
     public void save(Cliente cliente) {
         repoJPA.save(cliente);
     }
+
+    @Override
+    public Collection<Cliente> findClienteByNombre(String nombre) {
+        return repoJPA.findClienteByNombre(nombre);
+    }
+
+    @Override
+    public Collection<Cliente> findClienteByCorreo(String correo) {
+        return repoJPA.findClienteByCorreo(correo);
+    }
+
+    @Override
+    public Collection<Cliente> findClienteByCelular(String celular) {
+        return repoJPA.findClienteByCelular(celular);
+    }
 }
