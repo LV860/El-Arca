@@ -233,7 +233,7 @@ footer {
   padding-left: 0.6em;
   border-radius: 10rem;
   background-color: #abf8c4;
-  
+  display: flex;
 }
 
 .tagEstadoPerfilInactivo {
@@ -242,7 +242,7 @@ footer {
   padding-left: 0.6em;
   border-radius: 10rem;
   background-color: #fffae8;
-  display: inline-block; /* Change to inline-block */
+  display: flex;
 }
 
 .tagEstadoMascotaTratamiento {
@@ -252,7 +252,6 @@ footer {
   border-radius: 10rem;
   background-color: #abf8c4;
   display: flex;
-  
 }
 
 .tagEstadoMascotaInactiva {
@@ -262,5 +261,4 @@ footer {
   border-radius: 10rem;
   background-color: #fffae8;
   display: flex;
-  
 }

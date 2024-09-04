@@ -154,6 +154,14 @@ public class ClienteController {
             model.addAttribute("clientes", clienteService.findClienteByCelular(query));
             return "/veterinarioClientes"; 
 
+        case "inactivo":
+            model.addAttribute("clientes", clienteService.findClienteByEstado("Inactivo"));
+            return "veterinarioClientes";
+
+        case "activo":
+            model.addAttribute("clientes", clienteService.findClienteByEstado("activo"));
+            return "veterinarioClientes";
+
         default:
             model.addAttribute("clientes", clienteService.SearchAll());
             return "/veterinarioClientes"; 
