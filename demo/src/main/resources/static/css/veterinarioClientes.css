@@ -9,6 +9,10 @@
   margin: 20px;
 }
 
+h3 {
+  font-size: 1.17em;
+}
+
 .buttons-group {
   display: flex;
   gap: 10px;
