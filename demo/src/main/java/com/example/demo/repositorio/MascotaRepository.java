@@ -8,6 +8,8 @@ import java.util.List;
 @Repository
 public interface MascotaRepository extends JpaRepository<Mascota, Long>{
 
-    //List<Mascota> findMascotaByClienteId(Long id);
+    List<Mascota> findMascotaByNombre(String nombre);
+    List<Mascota> findMascotaByRaza(String raza);
+    List<Mascota> findMascotaByEnfermedad(String enfermedad);
 }
 

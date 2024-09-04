@@ -13,6 +13,7 @@ public interface MascotaService {
     public void deleteById(Long id);
     public void update(Mascota mascota);
     public void save(Mascota mascota);
-    //public Collection<Mascota> findMascotaByClienteId(Long id);
-    
+    public Collection<Mascota> findMascotaByNombre(String nombre);
+    public Collection<Mascota> findMascotaByRaza(String raza);
+    public Collection<Mascota> findMascotaByEnfermedad(String enfermedad);
 } 

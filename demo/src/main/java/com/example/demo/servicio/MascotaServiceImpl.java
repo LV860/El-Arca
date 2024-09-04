@@ -44,10 +44,19 @@ public class MascotaServiceImpl implements MascotaService {
         mascota.setCliente(clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null));
         mascotaRepositoryJPA.save(mascota);
     }
-/* 
+
     @Override
-    public Collection<Mascota> findMascotaByClienteId(Long id) {
-        return repo.findMascotaByClienteId(id);
+    public Collection<Mascota> findMascotaByNombre(String nombre) {
+        return mascotaRepositoryJPA.findMascotaByNombre(nombre);
     }
-        */
+
+    @Override
+    public Collection<Mascota> findMascotaByRaza(String raza) {
+        return mascotaRepositoryJPA.findMascotaByRaza(raza);
+    }
+
+    @Override
+    public Collection<Mascota> findMascotaByEnfermedad(String enfermedad) {
+        return mascotaRepositoryJPA.findMascotaByEnfermedad(enfermedad);
+    }
 }

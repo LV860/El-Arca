@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,4 +74,45 @@ public class MascotaController {
         mascotaService.update(mascota);
         return "redirect:/mascota/all";
     }
+
+
+
+    @GetMapping("/search")
+public String searchMascotas(@RequestParam("query") String query, 
+                             @RequestParam("filterBy") String filterBy, 
+                             Model model) {
+
+    // Determine which filter to use
+    switch (filterBy) {
+        case "todos":
+            model.addAttribute("mascotas", mascotaService.SearchAll());
+            return "tabla_Mascotas";
+
+        case "id":
+            try {
+                // Convert query to Long for ID search
+                model.addAttribute("mascotas", mascotaService.SearchById(Long.parseLong(query)));
+            } catch (NumberFormatException e) {
+                // Handle invalid number format
+                model.addAttribute("mascotas", mascotaService.SearchAll());
+            }
+            return "tabla_Mascotas";
+
+        case "nombre":
+            model.addAttribute("mascotas", mascotaService.findMascotaByNombre(query));
+            return "tabla_Mascotas";
+
+        case "raza":
+            model.addAttribute("mascotas", mascotaService.findMascotaByRaza(query));
+            return "tabla_Mascotas";
+
+        case "enfermedad":
+            model.addAttribute("mascotas", mascotaService.findMascotaByEnfermedad(query));
+            return "tabla_Mascotas";
+
+        default:
+            model.addAttribute("mascotas", mascotaService.SearchAll());
+            return "tabla_Mascotas";
+    }
+}
 }

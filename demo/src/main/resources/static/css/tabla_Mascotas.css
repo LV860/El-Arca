@@ -5,6 +5,14 @@ table img {
   border-radius: 50%;
 }
 
+#formularioFiltro {
+  padding-bottom: 25px;
+}
+
+.btn-primary {
+  background-color: #379ae6ff;
+  border-color: #379ae6ff;
+}
 
 .title-bar {
   display: flex;
