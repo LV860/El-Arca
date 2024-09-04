@@ -76,9 +76,11 @@
               <div class="card-nombre-estadoicon">
                 <h3 th:text="${mascota.nombre}"></h3>
                 <p>
-                  <span class="tagEstadoMascotaTratamiento"
-                    >En tratamiento</span
-                  >
+                  <span
+                    class="value"
+                    th:text="${mascota.estado}"
+                    th:classappend="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
+                  ></span>
                 </p>
               </div>
 

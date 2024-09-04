@@ -49,10 +49,8 @@ public class MascotaController {
 
     @PostMapping("/add")
     public String agregarMascota(@ModelAttribute Mascota mascota, Model model) {
+        mascota.setEstado("En tratamiento");
         mascotaService.save(mascota);
-
-        
-
         model.addAttribute("mascotas", mascotaService.SearchAll());
         return "redirect:/mascota/all";
     }
