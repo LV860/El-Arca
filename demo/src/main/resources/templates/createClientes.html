@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Arca - Añadir Cliente</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/createClientes.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/createClientes.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
     <header>
-        <div class="navigationBarLogo">
-          <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
-          <a href=""><h1>El Arca</h1></a>
-        </div>
-        <div class="navigationBarMenuOptions">
-          <a href="/clientes/perfil"><h3>Perfil</h3></a>
-          <a href="/clientes/all"><h3>Clientes</h3></a>
-          <a href="/mascota/all"><h3>Mascotas</h3></a>
-        </div>
-        <div class="navigationBarButtons">
-          <a href="/home/landingPage">
-            <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
-          </a>
-        </div>
-      </header>
+      <div class="navigationBarLogo">
+        <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+        <a href=""><h1>El Arca</h1></a>
+      </div>
+      <div class="navigationBarMenuOptions">
+        <a href="/clientes/perfil"><h3>Perfil</h3></a>
+        <a href="/clientes/all"><h3>Clientes</h3></a>
+        <a href="/mascota/all"><h3>Mascotas</h3></a>
+      </div>
+      <div class="navigationBarButtons">
+        <a href="/home/landingPage">
+          <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+        </a>
+      </div>
+    </header>
 
     <main>
-        <div class="add-client-form">
-            <h1>Añadir Cliente</h1>
-            <form action="/clientes/add" method="post"> 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cedula">Cédula</label>
-                        <input type="number" id="cedula" name="cedula" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="correo">Correo</label>
-                        <input type="email" id="correo" name="correo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="celular">Número de Teléfono</label>
-                        <input type="tel" id="celular" name="celular" required>
-                    </div>
-                </div>
-                <button type="submit" class="btnSubmit">Añadir</button>
-            </form>
-        </div>
+      <div class="add-client-form">
+        <h1>Añadir Cliente</h1>
+        <form action="/clientes/add" method="post">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="cedula">Cédula</label>
+              <input type="number" id="cedula" name="cedula" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="correo">Correo</label>
+              <input type="email" id="correo" name="correo" required />
+            </div>
+            <div class="form-group">
+              <label for="celular">Número de Teléfono</label>
+              <input type="tel" id="celular" name="celular" required />
+            </div>
+          </div>
+          <button type="submit" class="btnSubmit">Añadir</button>
+        </form>
+      </div>
     </main>
-</body>
+  </body>
 </html>

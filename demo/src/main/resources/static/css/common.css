@@ -25,6 +25,11 @@ header {
   background-color: #2e0e73ff;
 }
 
+header a:hover {
+  text-decoration: none !important; /* Removes the underline on hover */
+  color: white !important; /* Changes the text color to white on hover */
+}
+
 .navigationBarLogo img {
   border-radius: 36px;
 }
