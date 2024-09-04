@@ -13,6 +13,15 @@ body {
   padding: 0;
 }
 
+
+.image-scrollable {
+  width: 200px !important; /* Ancho deseado */
+  height: 200px !important; /* Altura deseada */
+  object-fit: cover;
+  border-radius: 20px !important;
+
+}
+
 .card-nombre-estadoicon {
   width: 100%;
   display: flex;
@@ -143,11 +152,15 @@ body {
 }
 
 .image-content {
-  width: 100%;
+  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+
+
+
 
 .scrollable-container {
   margin-top: 25px;
@@ -203,3 +216,6 @@ span {
   background-color: #fcf2f5ff;
   padding: 25px;
 }
+
+
+
