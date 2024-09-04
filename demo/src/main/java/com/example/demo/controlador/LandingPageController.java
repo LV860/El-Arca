@@ -30,4 +30,8 @@ public class LandingPageController {
     public String contactPage (){
         return "/contactPage";
     }
+    @GetMapping("locationPage")
+    public String locationPage (){
+        return "/locationPage";
+    }
 }
