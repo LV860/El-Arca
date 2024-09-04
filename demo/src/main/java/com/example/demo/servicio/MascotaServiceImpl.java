@@ -79,4 +79,9 @@ public class MascotaServiceImpl implements MascotaService {
     public Collection<Mascota> findMascotaByEnfermedad(String enfermedad) {
         return mascotaRepositoryJPA.findMascotaByEnfermedad(enfermedad);
     }
+
+    @Override
+    public Collection<Mascota> findMascotaByEstado(String estado) {
+        return mascotaRepositoryJPA.findMascotaByEstado(estado);
+    }
 }

@@ -16,4 +16,5 @@ public interface MascotaService {
     public Collection<Mascota> findMascotaByNombre(String nombre);
     public Collection<Mascota> findMascotaByRaza(String raza);
     public Collection<Mascota> findMascotaByEnfermedad(String enfermedad);
+    public Collection<Mascota> findMascotaByEstado(String estado);
 } 

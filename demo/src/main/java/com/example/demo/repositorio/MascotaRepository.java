@@ -11,5 +11,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long>{
     List<Mascota> findMascotaByNombre(String nombre);
     List<Mascota> findMascotaByRaza(String raza);
     List<Mascota> findMascotaByEnfermedad(String enfermedad);
+    List<Mascota> findMascotaByEstado(String estado);
 }
 

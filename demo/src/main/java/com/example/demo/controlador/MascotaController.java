@@ -109,6 +109,14 @@ public String searchMascotas(@RequestParam("query") String query,
             model.addAttribute("mascotas", mascotaService.findMascotaByEnfermedad(query));
             return "tabla_Mascotas";
 
+        case "inactiva":
+            model.addAttribute("mascotas", mascotaService.findMascotaByEstado("Inactiva"));
+            return "tabla_Mascotas";
+
+        case "en tratamiento":
+            model.addAttribute("mascotas", mascotaService.findMascotaByEstado("En tratamiento"));
+            return "tabla_Mascotas";
+
         default:
             model.addAttribute("mascotas", mascotaService.SearchAll());
             return "tabla_Mascotas";
