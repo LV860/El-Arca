@@ -98,7 +98,7 @@
               </td>
               <td
                 th:text="${mascota.estado}"
-                th:classappend="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
+                th:class="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
               ></td>
               <td>
                 <div class="editButtonContainer">

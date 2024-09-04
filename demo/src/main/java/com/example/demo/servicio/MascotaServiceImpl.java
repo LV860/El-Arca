@@ -3,6 +3,8 @@ package com.example.demo.servicio;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
@@ -37,12 +39,30 @@ public class MascotaServiceImpl implements MascotaService {
         mascota.setCedulaDuenho(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCedulaDuenho());
         mascota.setCliente(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCliente());
         mascotaRepositoryJPA.save(mascota);
+        Cliente cliente = mascota.getCliente();
+        cliente.setEstado("Inactivo");
+        for(int i=0;i<cliente.getMascotas().size();i++){
+            if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
+                System.out.println(cliente.getMascotas().get(i).getEstado());
+                cliente.setEstado("Activo");
+            }
+        }
+        clienteRepositoryJPA.save(cliente);
     }
 
     @Override
     public void save(Mascota mascota) {
         mascota.setCliente(clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null));
         mascotaRepositoryJPA.save(mascota);
+        Cliente cliente = mascota.getCliente();
+        cliente.setEstado("Inactivo");
+        for(int i=0;i<cliente.getMascotas().size();i++){
+            if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
+                System.out.println(cliente.getMascotas().get(i).getEstado());
+                cliente.setEstado("Activo");
+            }
+        }
+        clienteRepositoryJPA.save(cliente);
     }
 
     @Override
