@@ -61,6 +61,8 @@
               <option value="id">Cédula</option>
               <option value="correo">Correo</option>
               <option value="telefono">Teléfono</option>
+              <option value="inactivo">Inactivo</option>
+              <option value="activo">Activo</option>
             </select>
 
             <!-- Submit Button -->
@@ -75,6 +77,7 @@
               <th>Correo</th>
               <th>Teléfono</th>
               <th>Acciones</th>
+              <th>Estado</th>
             </tr>
           </thead>
           <tbody>
@@ -84,6 +87,10 @@
               <td th:text="${cliente.cedula}"></td>
               <td th:text="${cliente.correo}"></td>
               <td th:text="${cliente.celular}"></td>
+              <td
+                th:text="${cliente.estado}"
+                th:class="${cliente.estado == 'Activo' ? 'tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'tagEstadoPerfilInactivo' : '')}"
+              ></td>
               <td>
                 <div class="editButtonContainer">
                   <a

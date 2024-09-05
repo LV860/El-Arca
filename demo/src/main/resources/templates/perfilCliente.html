@@ -47,8 +47,12 @@
 
           <div class="info-card">
             <p>
-              <span class="label">Éstado:</span>
-              <span class="tagEstadoPerfilActivo">Activo</span>
+              <span class="label">Estado:</span>
+              <span
+                class="value"
+                th:text="${cliente.estado}"
+                th:classappend="${cliente.estado == 'Activo' ? 'tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'tagEstadoPerfilInactivo' : '')}"
+              ></span>
             </p>
             <p>
               <span class="label">Cédula:</span>

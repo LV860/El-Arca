@@ -16,4 +16,5 @@ public interface ClienteService {
     public Collection<Cliente> findClienteByNombre(String nombre);
     public Collection<Cliente> findClienteByCorreo(String correo);
     public Collection<Cliente> findClienteByCelular(String celular);
+    public Collection<Cliente> findClienteByEstado(String estado);
 }

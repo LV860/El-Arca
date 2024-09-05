@@ -51,6 +51,7 @@ public class MascotaController {
     public String agregarMascota(@ModelAttribute Mascota mascota, Model model) {
         mascota.setEstado("En tratamiento");
         mascotaService.save(mascota);
+        
         model.addAttribute("mascotas", mascotaService.SearchAll());
         return "redirect:/mascota/all";
     }
@@ -106,6 +107,14 @@ public String searchMascotas(@RequestParam("query") String query,
 
         case "enfermedad":
             model.addAttribute("mascotas", mascotaService.findMascotaByEnfermedad(query));
+            return "tabla_Mascotas";
+
+        case "inactiva":
+            model.addAttribute("mascotas", mascotaService.findMascotaByEstado("Inactiva"));
+            return "tabla_Mascotas";
+
+        case "en tratamiento":
+            model.addAttribute("mascotas", mascotaService.findMascotaByEstado("En tratamiento"));
             return "tabla_Mascotas";
 
         default:

@@ -55,4 +55,9 @@ public class ClienteServiceImpl implements ClienteService {
     public Collection<Cliente> findClienteByCelular(String celular) {
         return repoJPA.findClienteByCelular(celular);
     }
+
+    @Override
+    public Collection<Cliente> findClienteByEstado(String estado) {
+        return repoJPA.findClienteByEstado(estado);
+    }
 }

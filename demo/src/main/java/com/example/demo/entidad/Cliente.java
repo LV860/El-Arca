@@ -14,6 +14,7 @@ public class Cliente {
     private String correo;
     private String celular;
     private String nombre;
+    private String estado;
 
     @Id
     private Long cedula;
@@ -26,18 +27,20 @@ public class Cliente {
     }
 
 
-    public Cliente(Long cedula, String correo, String celular, String nombre) {
+    public Cliente(Long cedula, String correo, String celular, String nombre, String estado) {
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
         this.nombre = nombre;
+        this.estado = estado;
     }
 
-    public Cliente(String correo, String celular, String nombre) {
+    public Cliente(String correo, String celular, String nombre, String estado) {
         
         this.correo = correo;
         this.celular = celular;
         this.nombre = nombre;
+        this.estado = estado;
     }
 
 
@@ -87,4 +90,16 @@ public class Cliente {
     public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
     }
+
+
+    public String getEstado() {
+        return estado;
+    }
+
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
 }
