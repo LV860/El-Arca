@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.ClienteService;
-import com.example.demo.servicio.MascotaService;
+//import com.example.demo.servicio.MascotaService;
 
 @Controller
 @RequestMapping("/dueño")
@@ -17,8 +17,8 @@ public class DuenhoController {
 
     @Autowired
     private ClienteService clienteService;
-    @Autowired
-    private MascotaService mascotaService;
+    //@Autowired
+    //private MascotaService mascotaService;
 
     @PostMapping("/perfilCliente")
     public String mostrarPerfilCliente(@ModelAttribute Cliente cliente, Model model) {
