@@ -41,7 +41,7 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(102345678L, "maria.lopez@gmail.com", "3034567890", "María López", "Activo"));
         clienteRepository.save(new Cliente(234567890L, "pedro.martinez@gmail.com", "3045678901", "Pedro Martínez", "Activo"));
         clienteRepository.save(new Cliente(345678901L, "luisa.ramirez@gmail.com", "3056789012", "Luisa Ramírez", "Activo"));
-        clienteRepository.save(new Cliente(456789012L, "carlos.gomez@gmail.com", "3067890123", "Carlos Gómez", "Inactivo"));
+        clienteRepository.save(new Cliente(456789012L, "carlos.gomez@gmail.com", "3067890123", "Carlos Gómez", "Activo"));
         clienteRepository.save(new Cliente(567890123L, "sofia.mora@gmail.com", "3078901234", "Sofía Mora", "Activo"));
         clienteRepository.save(new Cliente(678901234L, "david.herrera@gmail.com", "3089012345", "David Herrera", "Activo"));
         clienteRepository.save(new Cliente(789012345L, "natalia.mendoza@gmail.com", "3090123456", "Natalia Mendoza", "Activo"));
@@ -51,16 +51,16 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(345678902L, "laura.martinez@gmail.com", "3134567890", "Laura Martínez", "Activo"));
         clienteRepository.save(new Cliente(456789013L, "martin.cano@gmail.com", "3145678901", "Martín Cano", "Activo"));
         clienteRepository.save(new Cliente(567890124L, "carla.uribe@gmail.com", "3156789012", "Carla Uribe", "Activo"));
-        clienteRepository.save(new Cliente(678901235L, "esteban.vera@gmail.com", "3167890123", "Esteban Vera", "Inactivo"));
+        clienteRepository.save(new Cliente(678901235L, "esteban.vera@gmail.com", "3167890123", "Esteban Vera", "Activo"));
         clienteRepository.save(new Cliente(789012346L, "camila.suarez@gmail.com", "3178901234", "Camila Suárez", "Activo"));
-        clienteRepository.save(new Cliente(890123457L, "oscar.rodriqez@gmail.com", "3189012345", "Óscar Rodríguez", "Inactivo"));
+        clienteRepository.save(new Cliente(890123457L, "oscar.rodriqez@gmail.com", "3189012345", "Óscar Rodríguez", "Activo"));
         clienteRepository.save(new Cliente(901234568L, "juliana.valencia@gmail.com", "3190123456", "Juliana Valencia", "Activo"));
         clienteRepository.save(new Cliente(234567892L, "andres.carrillo@gmail.com", "3201234567", "Andrés Carrillo", "Activo"));
         clienteRepository.save(new Cliente(345678903L, "veronica.salazar@gmail.com", "3212345678", "Verónica Salazar", "Activo"));
-        clienteRepository.save(new Cliente(456789014L, "gustavo.jimenez@gmail.com", "3223456789", "Gustavo Jiménez", "Inactivo"));
+        clienteRepository.save(new Cliente(456789014L, "gustavo.jimenez@gmail.com", "3223456789", "Gustavo Jiménez", "Activo"));
         clienteRepository.save(new Cliente(567890125L, "daniela.torres@gmail.com", "3234567890", "Daniela Torres", "Activo"));
         clienteRepository.save(new Cliente(678901236L, "sebastian.murillo@gmail.com", "3245678901", "Sebastián Murillo", "Activo"));
-        clienteRepository.save(new Cliente(789012347L, "angela.romero@gmail.com", "3256789012", "Ángela Romero", "Inactivo"));
+        clienteRepository.save(new Cliente(789012347L, "angela.romero@gmail.com", "3256789012", "Ángela Romero", "Activo"));
         clienteRepository.save(new Cliente(890123458L, "nicolas.pineda@gmail.com", "3267890123", "Nicolás Pineda", "Activo"));
         clienteRepository.save(new Cliente(901234569L, "martha.silva@gmail.com", "3278901234", "Martha Silva", "Activo"));
         clienteRepository.save(new Cliente(102345680L, "alexander.rios@gmail.com", "3289012345", "Alexander Ríos", "Activo"));
@@ -70,10 +70,10 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(567890126L, "samuel.estrella@gmail.com", "3323456789", "Samuel Estrella", "Activo"));
         clienteRepository.save(new Cliente(678901237L, "carolina.ortega@gmail.com", "3334567890", "Carolina Ortega", "Activo"));
         clienteRepository.save(new Cliente(789012348L, "javier.martinez@gmail.com", "3345678901", "Javier Martínez", "Activo"));
-        clienteRepository.save(new Cliente(890123459L, "catalina.vargas@gmail.com", "3356789012", "Catalina Vargas", "Inactivo"));
-        clienteRepository.save(new Cliente(901234570L, "martin.fernandez@gmail.com", "3367890123", "Martín Fernández", "Inactivo"));
+        clienteRepository.save(new Cliente(890123459L, "catalina.vargas@gmail.com", "3356789012", "Catalina Vargas", "Activo"));
+        clienteRepository.save(new Cliente(901234570L, "martin.fernandez@gmail.com", "3367890123", "Martín Fernández", "Activo"));
         clienteRepository.save(new Cliente(102345681L, "isabella.castano@gmail.com", "3378901234", "Isabella Castaño", "Activo"));
-        clienteRepository.save(new Cliente(234567894L, "manuel.palomino@gmail.com", "3389012345", "Manuel Palomino", "Inactivo"));
+        clienteRepository.save(new Cliente(234567894L, "manuel.palomino@gmail.com", "3389012345", "Manuel Palomino", "Activo"));
         clienteRepository.save(new Cliente(345678905L, "lina.quintero@gmail.com", "3390123456", "Lina Quintero", "Activo"));
         clienteRepository.save(new Cliente(456789016L, "santiago.garcia@gmail.com", "3401234567", "Santiago García", "Activo"));
         clienteRepository.save(new Cliente(567890127L, "silvia.morales@gmail.com", "3412345678", "Silvia Morales", "Activo"));
@@ -81,10 +81,10 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(789012349L, "fabian.garcia@gmail.com", "3434567890", "Fabian García", "Activo"));
         clienteRepository.save(new Cliente(890123460L, "maria.flores@gmail.com", "3445678901", "María Flores", "Activo"));
         clienteRepository.save(new Cliente(901234571L, "roberto.moreno@gmail.com", "3456789012", "Roberto Moreno", "Activo"));
-        clienteRepository.save(new Cliente(102345682L, "valeria.perez@gmail.com", "3467890123", "Valeria Pérez", "Inactivo"));
+        clienteRepository.save(new Cliente(102345682L, "valeria.perez@gmail.com", "3467890123", "Valeria Pérez", "Activo"));
         clienteRepository.save(new Cliente(234567895L, "raul.bermudez@gmail.com", "3478901234", "Raúl Bermúdez", "Activo"));
         clienteRepository.save(new Cliente(345678906L, "gloria.ramirez@gmail.com", "3489012345", "Gloria Ramírez", "Activo"));
-        clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Inactivo"));
+        clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"));
         clienteRepository.save(new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
 
 
