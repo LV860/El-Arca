@@ -72,7 +72,7 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(789012348L, "javier.martinez@gmail.com", "3345678901", "Javier Martínez", "Activo"));
         clienteRepository.save(new Cliente(890123459L, "catalina.vargas@gmail.com", "3356789012", "Catalina Vargas", "Inactivo"));
         clienteRepository.save(new Cliente(901234570L, "martin.fernandez@gmail.com", "3367890123", "Martín Fernández", "Inactivo"));
-        clienteRepository.save(new Cliente(102345681L, "isabella.castano@gmail.com", "3378901234", "Isabella Castaño", "Inactivo"));
+        clienteRepository.save(new Cliente(102345681L, "isabella.castano@gmail.com", "3378901234", "Isabella Castaño", "Activo"));
         clienteRepository.save(new Cliente(234567894L, "manuel.palomino@gmail.com", "3389012345", "Manuel Palomino", "Inactivo"));
         clienteRepository.save(new Cliente(345678905L, "lina.quintero@gmail.com", "3390123456", "Lina Quintero", "Activo"));
         clienteRepository.save(new Cliente(456789016L, "santiago.garcia@gmail.com", "3401234567", "Santiago García", "Activo"));
