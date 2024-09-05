@@ -36,4 +36,9 @@ public class LandingPageController {
         return "/servicesPage";
     }
 
+    @GetMapping("locationPage")
+    public String locationPage(){
+        return "/locationPage";
+    }
+
 }

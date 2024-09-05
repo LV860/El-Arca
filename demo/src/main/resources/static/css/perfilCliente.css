@@ -17,7 +17,7 @@ body {
 .image-scrollable {
   width: 200px !important; /* Ancho deseado */
   height: 200px !important; /* Altura deseada */
-  object-fit: cover;
+  object-fit: cover !important;
   border-radius: 20px !important;
 
 }
