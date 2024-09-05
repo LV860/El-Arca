@@ -126,3 +126,9 @@
   margin-bottom: 8px;
   color: #16191ed2;
 }
+
+.hidden-link {
+  color: inherit; /* Hereda el color del texto circundante */
+  text-decoration: none; /* Elimina el subrayado */
+  background: none; /* Elimina cualquier fondo */
+}

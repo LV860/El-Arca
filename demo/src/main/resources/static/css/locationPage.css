@@ -63,5 +63,6 @@
 .frame-mapa {
   border-radius: 40px;
   box-shadow: 0 4px 8px rgba(244, 188, 3, 0.425); /* Sombra opcional */
+  margin-bottom: 40px;
 }
 
