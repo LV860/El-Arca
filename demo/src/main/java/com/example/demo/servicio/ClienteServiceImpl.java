@@ -38,6 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void save(Cliente cliente) {
+        cliente.setEstado("Inactivo");
         repoJPA.save(cliente);
     }
 

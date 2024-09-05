@@ -54,7 +54,7 @@ public class MascotaServiceImpl implements MascotaService {
     public void save(Mascota mascota) {
         mascota.setCliente(clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null));
         mascotaRepositoryJPA.save(mascota);
-        Cliente cliente = mascota.getCliente();
+        Cliente cliente = clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null);
         cliente.setEstado("Inactivo");
         for(int i=0;i<cliente.getMascotas().size();i++){
             if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
