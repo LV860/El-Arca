@@ -159,7 +159,7 @@ public class ClienteController {
             return "veterinarioClientes";
 
         case "activo":
-            model.addAttribute("clientes", clienteService.findClienteByEstado("activo"));
+            model.addAttribute("clientes", clienteService.findClienteByEstado("Activo"));
             return "veterinarioClientes";
 
         default:
