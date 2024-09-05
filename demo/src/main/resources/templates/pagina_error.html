@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página No Encontrada</title>
+    <link rel="stylesheet" href="/css/error.css">
+</head>
+<body>
+
+    <section class="container">
+        <div class="content">
+            <img src="/images/headerNavBarLogo.png" alt="Logo El Arca" class="logo"/>
+            <h1>Oops!</h1>
+            <p>Parece que no podemos encontrar la página que estás buscando.</p>
+            <p>El cliente con la cédula <span th:text="${cedula}"></span> no existe.</p>
+            <p class="error-code">Código de error: 404</p>
+        
+            <ul class="navigation">
+                <li><a href="/home/landingPage">Inicio</a></li>
+                <li><a href="/home/servicesPage">Servicios</a></li>
+                <li><a href="/home/aboutUsPage">Sobre Nosotros</a></li>
+                <li><a href="/home/locationPage">Ubicación</a></li>    
+                <li><a href="/home/contactPage">Contactos</a></li>
+            </ul>
+        </div>
+        <div class="error-image-container">
+            <img class="error-image" src="https://static.vecteezy.com/system/resources/previews/017/178/563/non_2x/cross-check-icon-symbol-on-transparent-background-free-png.png" alt="error">
+        </div>
+    </section>
+    
+</body>
+</html>

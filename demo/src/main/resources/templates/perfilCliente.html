@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Arca - Perfil Cliente</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/perfilCliente.css" />
+    <link rel="stylesheet" href="/css/tabla_Mascotas.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navigationBarLogo">
+        <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+        <a href=""><h1>El Arca</h1></a>
+      </div>
+      <div class="navigationBarMenuOptions"></div>
+      <div class="navigationBarButtons">
+        <a href="/home/landingPage">
+          <button class="btnYellow"><h3>Cerrar Sesión</h3></button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="profile-section">
+        <div class="profile-details">
+          <div class="image-emailName">
+            <img
+              src="/images/fotoPerfil_PorDefecto.jpg"
+              alt="Foto de Perfil"
+            />
+            <div class="name-email">
+              <span id="nameSpan" th:text="${cliente.nombre}"> </span>
+              <span id="emailSpan" th:text="${cliente.correo}"> </span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <p>
+              <span class="label">Estado:</span>
+              <span
+                class="value"
+                th:text="${cliente.estado}"
+                th:classappend="${cliente.estado == 'Activo' ? 'tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'tagEstadoPerfilInactivo' : '')}"
+              ></span>
+            </p>
+            <p>
+              <span class="label">Cédula:</span>
+              <span class="value" th:text="${cliente.cedula}"></span>
+            </p>
+            <p>
+              <span class="label">Celular:</span>
+              <span class="value" th:text="${cliente.celular}"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCION QUE PERMITE CARGAR DATOS EN LA TABLA -->
+
+      <div class="scrollable-container">
+        <div class="card" th:each="mascota : ${mascotas}">
+          <img
+            class="image-scrollable"
+            th:src="${mascota.urlImagen}"
+            alt="Imagen de Mascota"
+          />
+          <div class="image-content">
+            <div class="info-container">
+              <div class="card-nombre-estadoicon">
+                <h3 th:text="${mascota.nombre}"></h3>
+                <p>
+                  <span
+                    class="value"
+                    th:text="${mascota.estado}"
+                    th:classappend="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
+                  ></span>
+                </p>
+              </div>
+
+              <p>
+                <strong>Raza:</strong> <span th:text="${mascota.raza}"></span>
+              </p>
+              <p>
+                <strong>Enfermedad:</strong>
+                <span th:text="${mascota.enfermedad}"></span>
+              </p>
+              <div class="cardPesoEdad">
+                <p class="cardPesoEdad-Edad">
+                  <strong>Edad:</strong> <span th:text="${mascota.edad}"></span>
+                </p>
+                <p class="cardPesoEdad-Peso">
+                  <strong>Peso:</strong> <span th:text="${mascota.peso}"></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

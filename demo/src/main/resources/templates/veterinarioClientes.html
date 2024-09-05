@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Arca - Clientes</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/veterinarioClientes.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navigationBarLogo">
+        <img src="/images/headerNavBarLogo.png" alt="imagenLogoElArca" />
+        <a href=""><h1>El Arca</h1></a>
+      </div>
+      <div class="navigationBarMenuOptions">
+        <a href="/clientes/perfil"><h3>Perfil</h3></a>
+        <a href="/clientes/all"><h3>Clientes</h3></a>
+        <a href="/mascota/all"><h3>Mascotas</h3></a>
+      </div>
+      <div class="navigationBarButtons">
+        <a href="/home/landingPage">
+          <button class="btnYellowPortal"><h3>Cerrar Sesión</h3></button>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="title-bar">
+        <h1>Información Clientes</h1>
+        <div class="buttons-group">
+          <a href="/clientes/createClientes">
+            <button class="btnAzulPortal">Añadir Cliente</button>
+          </a>
+          <!-- Los botones para editar y eliminar clientes se pueden gestionar aquí -->
+        </div>
+      </div>
+      <div class="client-table">
+        <!-- Filtrar mascotas -->
+        <div id="formularioFiltro">
+          <form action="/clientes/search" method="get" class="form-inline">
+            <!-- Search Bar -->
+            <input
+              type="text"
+              name="query"
+              class="form-control"
+              placeholder="Buscar..."
+            />
+
+            <!-- Dropdown Filter -->
+            <label for="filterBy" class="mr-2"> Filtrar por:</label>
+            <select name="filterBy" id="filterBy" class="form-control">
+              <option value="todos">Todos</option>
+              <option value="nombre">Nombre</option>
+              <option value="id">Cédula</option>
+              <option value="correo">Correo</option>
+              <option value="telefono">Teléfono</option>
+              <option value="inactivo">Inactivo</option>
+              <option value="activo">Activo</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary ml-2">Buscar</button>
+          </form>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cédula</th>
+              <th>Correo</th>
+              <th>Teléfono</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Iterar sobre clientes y mostrar en la tabla -->
+            <tr th:each="cliente : ${clientes}">
+              <td th:text="${cliente.nombre}"></td>
+              <td th:text="${cliente.cedula}"></td>
+              <td th:text="${cliente.correo}"></td>
+              <td th:text="${cliente.celular}"></td>
+              <td>
+                <button
+                  th:text="${cliente.estado}"
+                  th:class="${cliente.estado == 'Activo' ? 'btn btn-warning tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'btn btn-warning tagEstadoPerfilInactivo' : 'btn btn-warning')}"
+                ></button>
+              </td>
+              <td>
+                <div class="editButtonContainer">
+                  <a
+                    type="button"
+                    class="btn btn-warning"
+                    th:href="@{/clientes/update/{id}(id=${cliente.cedula})}"
+                    >Editar</a
+                  >
+                  <a
+                    type="button"
+                    class="btn btn-danger"
+                    th:href="@{/clientes/delete/{id}(id=${cliente.cedula})}"
+                  >
+                    Eliminar
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>
