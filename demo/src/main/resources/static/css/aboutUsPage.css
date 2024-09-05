@@ -48,11 +48,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 80%;
-<<<<<<< HEAD:css/aboutUsPage.css
-  background-color: #f0f0f0;
-=======
   background-color: #fffade;
->>>>>>> origin/development:demo/src/main/resources/static/css/aboutUsPage.css
   border: 2px solid #d3d3d3;
   border-radius: 15px;
   padding: 20px;
