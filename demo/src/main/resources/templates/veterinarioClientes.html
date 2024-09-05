@@ -76,8 +76,8 @@
               <th>Cédula</th>
               <th>Correo</th>
               <th>Teléfono</th>
-              <th>Acciones</th>
               <th>Estado</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -87,10 +87,12 @@
               <td th:text="${cliente.cedula}"></td>
               <td th:text="${cliente.correo}"></td>
               <td th:text="${cliente.celular}"></td>
-              <td
-                th:text="${cliente.estado}"
-                th:class="${cliente.estado == 'Activo' ? 'tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'tagEstadoPerfilInactivo' : '')}"
-              ></td>
+              <td>
+                <button
+                  th:text="${cliente.estado}"
+                  th:class="${cliente.estado == 'Activo' ? 'btn btn-warning tagEstadoPerfilActivo' : (cliente.estado == 'Inactivo' ? 'btn btn-warning tagEstadoPerfilInactivo' : 'btn btn-warning')}"
+                ></button>
+              </td>
               <td>
                 <div class="editButtonContainer">
                   <a

@@ -98,10 +98,12 @@
               <td>
                 <img th:src="${mascota.urlImagen}" alt="Imagen de Mascota" />
               </td>
-              <td
-                th:text="${mascota.estado}"
-                th:class="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
-              ></td>
+              <td>
+                <button
+                  th:text="${mascota.estado}"
+                  th:class="${mascota.estado == 'En tratamiento' ? 'tagEstadoMascotaTratamiento' : (mascota.estado == 'Inactiva' ? 'tagEstadoMascotaInactiva' : '')}"
+                ></button>
+              </td>
               <td>
                 <div class="editButtonContainer">
                   <a

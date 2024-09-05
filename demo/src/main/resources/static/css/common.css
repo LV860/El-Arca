@@ -229,36 +229,31 @@ footer {
 /*------------------------------------------- TAGS DE ESTADOS ------------------------------------------*/
 .tagEstadoPerfilActivo {
   color: #117b34ff;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
+  padding: 0.2em 0.6em; /* Adjust padding to make the tag smaller */
   border-radius: 10rem;
   background-color: #abf8c4;
-  display: flex;
+  border: none; /* Remove default button border */
 }
 
 .tagEstadoPerfilInactivo {
   color: #896901;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
+  padding: 0.2em 0.6em; /* Adjust padding to make the tag smaller */
   border-radius: 10rem;
   background-color: #fffae8;
-  display: flex;
+  border: none; /* Remove default button border */
 }
 
 .tagEstadoMascotaTratamiento {
   color: #117b34ff;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
+  padding: 0.2em 0.6em;
   border-radius: 10rem;
   background-color: #abf8c4;
-  display: flex;
+  border: none; /* Remove default button border */
 }
 
 .tagEstadoMascotaInactiva {
   color: #896901;
-  padding-right: 0.6em;
-  padding-left: 0.6em;
+  padding: 0.2em 0.6em;
   border-radius: 10rem;
   background-color: #fffae8;
-  display: flex;
 }
