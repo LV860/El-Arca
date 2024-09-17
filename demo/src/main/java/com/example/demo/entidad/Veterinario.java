@@ -15,7 +15,7 @@ public class Veterinario {
     private String contrasena;
     private String especialidad;
     private String urlImagen;
-    private int numAtenciones;
+    
     private String nombre;
 
     @Id
@@ -30,13 +30,13 @@ public class Veterinario {
 
     
 
-    public Veterinario(Long id, String cedula, String contrasena, String especialidad, String urlImagen, int numAtenciones,
+    public Veterinario(Long id, String cedula, String contrasena, String especialidad, String urlImagen,
             String nombre) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlImagen = urlImagen;
-        this.numAtenciones = numAtenciones;
+        
         this.nombre = nombre;
         this.id = id;
     }
@@ -48,13 +48,13 @@ public class Veterinario {
 
 
 
-    public Veterinario(String cedula, String contrasena, String especialidad, String urlImagen, int numAtenciones,
+    public Veterinario(String cedula, String contrasena, String especialidad, String urlImagen,
             String nombre) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlImagen = urlImagen;
-        this.numAtenciones = numAtenciones;
+        
         this.nombre = nombre;
     }
 
@@ -100,13 +100,7 @@ public class Veterinario {
         this.urlImagen = urlImagen;
     }
 
-    public int getNumAtenciones() {
-        return numAtenciones;
-    }
-
-    public void setNumAtenciones(int numAtenciones) {
-        this.numAtenciones = numAtenciones;
-    }
+    
 
     public String getNombre() {
         return nombre;
