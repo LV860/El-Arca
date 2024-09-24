@@ -10,6 +10,9 @@ public class Tratamiento {
 
     private float Precio;
     private String Fecha;
+    private Long clienteIdLong;
+    private Long veterinarioIdLong;
+    private Long drogaIdLong;
 
 
     
@@ -34,12 +37,12 @@ public class Tratamiento {
     public Tratamiento() {
     }
 
-    public Tratamiento(Long id, float Precio, String Fecha, Cliente cliente, Veterinario veterinario, Droga droga) {        
+    public Tratamiento(Long id, float Precio, String Fecha, Long clienteIdLong, Long veterinarioIdLong, Long drogaIdLong) {        
         this.id = id;
         this.Precio = Precio;
-        this.cliente = cliente;
-        this.veterinario = veterinario;
-        this.droga = droga;
+        this.clienteIdLong = clienteIdLong;
+        this.veterinarioIdLong = veterinarioIdLong;
+        this.drogaIdLong = drogaIdLong;
     }
 
     public Tratamiento(float precio, String fecha, Cliente cliente, Veterinario veterinario, Droga droga) {
@@ -97,6 +100,32 @@ public class Tratamiento {
     public void setDroga(Droga droga) {
         this.droga = droga;
     }
+
+    public Long getClienteIdLong() {
+        return clienteIdLong;
+    }
+
+    public void setClienteIdLong(Long clienteIdLong) {
+        this.clienteIdLong = clienteIdLong;
+    }
+
+    public Long getVeterinarioIdLong() {
+        return veterinarioIdLong;
+    }
+
+    public void setVeterinarioIdLong(Long veterinarioIdLong) {
+        this.veterinarioIdLong = veterinarioIdLong;
+    }
+
+    public Long getDrogaIdLong() {
+        return drogaIdLong;
+    }
+
+    public void setDrogaIdLong(Long drogaIdLong) {
+        this.drogaIdLong = drogaIdLong;
+    }
+
+    
 
     
     
