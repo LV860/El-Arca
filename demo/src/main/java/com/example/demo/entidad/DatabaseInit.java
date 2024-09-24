@@ -48,8 +48,29 @@ public class DatabaseInit implements ApplicationRunner {
 
 
 
-        veterinarioRepository.save(new Veterinario("678901239", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s",4,"Hugh Jackman"));
         
+        veterinarioRepository.save(new Veterinario("678901239", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s","Hugh Jackman"));
+        veterinarioRepository.save(new Veterinario("123456789", "pass123", "Cirugia", "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg", "Ana Martínez"));
+        veterinarioRepository.save(new Veterinario("987654321", "mypassword", "Dermatología", "https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg", "Luis García"));
+        veterinarioRepository.save(new Veterinario("112233445", "securepass", "Odontología", "https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg", "María Fernández"));
+        veterinarioRepository.save(new Veterinario("556677889", "vet1234", "Cardiología", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s", "Carlos López"));
+        veterinarioRepository.save(new Veterinario("998877665", "mypetpass", "Neumología", "https://pixnio.com/free-images/2017/11/30/2017-11-30-18-37-25.jpg", "Lucía Sánchez"));
+        veterinarioRepository.save(new Veterinario("223344556", "password1", "Endocrinología", "https://s2.abcstatics.com/Media/200912/14/davidmeca--300x180.jpg", "Javier Rodríguez"));
+        veterinarioRepository.save(new Veterinario("334455667", "animal123", "Rehabilitación", "https://i.pinimg.com/736x/c8/e9/72/c8e972106158f5dd52b0b20c6292f089.jpg", "Isabel Morales"));
+        veterinarioRepository.save(new Veterinario("445566778", "vetsecure", "Gastroenterología", "https://www.okchicas.com/wp-content/uploads/2016/01/Qu%C3%A9-dice-tu-rostro-de-ti-3.jpg", "Roberto Pérez"));
+        veterinarioRepository.save(new Veterinario("556677889", "petcare", "Neurocirugía", "https://thumbs.dreamstime.com/b/personas-negras-afroamericanas-hermosas-de-la-cara-de-la-mujer-ov-aislado-46936285.jpg", "Elena Gómez"));
+        veterinarioRepository.save(new Veterinario("667788990", "mypet123", "Oftalmología", "https://img.freepik.com/fotos-premium/concepto-personas-mujeres-retratos-cara-mujer-joven-sonriente-feliz_380164-119771.jpg", "Manuel Díaz"));
+        veterinarioRepository.save(new Veterinario("778899001", "veterinario", "Medicina Interna", "https://i.pinimg.com/236x/3d/a5/66/3da56663f134d5c630511f7ca4135852.jpg", "Sofía Ruiz"));
+        veterinarioRepository.save(new Veterinario("889900112", "v3tpass", "Cirugía General", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_nbSpPNMYYd3Q-qgYh6DUtnJjkVbnfilXA&s", "Fernando Fernández"));
+        veterinarioRepository.save(new Veterinario("990011223", "animalcare", "Oncología", "https://tenimage.es/wp-content/uploads/2014/10/Fotolia_triangular.jpg", "Carmen Torres"));
+        veterinarioRepository.save(new Veterinario("101112233", "vetpass", "Emergencias", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s", "Ángel Romero"));
+        veterinarioRepository.save(new Veterinario("112233445", "mypassword1", "Podología", "https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg", "Laura Ortega"));
+        veterinarioRepository.save(new Veterinario("223344556", "animal1234", "Genética", "https://i.pinimg.com/236x/27/31/76/2731763ea1512156ce5162d9f19860b3.jpg", "Jorge Morales"));
+        veterinarioRepository.save(new Veterinario("334455667", "securevet", "Alergología", "https://thumbs.dreamstime.com/z/cara-sonriente-de-persona-bastante-minoritaria-una-joven-hembra-asi%C3%A1tica-adulta-219032346.jpg", "Patricia Vargas"));
+        veterinarioRepository.save(new Veterinario("445566778", "petpassword", "Terapias", "https://i.pinimg.com/originals/cf/c1/d8/cfc1d8b69811d4bacb1377e39d5a74c9.jpg", "Ricardo López"));
+        veterinarioRepository.save(new Veterinario("556677889", "v3tsecure", "Pediatría", "https://png.pngtree.com/background/20230912/original/pngtree-young-woman-face-serious-people-woman-photo-picture-image_5054394.jpg", "Mónica Jiménez"));
+        veterinarioRepository.save(new Veterinario("667788990", "secure1234", "Toxicología", "https://i3.wp.com/previews.123rf.com/images/rawpixel/rawpixel1702/rawpixel170210473/71263896-hombres-cara-de-la-sonrisa-concepto-expresi%C3%B3n-retrato.jpg", "Victoria Alonso"));
+
         
 
         clienteRepository.save(new Cliente(123456789L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"));
