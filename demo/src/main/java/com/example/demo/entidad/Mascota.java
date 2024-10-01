@@ -1,5 +1,7 @@
 package com.example.demo.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +23,8 @@ public class Mascota {
     @GeneratedValue
     private Long id;
 
+    //cuando traigo ejemplo otra lista de mascotas y evitar un loop infinito.
+    @JsonIgnore 
     @ManyToOne
     //@JoinColumn(name = "cliente_id")
     private Cliente cliente;

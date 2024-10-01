@@ -1,6 +1,8 @@
 package com.example.demo.servicio;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public Collection<Mascota> SearchAll() {
+    public List<Mascota> SearchAll() {
         return mascotaRepositoryJPA.findAll();
     }
 

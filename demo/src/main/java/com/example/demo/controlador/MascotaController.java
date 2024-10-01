@@ -2,42 +2,56 @@ package com.example.demo.controlador;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.MascotaService;
 
+
+@RestController
 @RequestMapping("/mascota")
-@Controller
+@CrossOrigin(origins = "http://localhost:8090")
+//@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "https://8090-lv860-elarca-ga5bpzkaevl.ws-us116.gitpod.io")
 public class MascotaController {
     
     @Autowired
     MascotaService mascotaService;
 
     @GetMapping("/all")
-    public String mostrarMascotas(Model model) {
-        model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "/tabla_Mascotas";
+    public List<Mascota> mostrarMascotas() {
+        //model.addAttribute("mascotas", mascotaService.SearchAll());
+        //return "/tabla_Mascotas";
+        return mascotaService.SearchAll(); 
     }
 
     @GetMapping("/find/{id}")
-    public String mostrarInfoMascota(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "/mostrarMascotaPage";
+    public Mascota mostrarInfoMascota(@PathVariable("id") Long id) {
+        //model.addAttribute("mascota", mascotaService.SearchById(id));
+        //return "/mostrarMascotaPage";
+        return mascotaService.SearchById(id);
     }
 
     @GetMapping("/find")
-    public String mostrarInfoMascota2(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "/mostrarMascotaPage";
+    public Mascota mostrarInfoMascota2(@RequestParam("id") Long id) {
+        //model.addAttribute("mascota", mascotaService.SearchById(id));
+        //return "/mostrarMascotaPage";
+        return mascotaService.SearchById(id);
     }
 
     @GetMapping("/add")
@@ -48,18 +62,15 @@ public class MascotaController {
     }
 
     @PostMapping("/add")
-    public String agregarMascota(@ModelAttribute Mascota mascota, Model model) {
+    public void agregarMascota(@RequestBody Mascota mascota) {
         mascota.setEstado("En tratamiento");
         mascotaService.save(mascota);
-        
-        model.addAttribute("mascotas", mascotaService.SearchAll());
-        return "redirect:/mascota/all";
+        //Antes la mascota venía directamente del form, ahora viene del cuerpo de la petición
     }
 
-    @GetMapping("/delete/{id}")
-    public String borrarMascota(@PathVariable("id") Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void borrarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
-        return "redirect:/mascota/all";
     }
 
     @GetMapping("/update/{id}")
@@ -68,10 +79,9 @@ public class MascotaController {
         return "/updateMascota";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateMascota(@PathVariable("id") int id, @ModelAttribute("mascota") Mascota mascota) {
+    @PutMapping("/update/{id}")
+    public void updateMascota(@RequestBody Mascota mascota) {
         mascotaService.update(mascota);
-        return "redirect:/mascota/all";
     }
 
 
