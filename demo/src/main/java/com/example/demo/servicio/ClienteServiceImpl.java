@@ -2,6 +2,8 @@ package com.example.demo.servicio;
 
 import java.util.Collection;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,53 +14,51 @@ import com.example.demo.repositorio.ClienteRepository;
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
-    private ClienteRepository repoJPA;
-
-
+    private ClienteRepository clienteRepositoryJPA;
 
     @Override
     public Cliente findById(Long id) {
-        return repoJPA.findById(id).orElse(null);
+        return clienteRepositoryJPA.findById(id).orElse(null);
     }
 
     @Override
-    public Collection<Cliente> SearchAll() {
-        return repoJPA.findAll();
+    public List<Cliente> SearchAll() {
+        return clienteRepositoryJPA.findAll();
     }
 
     @Override
     public void delete(Long id) {
-        repoJPA.deleteById(id);
+        clienteRepositoryJPA.deleteById(id);
     }
 
     @Override
     public void update(Cliente cliente) {
-        repoJPA.save(cliente);
+        clienteRepositoryJPA.save(cliente);
     }
 
     @Override
     public void save(Cliente cliente) {
         cliente.setEstado("Inactivo");
-        repoJPA.save(cliente);
+        clienteRepositoryJPA.save(cliente);
     }
 
     @Override
     public Collection<Cliente> findClienteByNombre(String nombre) {
-        return repoJPA.findClienteByNombre(nombre);
+        return clienteRepositoryJPA.findClienteByNombre(nombre);
     }
 
     @Override
     public Collection<Cliente> findClienteByCorreo(String correo) {
-        return repoJPA.findClienteByCorreo(correo);
+        return clienteRepositoryJPA.findClienteByCorreo(correo);
     }
 
     @Override
     public Collection<Cliente> findClienteByCelular(String celular) {
-        return repoJPA.findClienteByCelular(celular);
+        return clienteRepositoryJPA.findClienteByCelular(celular);
     }
 
     @Override
     public Collection<Cliente> findClienteByEstado(String estado) {
-        return repoJPA.findClienteByEstado(estado);
+        return clienteRepositoryJPA.findClienteByEstado(estado);
     }
 }

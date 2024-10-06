@@ -1,25 +1,34 @@
 package com.example.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequestMapping("/clientes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
 
     @Autowired
@@ -29,21 +38,19 @@ public class ClienteController {
     private VeterinarioService veterinarioService;
 
     @GetMapping("/all")
-    public String listarClientes(Model model) {
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "/veterinarioClientes"; 
+    @Operation(summary = "Mostrar todas los clientes")
+    public List<Cliente> listarClientes(Model model) {
+        return clienteService.SearchAll();
     }
 
-     @GetMapping("/find/{id}")
-    public String mostrarInfoCliente(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("cliente", clienteService.findById(id));
-        return "/mostrarClientePage";
+    @GetMapping("/find/{id}")
+    public Cliente mostrarInfoCliente(@PathVariable("id") Long id) {
+        return clienteService.findById(id);
     }
 
     @GetMapping("/find")
-    public String mostrarInfoCliente2(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("cliente", clienteService.findById(id));
-        return "/mostrarClientePage";
+    public Cliente mostrarInfoCliente2(@RequestParam("id") Long id) {
+        return clienteService.findById(id);
     }
 
     @GetMapping("/createClientes")
@@ -54,16 +61,13 @@ public class ClienteController {
     }
 
     @PostMapping("/add")
-    public String agregarCliente(@ModelAttribute Cliente cliente, Model model) {
+    public void agregarCliente(@RequestBody Cliente cliente) {
         clienteService.save(cliente);
-        model.addAttribute("clientes", clienteService.SearchAll());
-        return "redirect:/clientes/all";
     }
 
     @GetMapping("/delete/{id}")
-    public String borrarCliente(@PathVariable("id") Long id) {
+    public void borrarCliente(@PathVariable("id") Long id) {
         clienteService.delete(id);
-        return "redirect:/clientes/all";
     }
 
     @GetMapping("/update/{id}")
@@ -72,12 +76,12 @@ public class ClienteController {
         return "/updateClientes";
     }
 
-    @PostMapping("/update/{id}")
-    public String updateCliente(@PathVariable("id") Long id, @ModelAttribute("cliente") Cliente cliente) {
-        cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
-        cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el ID se mantenga al actualizar
+    @PutMapping("/update/{id}")
+    public void updateCliente(@RequestBody Cliente cliente) {
+        // cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
+        // cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el
+        // ID se mantenga al actualizar
         clienteService.update(cliente);
-        return "redirect:/clientes/all";
     }
 
     @GetMapping("/perfil")
@@ -93,7 +97,6 @@ public class ClienteController {
         }
     }
 
-
     @PostMapping("/perfil")
     public String mostrarPerfil(@ModelAttribute Veterinario veterinario, HttpSession session, Model model) {
         try {
@@ -101,7 +104,7 @@ public class ClienteController {
 
             if (user != null) {
                 session.setAttribute("veterinario", user); // Store in session
-                
+
                 model.addAttribute("veterinario", user);
                 return "/perfilVeterinario";
             } else {
@@ -109,63 +112,64 @@ public class ClienteController {
                 return "/loginVeterinarioError";
             }
         } catch (Exception e) {
-            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de error
+            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
+            // error
             System.err.println("Ocurrió un error: " + e.getMessage());
             model.addAttribute("error", "Ocurrió un error al intentar mostrar el perfil del veterinario.");
             return "/loginVeterinarioError";
         }
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus) {
         session.invalidate(); // Invalidate the session
         return "redirect:/home/landingPage"; // Redirect to login page
     }
 
-
     @GetMapping("/search")
-    public String searchClientes(@RequestParam("query") String query, 
-                             @RequestParam("filterBy") String filterBy, 
-                             Model model) {
+    public String searchClientes(@RequestParam("query") String query,
+            @RequestParam("filterBy") String filterBy,
+            Model model) {
 
-    // Determine which filter to use
-    switch (filterBy) {
-        case "todos":
-            model.addAttribute("clientes", clienteService.SearchAll());
-            return "/veterinarioClientes"; 
-
-        case "id":
-            try {
-                // Convert query to Long for ID search
-                model.addAttribute("clientes", clienteService.findById(Long.parseLong(query)));
-            } catch (NumberFormatException e) {
-                // Handle invalid number format
+        // Determine which filter to use
+        switch (filterBy) {
+            case "todos":
                 model.addAttribute("clientes", clienteService.SearchAll());
-            }
-            return "/veterinarioClientes"; 
+                return "/veterinarioClientes";
 
-        case "nombre":
-            model.addAttribute("clientes", clienteService.findClienteByNombre(query));
-            return "/veterinarioClientes"; 
+            case "id":
+                try {
+                    // Convert query to Long for ID search
+                    model.addAttribute("clientes", clienteService.findById(Long.parseLong(query)));
+                } catch (NumberFormatException e) {
+                    // Handle invalid number format
+                    model.addAttribute("clientes", clienteService.SearchAll());
+                }
+                return "/veterinarioClientes";
 
-        case "correo":
-            model.addAttribute("clientes", clienteService.findClienteByCorreo(query));
-            return "/veterinarioClientes"; 
+            case "nombre":
+                model.addAttribute("clientes", clienteService.findClienteByNombre(query));
+                return "/veterinarioClientes";
 
-        case "telefono":
-            model.addAttribute("clientes", clienteService.findClienteByCelular(query));
-            return "/veterinarioClientes"; 
+            case "correo":
+                model.addAttribute("clientes", clienteService.findClienteByCorreo(query));
+                return "/veterinarioClientes";
 
-        case "inactivo":
-            model.addAttribute("clientes", clienteService.findClienteByEstado("Inactivo"));
-            return "veterinarioClientes";
+            case "telefono":
+                model.addAttribute("clientes", clienteService.findClienteByCelular(query));
+                return "/veterinarioClientes";
 
-        case "activo":
-            model.addAttribute("clientes", clienteService.findClienteByEstado("Activo"));
-            return "veterinarioClientes";
+            case "inactivo":
+                model.addAttribute("clientes", clienteService.findClienteByEstado("Inactivo"));
+                return "veterinarioClientes";
 
-        default:
-            model.addAttribute("clientes", clienteService.SearchAll());
-            return "/veterinarioClientes"; 
+            case "activo":
+                model.addAttribute("clientes", clienteService.findClienteByEstado("Activo"));
+                return "veterinarioClientes";
+
+            default:
+                model.addAttribute("clientes", clienteService.SearchAll());
+                return "/veterinarioClientes";
+        }
     }
-}
 }
