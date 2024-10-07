@@ -38,7 +38,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void save(Cliente cliente) {
-        cliente.setEstado("Inactivo");
         clienteRepositoryJPA.save(cliente);
     }
 
@@ -56,7 +55,6 @@ public class ClienteServiceImpl implements ClienteService {
     public Collection<Cliente> findClienteByCelular(String celular) {
         return clienteRepositoryJPA.findClienteByCelular(celular);
     }
-
 
     @Override
     public Collection<Cliente> findClienteByCedula(Long cedula) {

@@ -27,7 +27,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpSession;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,6 +71,7 @@ public class ClienteController {
 
     @PostMapping("/add")
     public void agregarCliente(@RequestBody Cliente cliente) {
+        cliente.setEstado("Inactivo");
         clienteService.save(cliente);
     }
 
@@ -92,15 +92,12 @@ public class ClienteController {
         // cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el
         // ID se mantenga al actualizar
 
-
-
         Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
         logger.info("cliente: " + cliente.getNombre());
         System.out.println("cliente: " + cliente.getNombre());
         clienteService.update(cliente);
-        
-        
+
     }
 
     @GetMapping("/perfil")
@@ -134,12 +131,13 @@ public class ClienteController {
     @GetMapping("/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus) {
         session.invalidate(); // Invalidate the session
-                // Mostrar un mensaje de error si no se encuentra el veterinario
+        // Mostrar un mensaje de error si no se encuentra el veterinario
         return "redirect:/home/landingPage"; // Redirect to login page
     }
 
     @GetMapping("/search")
-            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de error
+    // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
+    // error
     public String searchClientes(@RequestParam("query") String query,
             @RequestParam("filterBy") String filterBy,
             Model model) {
