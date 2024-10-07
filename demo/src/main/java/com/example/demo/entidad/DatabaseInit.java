@@ -35,17 +35,7 @@ public class DatabaseInit implements ApplicationRunner {
 
 
 
-        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1001L, 2001L, 3001L));
-        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 1002L, 2002L, 3002L));
-        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 1003L, 2003L, 3003L));
-        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 1004L, 2004L, 3004L));
-        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 1005L, 2005L, 3005L));
-        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 1006L, 2006L, 3006L));
-        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 1007L, 2007L, 3007L));
-        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 1008L, 2008L, 3008L));
-        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 1009L, 2009L, 3009L));
-        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01", 1010L, 2010L, 3010L));
-
+        
 
 
         
@@ -124,6 +114,16 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"));
         clienteRepository.save(new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
 
+        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1001L, 2001L, 3001L));
+        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 1002L, 2002L, 3002L));
+        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 1003L, 2003L, 3003L));
+        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 1004L, 2004L, 3004L));
+        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 1005L, 2005L, 3005L));
+        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 1006L, 2006L, 3006L));
+        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 1007L, 2007L, 3007L));
+        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 1008L, 2008L, 3008L));
+        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 1009L, 2009L, 3009L));
+        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01", 1010L, 2010L, 3010L));
 
         
         mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 123456789L, "Inactiva"));

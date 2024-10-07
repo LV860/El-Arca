@@ -27,6 +27,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.servlet.http.HttpSession;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/clientes")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -52,6 +56,11 @@ public class ClienteController {
     @GetMapping("/find")
     public Cliente mostrarInfoCliente2(@RequestParam("id") Long id) {
         return clienteService.findById(id);
+    }
+
+    @GetMapping("/findVeterinario")
+    public Veterinario buscarVeterinario(@RequestParam("id") Long id) {
+        return veterinarioService.findById(id);
     }
 
     @GetMapping("/createClientes")
@@ -82,20 +91,21 @@ public class ClienteController {
         // cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
         // cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el
         // ID se mantenga al actualizar
+
+
+
+        Logger logger = LoggerFactory.getLogger(ClienteController.class);
+
+        logger.info("cliente: " + cliente.getNombre());
+        System.out.println("cliente: " + cliente.getNombre());
         clienteService.update(cliente);
+        
+        
     }
 
     @GetMapping("/perfil")
-    public String landingPage(HttpSession session, Model model) {
-        Veterinario user = (Veterinario) session.getAttribute("veterinario");
-        if (user != null) {
-            model.addAttribute("veterinario", user);
-            return "/perfilVeterinario";
-        } else {
-            // Handle the case where the user is not logged in
-            model.addAttribute("error", "No estás autenticado.");
-            return "/loginVeterinarioError";
-        }
+    public List<Veterinario> perfilVeterinario(Model model) {
+        return (List<Veterinario>) veterinarioService.SearchAll();
     }
 
     @PostMapping("/perfil")
@@ -124,10 +134,12 @@ public class ClienteController {
     @GetMapping("/logout")
     public String logout(HttpSession session, SessionStatus sessionStatus) {
         session.invalidate(); // Invalidate the session
+                // Mostrar un mensaje de error si no se encuentra el veterinario
         return "redirect:/home/landingPage"; // Redirect to login page
     }
 
     @GetMapping("/search")
+            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de error
     public String searchClientes(@RequestParam("query") String query,
             @RequestParam("filterBy") String filterBy,
             Model model) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -15,9 +16,11 @@ public class Cliente {
     private String celular;
     private String nombre;
     private String estado;
+    private Long cedula;
 
     @Id
-    private Long cedula;
+    @GeneratedValue
+    private Long id;
 
     //CASCADE para evitar problemas de foreign key.
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -27,7 +30,9 @@ public class Cliente {
     }
 
 
-    public Cliente(Long cedula, String correo, String celular, String nombre, String estado) {
+    public Cliente(Long id, Long cedula, String correo, String celular, String nombre, String estado) {
+
+        this.id = id;
         this.cedula = cedula;
         this.correo = correo;
         this.celular = celular;
@@ -35,12 +40,13 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(String correo, String celular, String nombre, String estado) {
+    public Cliente(Long cedula,String correo, String celular, String nombre, String estado) {
         
         this.correo = correo;
         this.celular = celular;
         this.nombre = nombre;
         this.estado = estado;
+        this.cedula = cedula;
     }
 
 
@@ -99,6 +105,14 @@ public class Cliente {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     

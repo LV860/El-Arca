@@ -57,6 +57,12 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepositoryJPA.findClienteByCelular(celular);
     }
 
+
+    @Override
+    public Collection<Cliente> findClienteByCedula(Long cedula) {
+        return clienteRepositoryJPA.findClienteByCedula(cedula);
+    }
+
     @Override
     public Collection<Cliente> findClienteByEstado(String estado) {
         return clienteRepositoryJPA.findClienteByEstado(estado);

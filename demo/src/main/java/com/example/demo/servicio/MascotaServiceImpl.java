@@ -54,17 +54,25 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public void save(Mascota mascota) {
-        mascota.setCliente(clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null));
-        mascotaRepositoryJPA.save(mascota);
-        Cliente cliente = clienteRepositoryJPA.findById(mascota.getCedulaDuenho()).orElse(null);
-        cliente.setEstado("Inactivo");
-        for(int i=0;i<cliente.getMascotas().size();i++){
-            if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
-                System.out.println(cliente.getMascotas().get(i).getEstado());
-                cliente.setEstado("Activo");
+         List<Cliente> clientes = clienteRepositoryJPA.findClienteByCedula(mascota.getCedulaDuenho());
+    
+        if (!clientes.isEmpty()) {
+            Cliente cliente = clientes.get(0); // Obtener el primer cliente de la lista
+            mascota.setCliente(cliente); // Asignar el cliente a la mascota
+            mascotaRepositoryJPA.save(mascota);
+            
+            cliente.setEstado("Inactivo");
+            for(int i=0;i<cliente.getMascotas().size();i++){
+                if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
+                    System.out.println(cliente.getMascotas().get(i).getEstado());
+                    cliente.setEstado("Activo");
+                }
             }
+            clienteRepositoryJPA.save(cliente);
+
+        } else {
+            throw new RuntimeException("No se encontro el cliente con la cédula: " + mascota.getCedulaDuenho());
         }
-        clienteRepositoryJPA.save(cliente);
     }
 
     @Override
