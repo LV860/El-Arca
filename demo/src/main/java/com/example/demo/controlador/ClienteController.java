@@ -3,7 +3,6 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.entidad.Cliente;
-import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
