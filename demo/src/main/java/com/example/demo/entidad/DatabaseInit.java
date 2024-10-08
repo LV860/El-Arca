@@ -2,17 +2,30 @@ package com.example.demo.entidad;
 
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 @Controller
 @Transactional
@@ -29,6 +42,9 @@ public class DatabaseInit implements ApplicationRunner {
 
     @Autowired
     TratamientoRepository tratamientoRepository;
+
+    @Autowired
+    DrogaRepository drogaRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -242,49 +258,31 @@ public class DatabaseInit implements ApplicationRunner {
         }
 
 
-        /* 
-            mascotaRepository.save(new Mascota("Firulais", "Siberiano", 4, 30, "Cáncer", "https://static.vecteezy.com/system/resources/thumbnails/008/951/892/small_2x/cute-puppy-pomeranian-mixed-breed-pekingese-dog-run-on-the-grass-with-happiness-photo.jpg", "123456789"));
-            mascotaRepository.save(new Mascota("Rex", "Labrador", 3, 35, "Parvovirus", "https://cdn.pixabay.com/photo/2023/08/18/15/02/dog-8198719_640.jpg", "0"));
-        */
+        // Cargar datos del excel
+        List<Droga> drogas = readExcelFile("MEDICAMENTOS_VETERINARIA.xlsx");
+        drogaRepository.saveAll(drogas);
 
-        /*
-        List<Cliente> asociar = clienteRepository.findAll();
-        for (Cliente cliente : asociar) {
-            
+
+
+
+    }
+
+    private List<Droga> readExcelFile(String fileName) throws IOException {
+        List<Droga> drogas = new ArrayList<>();
+        try (InputStream is = new ClassPathResource(fileName).getInputStream();
+             Workbook workbook = new XSSFWorkbook(is)) {
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0) continue; // Skip header row
+                String nombre = row.getCell(0).getStringCellValue();
+                float precioVenta = (float) row.getCell(1).getNumericCellValue();
+                float precioCompra = (float) row.getCell(2).getNumericCellValue();
+                int unidadesDisponibles = (int) row.getCell(3).getNumericCellValue();
+                int unidadesVendidas = (int) row.getCell(4).getNumericCellValue();
+                drogas.add(new Droga(nombre, precioCompra, precioVenta, unidadesDisponibles, unidadesVendidas));
+            }
         }
-        int cont = 0;
-        int clienteIndex = 0;
-        List<Cliente> clientes = clienteRepository.findAll(); // Asumiendo que tienes una forma de obtener todos los clientes
-
-        
-for (Mascota m : mascotaRepository.findAll()) {
-    if (cont >= 100) {
-        break;
-    }
-
-    // Asocia la mascota con el cliente actual
-    m.setCliente(clientes.get(clienteIndex));
-
-    // Guarda la mascota en el repositorio
-    mascotaRepository.save(m);
-
-    cont++;
-    
-    // Actualiza el índice del cliente
-    clienteIndex++;
-    
-    // Reinicia el índice si es necesario
-    if (clienteIndex >= clientes.size()) {
-        clienteIndex = 0;
-    }
-    
-    if (cont >= 100) {
-        break;
-    }
-}
-
- 
- */
+        return drogas;
     }
     
 }
