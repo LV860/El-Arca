@@ -108,6 +108,16 @@ public class Droga {
         this.id = id;
     }
 
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
     
     
 }

@@ -130,16 +130,16 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"));
         clienteRepository.save(new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
 
-        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1001L, 2001L, 3001L));
-        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 1002L, 2002L, 3002L));
-        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 1003L, 2003L, 3003L));
-        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 1004L, 2004L, 3004L));
-        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 1005L, 2005L, 3005L));
-        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 1006L, 2006L, 3006L));
-        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 1007L, 2007L, 3007L));
-        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 1008L, 2008L, 3008L));
-        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 1009L, 2009L, 3009L));
-        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01", 1010L, 2010L, 3010L));
+        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1L, 1L, 1L));
+        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 2L, 2L, 2L));
+        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 3L, 3L, 3L));
+        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 4L, 4L, 4L));
+        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 5L, 5L, 5L));
+        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 6L, 6L, 6L));
+        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 7L, 7L, 7L));
+        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
+        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 9L, 9L, 9L));
+        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
 
         
         mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 123456789L, "Inactiva"));
@@ -261,6 +261,44 @@ public class DatabaseInit implements ApplicationRunner {
         // Cargar datos del excel
         List<Droga> drogas = readExcelFile("MEDICAMENTOS_VETERINARIA.xlsx");
         drogaRepository.saveAll(drogas);
+
+        //Unir droga a tratamientos
+        List<Tratamiento> asociarTratamiento = tratamientoRepository.findAll();
+        List<Droga> drogasAsociar = drogaRepository.findAll();
+        for (int j = 0; j < drogasAsociar.size(); j++) {
+            for (int i = 0; i < asociarTratamiento.size(); i++) {
+                if (asociarTratamiento.get(i).getDrogaIdLong().equals(drogasAsociar.get(j).getId())) {
+                    asociarTratamiento.get(i).setDroga(drogasAsociar.get(j));
+                    drogaRepository.save(drogasAsociar.get(j));
+                }
+            }
+        }
+
+        //Unir cliente a tratamientos
+        asociarTratamiento = tratamientoRepository.findAll();
+        List<Cliente> clientesAsociar = clienteRepository.findAll();
+
+        for (int j = 0; j < clientesAsociar.size(); j++) {
+            for (int i = 0; i < asociarTratamiento.size(); i++) {
+                if (asociarTratamiento.get(i).getClienteIdLong().equals(clientesAsociar.get(j).getId())) {
+                    asociarTratamiento.get(i).setCliente(clientesAsociar.get(j));
+                    drogaRepository.save(drogasAsociar.get(j));
+                }
+            }
+        }
+
+        //Unir Veterinario a tratamientos
+        asociarTratamiento = tratamientoRepository.findAll();
+        List<Veterinario> veterinariosAsociar = veterinarioRepository.findAll();
+
+        for (int j = 0; j < veterinariosAsociar.size(); j++) {
+            for (int i = 0; i < asociarTratamiento.size(); i++) {
+                if (asociarTratamiento.get(i).getClienteIdLong().equals(veterinariosAsociar.get(j).getId())) {
+                    asociarTratamiento.get(i).setVeterinario(veterinariosAsociar.get(j));
+                    drogaRepository.save(drogasAsociar.get(j));
+                }
+            }
+        }
 
 
 
