@@ -26,5 +26,7 @@ public interface ClienteService {
 
     public Collection<Cliente> findClienteByCedula(Long cedula);
 
+    public Cliente findByCedula(Long cedula);
+
     public Collection<Cliente> findClienteByEstado(String estado);
 }

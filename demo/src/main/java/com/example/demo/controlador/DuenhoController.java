@@ -20,7 +20,7 @@ public class DuenhoController {
     //@Autowired
     //private MascotaService mascotaService;
 
-    @PostMapping("/perfilCliente")
+    @PostMapping("/perfilCliente")  
     public String mostrarPerfilCliente(@ModelAttribute Cliente cliente, Model model) {
         try {
             Cliente duenho = clienteService.findById(cliente.getCedula());

@@ -45,6 +45,11 @@ public class ClienteController {
         return clienteService.SearchAll();
     }
 
+    @GetMapping("/findCedula/{cedula}")
+    public Cliente findByCedula(@PathVariable("cedula") Long cedula){
+        return clienteService.findByCedula(cedula);
+    }
+
     @GetMapping("/find/{id}")
     public Cliente mostrarInfoCliente(@PathVariable("id") Long id) {
         return clienteService.findById(id);

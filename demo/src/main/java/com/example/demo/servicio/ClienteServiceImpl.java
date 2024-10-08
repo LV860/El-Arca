@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entidad.Cliente;
 import com.example.demo.repositorio.ClienteRepository;
 
+import jakarta.validation.OverridesAttribute;
+
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
@@ -59,6 +61,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Collection<Cliente> findClienteByCedula(Long cedula) {
         return clienteRepositoryJPA.findClienteByCedula(cedula);
+    }
+
+    @Override
+    public Cliente findByCedula(Long Cedula){
+        return clienteRepositoryJPA.findByCedula(Cedula);
     }
 
     @Override
