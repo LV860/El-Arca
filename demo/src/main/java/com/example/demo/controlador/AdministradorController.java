@@ -45,7 +45,7 @@ public class AdministradorController {
         return admiService.findById(id);
     }
 
-    @GetMapping("/find/{usuario}")
+    @GetMapping("/findUsuario/{usuario}")
     public Administrador mostrarInfoAdmi2(@PathVariable("usuario") String usuario) {
         return admiService.findByUsuario(usuario);
     }
