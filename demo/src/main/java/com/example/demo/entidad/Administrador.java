@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Administrador {
     private String usuario;
-    private String contrasenia;
+    private String contrasena;
 
 
     @Id
@@ -17,15 +17,15 @@ public class Administrador {
 
     
 
-    public Administrador(String usuario, String contrasenia) {
+    public Administrador(String usuario, String contrasena) {
         this.usuario = usuario;
-        this.contrasenia = contrasenia;
+        this.contrasena = contrasena;
     }
 
 
-    public Administrador(String usuario, String contrasenia, Long id) {
+    public Administrador(String usuario, String contrasena, Long id) {
         this.usuario = usuario;
-        this.contrasenia = contrasenia;
+        this.contrasena = contrasena;
         this.id = id;
     }
 
@@ -48,12 +48,12 @@ public class Administrador {
 
 
     public String getContrasenia() {
-        return contrasenia;
+        return contrasena;
     }
 
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setContrasenia(String contrasena) {
+        this.contrasena = contrasena;
     }
 
 
