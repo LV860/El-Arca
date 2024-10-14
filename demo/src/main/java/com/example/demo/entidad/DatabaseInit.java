@@ -12,6 +12,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
+import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
@@ -44,6 +45,9 @@ public class DatabaseInit implements ApplicationRunner {
     TratamientoRepository tratamientoRepository;
 
     @Autowired
+    AdministradorRepository administradorRepository;
+
+    @Autowired
     DrogaRepository drogaRepository;
 
     @Override
@@ -51,7 +55,7 @@ public class DatabaseInit implements ApplicationRunner {
 
 
 
-        
+        administradorRepository.save(new Administrador("admin", "a123"));
 
 
         

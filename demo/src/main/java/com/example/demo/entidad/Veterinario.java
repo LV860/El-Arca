@@ -17,6 +17,7 @@ public class Veterinario {
     private String urlImagen;
     
     private String nombre;
+    private String estado;
 
     @Id
     @GeneratedValue
@@ -54,6 +55,8 @@ public class Veterinario {
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlImagen = urlImagen;
+
+        this.estado = "Inactivo";
         
         this.nombre = nombre;
     }
