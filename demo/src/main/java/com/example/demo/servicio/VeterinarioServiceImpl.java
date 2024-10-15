@@ -1,6 +1,6 @@
 package com.example.demo.servicio;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
         return repoJPA.findById(id).orElse(null);
     }
 
+
     @Override
-    public Collection<Veterinario> SearchAll() {
+    public List<Veterinario> SearchAll() {
         return repoJPA.findAll();
     }
 
