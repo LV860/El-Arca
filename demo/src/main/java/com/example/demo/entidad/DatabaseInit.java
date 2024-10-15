@@ -280,12 +280,12 @@ public class DatabaseInit implements ApplicationRunner {
 
         //Unir cliente a tratamientos
         asociarTratamiento = tratamientoRepository.findAll();
-        List<Cliente> clientesAsociar = clienteRepository.findAll();
+        List<Mascota> mascotasAsociar2 = mascotaRepository.findAll();
 
-        for (int j = 0; j < clientesAsociar.size(); j++) {
+        for (int j = 0; j < mascotasAsociar2.size(); j++) {
             for (int i = 0; i < asociarTratamiento.size(); i++) {
-                if (asociarTratamiento.get(i).getClienteIdLong().equals(clientesAsociar.get(j).getId())) {
-                    asociarTratamiento.get(i).setCliente(clientesAsociar.get(j));
+                if (asociarTratamiento.get(i).getMascotaIdLong().equals(mascotasAsociar2.get(j).getId())) {
+                    asociarTratamiento.get(i).setMascota(mascotasAsociar2.get(j));
                     drogaRepository.save(drogasAsociar.get(j));
                 }
             }
@@ -297,7 +297,7 @@ public class DatabaseInit implements ApplicationRunner {
 
         for (int j = 0; j < veterinariosAsociar.size(); j++) {
             for (int i = 0; i < asociarTratamiento.size(); i++) {
-                if (asociarTratamiento.get(i).getClienteIdLong().equals(veterinariosAsociar.get(j).getId())) {
+                if (asociarTratamiento.get(i).getVeterinarioIdLong().equals(veterinariosAsociar.get(j).getId())) {
                     asociarTratamiento.get(i).setVeterinario(veterinariosAsociar.get(j));
                     drogaRepository.save(drogasAsociar.get(j));
                 }

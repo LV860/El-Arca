@@ -1,16 +1,23 @@
 package com.example.demo.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 @Entity
 public class Tratamiento {
 
     private float Precio;
     private String Fecha;
-    private Long clienteIdLong;
+    private Long mascotaIdLong;
     private Long veterinarioIdLong;
     private Long drogaIdLong;
 
@@ -20,14 +27,17 @@ public class Tratamiento {
     @GeneratedValue
     private Long id;
 
+    @JsonIgnore 
     @ManyToOne
     //@JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    private Mascota mascota;
 
+    @JsonIgnore 
     @ManyToOne
     //@JoinColumn(name = "cliente_id")
     private Veterinario veterinario;
 
+    @JsonIgnore 
     @ManyToOne
     //@JoinColumn(name = "cliente_id")
     private Droga droga;
@@ -37,19 +47,20 @@ public class Tratamiento {
     public Tratamiento() {
     }
 
-    public Tratamiento(Long id, float Precio, String Fecha, Long clienteIdLong, Long veterinarioIdLong, Long drogaIdLong) {        
+    public Tratamiento(Long id, float Precio, String Fecha, Long veterinarioIdLong, Long mascotaIdLong, Long drogaIdLong) {        
         this.id = id;
         this.Precio = Precio;
-        this.clienteIdLong = clienteIdLong;
+        this.mascotaIdLong = mascotaIdLong;
         this.veterinarioIdLong = veterinarioIdLong;
         this.drogaIdLong = drogaIdLong;
+        this.Fecha = Fecha;
     }
 
-    public Tratamiento(float precio, String fecha, Cliente cliente, Veterinario veterinario, Droga droga) {
+    public Tratamiento(float precio, String fecha, Veterinario Veterinario, Mascota mascota, Droga droga) {
         Precio = precio;
         Fecha = fecha;
-        this.cliente = cliente;
         this.veterinario = veterinario;
+        this.mascota = mascota;
         this.droga = droga;
     }
 
@@ -77,12 +88,12 @@ public class Tratamiento {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Mascota getMascota() {
+        return mascota;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 
     public Veterinario getVeterinario() {
@@ -101,12 +112,12 @@ public class Tratamiento {
         this.droga = droga;
     }
 
-    public Long getClienteIdLong() {
-        return clienteIdLong;
+    public Long getMascotaIdLong() {
+        return mascotaIdLong;
     }
 
-    public void setClienteIdLong(Long clienteIdLong) {
-        this.clienteIdLong = clienteIdLong;
+    public void setMascotaIdLong(Long mascotaIdLong) {
+        this.mascotaIdLong = mascotaIdLong;
     }
 
     public Long getVeterinarioIdLong() {
