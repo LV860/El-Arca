@@ -15,7 +15,7 @@ public class AdministradorServiceImpl implements AdministradorService{
     @Autowired
     private AdministradorRepository repoJPAAdmi;
 
-
+  
 
     @Override
     public Administrador findById(Long id) {

@@ -6,6 +6,6 @@ import com.example.demo.entidad.Droga;
 
 public interface DrogaRepository extends JpaRepository<Droga, Long>{
 
-    
+      
     
 }
