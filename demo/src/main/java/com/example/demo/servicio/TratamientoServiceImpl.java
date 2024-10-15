@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Tratamiento;
+import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 
 
@@ -14,6 +15,8 @@ public class TratamientoServiceImpl implements TratamientoService {
 
     @Autowired
     private TratamientoRepository repoJPA;
+    @Autowired
+    private DrogaRepository repoDrogaJPA;
 
 
     @Override
@@ -37,9 +40,13 @@ public class TratamientoServiceImpl implements TratamientoService {
     }
 
     @Override
-    public void save(Tratamiento tratamiento) {
-        repoJPA.save(tratamiento);
-    }
+public void save(Tratamiento tratamiento) {
+    repoJPA.save(tratamiento);
+    repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).ifPresent(droga -> {
+        droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
+        repoDrogaJPA.save(droga); 
+    });
+}
 
 
     
