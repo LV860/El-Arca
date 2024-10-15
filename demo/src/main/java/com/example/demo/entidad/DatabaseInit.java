@@ -134,17 +134,7 @@ public class DatabaseInit implements ApplicationRunner {
         clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"));
         clienteRepository.save(new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
 
-        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1L, 1L, 1L));
-        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 2L, 2L, 2L));
-        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 3L, 3L, 3L));
-        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 4L, 4L, 4L));
-        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 5L, 5L, 5L));
-        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 6L, 6L, 6L));
-        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 7L, 7L, 7L));
-        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
-        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 9L, 9L, 9L));
-        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
-
+       
         
         mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 123456789L, "Inactiva"));
         mascotaRepository.save(new Mascota("Bella", "Beagle", 5, 15.0, "Otitis", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 987654321L, "En tratamiento"));
@@ -266,6 +256,21 @@ public class DatabaseInit implements ApplicationRunner {
         List<Droga> drogas = readExcelFile("MEDICAMENTOS_VETERINARIA.xlsx");
         drogaRepository.saveAll(drogas);
 
+
+        tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1L, 1L, 1L));
+        tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 2L, 2L, 2L));
+        tratamientoRepository.save(new Tratamiento(3L, 120.0f, "2024-02-01", 3L, 3L, 3L));
+        tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 4L, 4L, 4L));
+        tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 5L, 5L, 5L));
+        tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 6L, 6L, 6L));
+        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 7L, 7L, 7L));
+        tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
+        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 9L, 9L, 9L));
+        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
+
+
+
+
         //Unir droga a tratamientos
         List<Tratamiento> asociarTratamiento = tratamientoRepository.findAll();
         List<Droga> drogasAsociar = drogaRepository.findAll();
@@ -273,10 +278,14 @@ public class DatabaseInit implements ApplicationRunner {
             for (int i = 0; i < asociarTratamiento.size(); i++) {
                 if (asociarTratamiento.get(i).getDrogaIdLong().equals(drogasAsociar.get(j).getId())) {
                     asociarTratamiento.get(i).setDroga(drogasAsociar.get(j));
+                    drogasAsociar.get(j).setUnidadesVendidas(drogasAsociar.get(j).getUnidadesVendidas() + 1);
+                    drogasAsociar.get(j).setUnidadesDisponibles(drogasAsociar.get(j).getUnidadesVendidas() - 1);
                     drogaRepository.save(drogasAsociar.get(j));
                 }
             }
         }
+
+
 
         //Unir cliente a tratamientos
         asociarTratamiento = tratamientoRepository.findAll();
