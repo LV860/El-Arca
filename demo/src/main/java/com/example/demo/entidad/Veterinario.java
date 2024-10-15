@@ -50,13 +50,13 @@ public class Veterinario {
 
 
     public Veterinario(String cedula, String contrasena, String especialidad, String urlImagen,
-            String nombre) {
+            String nombre, String estado) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
         this.urlImagen = urlImagen;
 
-        this.estado = "Inactivo";
+        this.estado = estado;
         
         this.nombre = nombre;
     }
