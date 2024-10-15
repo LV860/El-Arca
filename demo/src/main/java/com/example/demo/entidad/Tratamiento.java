@@ -56,7 +56,7 @@ public class Tratamiento {
         this.Fecha = Fecha;
     }
 
-    public Tratamiento(float precio, String fecha, Veterinario Veterinario, Mascota mascota, Droga droga) {
+    public Tratamiento(float precio, String fecha, Veterinario veterinario, Mascota mascota, Droga droga) {
         Precio = precio;
         Fecha = fecha;
         this.veterinario = veterinario;
