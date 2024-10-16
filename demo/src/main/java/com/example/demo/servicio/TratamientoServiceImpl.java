@@ -11,7 +11,6 @@ import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
-
 @Service
 public class TratamientoServiceImpl implements TratamientoService {
 
@@ -23,7 +22,6 @@ public class TratamientoServiceImpl implements TratamientoService {
     private VeterinarioRepository repoVetJPA;
     @Autowired
     private MascotaRepository repoMascotaJPA;
-
 
     @Override
     public Tratamiento findById(Long id) {
@@ -46,17 +44,20 @@ public class TratamientoServiceImpl implements TratamientoService {
     }
 
     @Override
-public void save(Tratamiento tratamiento) {
-    tratamiento.setDroga(repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).get());
-    tratamiento.setMascota(repoMascotaJPA.findById(tratamiento.getMascotaIdLong()).get());
-    tratamiento.setVeterinario(repoVetJPA.findById(tratamiento.getVeterinarioIdLong()).get());
-    repoJPA.save(tratamiento);
-    repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).ifPresent(droga -> {
-        droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
-        repoDrogaJPA.save(droga); 
-    });
-}
+    public void save(Tratamiento tratamiento) {
+        tratamiento.setDroga(repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).get());
+        tratamiento.setMascota(repoMascotaJPA.findById(tratamiento.getMascotaIdLong()).get());
+        tratamiento.setVeterinario(repoVetJPA.findById(tratamiento.getVeterinarioIdLong()).get());
+        repoJPA.save(tratamiento);
+        repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).ifPresent(droga -> {
+            droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
+            repoDrogaJPA.save(droga);
+        });
+    }
 
+    @Override
+    public Collection<Tratamiento> SearchByMascotaId(Long id) {
+        return repoJPA.findByMascotaId(id);
+    }
 
-    
 }
