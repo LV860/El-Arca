@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Administrador;
 import com.example.demo.entidad.Droga;
+import com.example.demo.entidad.Tratamiento;
 import com.example.demo.servicio.AdministradorService;
 import com.example.demo.servicio.DrogaService;
 import com.example.demo.servicio.MascotaService;
@@ -114,6 +115,12 @@ public class DashboardController {
     public Float getTotalGanancias() {
         Float totalGanancias = tratamientoService.getTotalGanancias(); // Obtiene el total de ganancias
         return totalGanancias; // Devuelve el total como un Float
+    }
+
+    @GetMapping("/top3/tratamientosMasCaros")
+    public List<Tratamiento> getTop3TratamientosMasCaros() {
+        List<Tratamiento> top3Tratamientos = tratamientoService.getTop3TratamientosMasCaros(); // Obtiene los top 3 tratamientos
+        return top3Tratamientos; // Devuelve la lista de tratamientos
     }
 
     

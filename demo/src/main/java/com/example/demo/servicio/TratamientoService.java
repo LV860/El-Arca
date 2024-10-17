@@ -25,9 +25,10 @@ public interface TratamientoService {
 
     Collection<Tratamiento> SearchByVeterinarioId(Long id);
 
-    
+
     int getCantidadTratamientosUltimoMes();
     Map<String, Integer> getTratamientosPorDrogaUltimoMes();
     Float getTotalVentas();
     Float getTotalGanancias();
+    List<Tratamiento> getTop3TratamientosMasCaros();
 }

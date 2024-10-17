@@ -37,4 +37,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     Float calcularGananciasTotales(); // Devuelve un Float con el total de ganancias
 
 
+    @Query(value = "SELECT * FROM Tratamiento ORDER BY Precio DESC LIMIT 3", nativeQuery = true)
+    List<Tratamiento> findTop3ByPrecio(); // Obtiene los 3 tratamientos más caros
+
+
 }

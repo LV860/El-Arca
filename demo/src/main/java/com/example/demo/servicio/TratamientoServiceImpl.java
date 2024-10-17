@@ -131,6 +131,11 @@ public class TratamientoServiceImpl implements TratamientoService {
         return repoJPATratamiento.calcularGananciasTotales(); // Llama al método del repositorio
     }
 
+    @Override
+    public List<Tratamiento> getTop3TratamientosMasCaros() {
+        return repoJPATratamiento.findTop3ByPrecio(); // Llama al método del repositorio
+    }
+
 
     
 }
