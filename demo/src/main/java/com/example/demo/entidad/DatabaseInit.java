@@ -60,7 +60,7 @@ public class DatabaseInit implements ApplicationRunner {
 
         
         veterinarioRepository.save(new Veterinario("678901239", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s","Hugh Jackman", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("123456789", "pass123", "Cirugia", "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg", "Ana Martínez", "Inactivo"));
+        veterinarioRepository.save(new Veterinario("123456789", "pass123", "Cirugia", "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg", "Ana Martínez", "Activo"));
         veterinarioRepository.save(new Veterinario("987654321", "mypassword", "Dermatología", "https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg", "Luis García", "Inactivo"));
         veterinarioRepository.save(new Veterinario("112233445", "securepass", "Odontología", "https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg", "María Fernández", "Inactivo"));
         veterinarioRepository.save(new Veterinario("556677889", "vet1234", "Cardiología", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s", "Carlos López", "Inactivo"));
@@ -265,7 +265,7 @@ public class DatabaseInit implements ApplicationRunner {
         tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 6L, 6L, 6L));
         tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 7L, 7L, 7L));
         tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
-        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-04-10", 9L, 9L, 9L));
+        tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-10-10", 9L, 9L, 9L));
         tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
 
 

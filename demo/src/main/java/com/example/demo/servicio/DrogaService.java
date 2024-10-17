@@ -10,4 +10,9 @@ public interface DrogaService {
   
     Droga findById(Long id);
     List<Droga> SearchAll();
+    int obtenerUnidadesDisponibles(Long id);
+    int obtenerUnidadesVendidas(Long id);
+    
+    
+    
 }

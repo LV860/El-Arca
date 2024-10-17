@@ -41,5 +41,15 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     public void save(Veterinario veterinario) {
         repoJPA.save(veterinario);
     }
+
+    @Override
+    public int obtenerCantidadVeterinariosActivos() {
+        return repoJPA.countVeterinariosByEstado("Activo");
+    }
+
+    @Override
+    public int obtenerCantidadVeterinariosInactivos() {
+        return repoJPA.countVeterinariosByEstado("Inactivo");
+    }
 }
 

@@ -24,5 +24,17 @@ public class DrogaServiceImpl implements DrogaService {
     public List<Droga> SearchAll() {
         return repoJPADroga.findAll();
     }
+
+    @Override
+    public int obtenerUnidadesDisponibles(Long id) {
+        return repoJPADroga.findUnidadesDisponiblesById(id);
+    }
+
+    @Override
+    public int obtenerUnidadesVendidas(Long id) {
+        return repoJPADroga.findUnidadesVendidasById(id);
+    }
+    
+    
     
 }

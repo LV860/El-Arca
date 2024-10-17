@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Cliente;
@@ -93,5 +94,16 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public Collection<Mascota> findMascotaByEstado(String estado) {
         return mascotaRepositoryJPA.findMascotaByEstado(estado);
+    }
+
+    @Override
+    public int getTotalMascotas() {
+        // Obtiene la cantidad total de mascotas y la convierte a int
+        return (int) mascotaRepositoryJPA.count(); // Cast a int desde long
+    }
+
+    @Override
+    public int getTotalMascotasEnTratamiento() {
+        return mascotaRepositoryJPA.countMascotasEnTratamiento(); // Llama al método del repositorio
     }
 }
