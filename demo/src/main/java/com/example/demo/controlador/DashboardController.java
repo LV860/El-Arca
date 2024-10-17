@@ -73,7 +73,7 @@ public class DashboardController {
         return total;
     }
 
-    @GetMapping("/total/tratamientosUltimoMes/porDroga-")
+    @GetMapping("/total/tratamientosUltimoMes/porDroga")
     public Map<String, Integer> getTratamientosPorDrogaUltimoMes() {
         Map<String, Integer> respuesta = tratamientoService.getTratamientosPorDrogaUltimoMes();
         return respuesta;

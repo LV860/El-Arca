@@ -16,6 +16,7 @@ import com.example.demo.repositorio.MascotaRepository;
 import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
+
 @Service
 public class TratamientoServiceImpl implements TratamientoService {
 
@@ -27,6 +28,7 @@ public class TratamientoServiceImpl implements TratamientoService {
     private VeterinarioRepository repoVetJPA;
     @Autowired
     private MascotaRepository repoMascotaJPA;
+
 
     @Override
     public Tratamiento findById(Long id) {
@@ -53,17 +55,82 @@ public class TratamientoServiceImpl implements TratamientoService {
         tratamiento.setDroga(repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).get());
         tratamiento.setMascota(repoMascotaJPA.findById(tratamiento.getMascotaIdLong()).get());
         tratamiento.setVeterinario(repoVetJPA.findById(tratamiento.getVeterinarioIdLong()).get());
-        repoJPA.save(tratamiento);
+        repoJPATratamiento.save(tratamiento);
         repoDrogaJPA.findById(tratamiento.getDrogaIdLong()).ifPresent(droga -> {
             droga.setUnidadesVendidas(droga.getUnidadesVendidas() + 1);
             repoDrogaJPA.save(droga);
         });
     }
 
+    @Override
+    public Collection<Tratamiento> SearchByMascotaId(Long id) {
+        return repoJPATratamiento.findByMascotaId(id);
+    }
 
     @Override
     public Collection<Tratamiento> SearchByVeterinarioId(Long id) {
-        return repoJPA.findByVeterinarioId(id);
+        return repoJPATratamiento.findByVeterinarioId(id);
     }
 
+    @Override
+    public int getCantidadTratamientosUltimoMes() {
+        // Obtener la fecha actual
+        LocalDate ahora = LocalDate.now();
+        
+        // Calcular el primer día del mes actual
+        LocalDate inicioMesActual = ahora.withDayOfMonth(1);
+        
+        // Calcular el último día del mes actual (primer día del mes siguiente menos un día)
+        LocalDate finMesActual = ahora.plusMonths(1).withDayOfMonth(1).minusDays(1);
+
+        // Convertir LocalDate a String con formato "yyyy-MM-dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaInicioStr = inicioMesActual.format(formatter);
+        String fechaFinStr = finMesActual.format(formatter);
+
+        // Usar las fechas calculadas para contar tratamientos
+        
+        return repoJPATratamiento.countTratamientosByFechaAdministracionBetween(fechaInicioStr, fechaFinStr);
+    }
+
+    @Override
+    public Map<String, Integer> getTratamientosPorDrogaUltimoMes() {
+        // Obtener la fecha actual
+        LocalDate ahora = LocalDate.now();
+        
+        // Calcular el primer día del mes actual
+        LocalDate inicioMesActual = ahora.withDayOfMonth(1);
+        
+        // Calcular el último día del mes actual
+        LocalDate finMesActual = ahora.plusMonths(1).withDayOfMonth(1).minusDays(1);
+
+        // Convertir LocalDate a String con formato "yyyy-MM-dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String fechaInicioStr = inicioMesActual.format(formatter);
+        String fechaFinStr = finMesActual.format(formatter);
+
+        List<Object[]> resultados = repoJPATratamiento.countTratamientosByDrogaLastMonth(fechaInicioStr, fechaFinStr);
+
+        Map<String, Integer> mapaResultado = new HashMap<>();
+        for (Object[] resultado : resultados) {
+            String droga = (String) resultado[0];
+            Long cantidad = (Long) resultado[1];
+            mapaResultado.put(droga, cantidad.intValue());
+        }
+
+        return mapaResultado;
+    }
+
+    @Override
+    public Float getTotalVentas() {
+        return repoJPATratamiento.calcularVentasTotales(); // Llama al método del repositorio
+    }
+
+    @Override
+    public Float getTotalGanancias() {
+        return repoJPATratamiento.calcularGananciasTotales(); // Llama al método del repositorio
+    }
+
+
+    
 }

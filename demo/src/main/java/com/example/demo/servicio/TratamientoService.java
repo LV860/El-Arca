@@ -24,6 +24,8 @@ public interface TratamientoService {
     Collection<Tratamiento> SearchByMascotaId(Long id);
 
     Collection<Tratamiento> SearchByVeterinarioId(Long id);
+
+    
     int getCantidadTratamientosUltimoMes();
     Map<String, Integer> getTratamientosPorDrogaUltimoMes();
     Float getTotalVentas();
