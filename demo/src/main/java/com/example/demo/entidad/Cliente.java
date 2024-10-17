@@ -23,7 +23,7 @@ public class Cliente {
     private Long id;
 
     //CASCADE para evitar problemas de foreign key.
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente() {

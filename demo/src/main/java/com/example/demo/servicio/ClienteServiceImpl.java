@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Mascota;
 import com.example.demo.repositorio.ClienteRepository;
+import com.example.demo.repositorio.MascotaRepository;
 
 import jakarta.validation.OverridesAttribute;
 
@@ -17,6 +19,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
     private ClienteRepository clienteRepositoryJPA;
+    @Autowired
+    private MascotaService mascotaService;
 
     @Override
     public Cliente findById(Long id) {
@@ -30,6 +34,12 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void delete(Long id) {
+        List<Mascota> listaMascotas = clienteRepositoryJPA.findById(id).get().getMascotas();
+        if(listaMascotas != null){
+            for (int i =0; i<listaMascotas.size(); i++){
+                mascotaService.deleteById(listaMascotas.get(i).getId());
+            }
+        }
         clienteRepositoryJPA.deleteById(id);
     }
 
