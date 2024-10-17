@@ -48,4 +48,10 @@ public class TratamientoController {
     public Collection<Tratamiento> mostrarTratamientosMascota(@PathVariable("id") Long id) {
         return tratamientoService.SearchByMascotaId(id);
     }
+
+    @GetMapping("/findByVeterinarioId/{id}")
+    @Operation(summary = "Mostrar todos los tratamientos de un Veterinario")
+    public Collection<Tratamiento> mostrarTratamientosVeterinario(@PathVariable("id") Long id) {
+        return tratamientoService.SearchByVeterinarioId(id);
+    }
 }

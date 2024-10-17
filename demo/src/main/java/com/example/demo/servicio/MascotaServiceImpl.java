@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.Tratamiento;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.TratamientoRepository;
 
 @Service
 public class MascotaServiceImpl implements MascotaService {
@@ -19,6 +21,9 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Autowired
     ClienteRepository clienteRepositoryJPA;
+
+    @Autowired
+    TratamientoRepository tratamientoRepositoryJPA;
 
     @Override
     public Mascota SearchById(Long id) {
@@ -31,20 +36,28 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void deleteById(Long id) { 
+    public void deleteById(Long id) {
+        Collection<Tratamiento> tratamientos = tratamientoRepositoryJPA.findByMascotaId(id);
+        if (!tratamientos.isEmpty()) {
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setMascota(null);
+                tratamientoRepositoryJPA.save(tratamiento);
+            }
+        }
         mascotaRepositoryJPA.deleteById(id);
     }
 
     @Override
     public void update(Mascota mascota) {
-        //Vuelve a buscar la mascota original antes de ser editada para obtener la cedula del dueño
+        // Vuelve a buscar la mascota original antes de ser editada para obtener la
+        // cedula del dueño
         mascota.setCedulaDuenho(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCedulaDuenho());
         mascota.setCliente(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCliente());
         mascotaRepositoryJPA.save(mascota);
         Cliente cliente = mascota.getCliente();
         cliente.setEstado("Inactivo");
-        for(int i=0;i<cliente.getMascotas().size();i++){
-            if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
+        for (int i = 0; i < cliente.getMascotas().size(); i++) {
+            if (cliente.getMascotas().get(i).getEstado().equals("En tratamiento")) {
                 System.out.println(cliente.getMascotas().get(i).getEstado());
                 cliente.setEstado("Activo");
             }
@@ -54,16 +67,16 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public void save(Mascota mascota) {
-         List<Cliente> clientes = clienteRepositoryJPA.findClienteByCedula(mascota.getCedulaDuenho());
-    
+        List<Cliente> clientes = clienteRepositoryJPA.findClienteByCedula(mascota.getCedulaDuenho());
+
         if (!clientes.isEmpty()) {
             Cliente cliente = clientes.get(0); // Obtener el primer cliente de la lista
             mascota.setCliente(cliente); // Asignar el cliente a la mascota
             mascotaRepositoryJPA.save(mascota);
-            
+
             cliente.setEstado("Inactivo");
-            for(int i=0;i<cliente.getMascotas().size();i++){
-                if(cliente.getMascotas().get(i).getEstado().equals("En tratamiento")){
+            for (int i = 0; i < cliente.getMascotas().size(); i++) {
+                if (cliente.getMascotas().get(i).getEstado().equals("En tratamiento")) {
                     System.out.println(cliente.getMascotas().get(i).getEstado());
                     cliente.setEstado("Activo");
                 }

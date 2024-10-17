@@ -1,11 +1,14 @@
 package com.example.demo.servicio;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.Veterinario;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 @Service
@@ -13,14 +16,13 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Autowired
     private VeterinarioRepository repoJPA;
-
-
+    @Autowired
+    private TratamientoRepository tratamientoRepositoryJPA;
 
     @Override
     public Veterinario findById(Long id) {
         return repoJPA.findById(id).orElse(null);
     }
-
 
     @Override
     public List<Veterinario> SearchAll() {
@@ -29,6 +31,13 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public void delete(Long id) {
+        Collection<Tratamiento> tratamientos = tratamientoRepositoryJPA.findByVeterinarioId(id);
+        if (!tratamientos.isEmpty()) {
+            for (Tratamiento tratamiento : tratamientos) {
+                tratamiento.setVeterinario(null);
+                tratamientoRepositoryJPA.save(tratamiento);
+            }
+        }
         repoJPA.deleteById(id);
     }
 
@@ -42,4 +51,3 @@ public class VeterinarioServiceImpl implements VeterinarioService {
         repoJPA.save(veterinario);
     }
 }
-

@@ -60,4 +60,9 @@ public class TratamientoServiceImpl implements TratamientoService {
         return repoJPA.findByMascotaId(id);
     }
 
+    @Override
+    public Collection<Tratamiento> SearchByVeterinarioId(Long id) {
+        return repoJPA.findByVeterinarioId(id);
+    }
+
 }

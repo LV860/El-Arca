@@ -12,4 +12,6 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
 
     Collection<Tratamiento> findByMascotaId(Long mascota_id);
 
+    Collection<Tratamiento> findByVeterinarioId(Long cliente_id);
+
 }

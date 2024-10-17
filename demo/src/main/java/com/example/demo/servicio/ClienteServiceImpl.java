@@ -64,7 +64,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente findByCedula(Long Cedula){
+    public Cliente findByCedula(Long Cedula) {
         return clienteRepositoryJPA.findByCedula(Cedula);
     }
 

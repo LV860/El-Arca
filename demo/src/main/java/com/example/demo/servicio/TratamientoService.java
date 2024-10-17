@@ -18,4 +18,6 @@ public interface TratamientoService {
     void save(Tratamiento tratamiento);
 
     Collection<Tratamiento> SearchByMascotaId(Long id);
+
+    Collection<Tratamiento> SearchByVeterinarioId(Long id);
 }
