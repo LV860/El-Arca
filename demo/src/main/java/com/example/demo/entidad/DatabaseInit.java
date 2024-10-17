@@ -263,7 +263,7 @@ public class DatabaseInit implements ApplicationRunner {
         tratamientoRepository.save(new Tratamiento(4L, 180.0f, "2024-02-05", 4L, 4L, 4L));
         tratamientoRepository.save(new Tratamiento(5L, 220.0f, "2024-02-10", 5L, 5L, 5L));
         tratamientoRepository.save(new Tratamiento(6L, 160.0f, "2024-03-01", 6L, 6L, 6L));
-        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-03-15", 7L, 7L, 7L));
+        tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-10-15", 7L, 7L, 7L));
         tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
         tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-10-10", 9L, 9L, 9L));
         tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
