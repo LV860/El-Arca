@@ -25,6 +25,11 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     }
 
     @Override
+    public Veterinario findByCedula(String cedula){
+        return repoJPA.findByCedula(cedula);
+    }
+
+    @Override
     public List<Veterinario> SearchAll() {
         return repoJPA.findAll();
     }

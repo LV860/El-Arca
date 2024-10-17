@@ -45,6 +45,12 @@ public class VeterinarioController {
         return veterinarioService.findById(id);
     }
 
+    @GetMapping("/findCedula/{cedula}")
+    public Veterinario findByCedula(@PathVariable("cedula") String cedula){
+        return veterinarioService.findByCedula(cedula);
+    }
+    
+
     
 
     @PostMapping("/add")

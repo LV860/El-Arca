@@ -13,6 +13,7 @@ public interface VeterinarioService {
     void delete(Long id);
     void update(Veterinario veterinario);
     void save(Veterinario veterinario);
+    Veterinario findByCedula(String cedula);
     int obtenerCantidadVeterinariosActivos();
     int obtenerCantidadVeterinariosInactivos();
     
