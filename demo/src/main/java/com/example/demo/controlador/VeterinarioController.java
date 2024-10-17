@@ -56,7 +56,6 @@ public class VeterinarioController {
     @PostMapping("/add")
     public void agregarCliente(@RequestBody Veterinario veterinario) {
         
-        veterinario.setEstado("Inactivo");
         veterinarioService.save(veterinario);
     }
 
