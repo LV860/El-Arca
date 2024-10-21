@@ -91,7 +91,7 @@ public class ClienteController {
     }
 
     @PutMapping("/update/{id}")
-    public void updateCliente(@RequestBody Cliente cliente) {
+    public Cliente updateCliente(@RequestBody Cliente cliente) {
         // cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
         // cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el
         // ID se mantenga al actualizar
@@ -101,6 +101,7 @@ public class ClienteController {
         logger.info("cliente: " + cliente.getNombre());
         System.out.println("cliente: " + cliente.getNombre());
         clienteService.update(cliente);
+        return cliente;
 
     }
 
