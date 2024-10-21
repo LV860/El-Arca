@@ -73,9 +73,10 @@ public class ClienteController {
     }
 
     @PostMapping("/add")
-    public void agregarCliente(@RequestBody Cliente cliente) {
+    public Cliente agregarCliente(@RequestBody Cliente cliente) {
         cliente.setEstado("Inactivo");
         clienteService.save(cliente);
+        return cliente;
     }
 
     @DeleteMapping("/delete/{id}")
