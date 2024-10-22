@@ -44,14 +44,16 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void update(Cliente cliente) {
+    public Cliente update(Cliente cliente) {
         clienteRepositoryJPA.save(cliente);
+        return cliente;
     }
 
     @Override
-    public void save(Cliente cliente) {
+    public Cliente save(Cliente cliente) {
         cliente.setMascotas(clienteRepositoryJPA.findById(cliente.getId()).get().getMascotas());
         clienteRepositoryJPA.save(cliente);
+        return cliente;
     }
 
     @Override

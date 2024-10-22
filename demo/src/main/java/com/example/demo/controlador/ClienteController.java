@@ -3,6 +3,8 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,8 +43,12 @@ public class ClienteController {
 
     @GetMapping("/all")
     @Operation(summary = "Mostrar todas los clientes")
-    public List<Cliente> listarClientes(Model model) {
-        return clienteService.SearchAll();
+    public ResponseEntity<List<Cliente>> listarClientes(Model model) {
+
+        List<Cliente> lista = clienteService.SearchAll();
+        ResponseEntity<List<Cliente>> response = new ResponseEntity<>(lista, HttpStatus.OK);
+
+        return response;
     }
 
     @GetMapping("/findCedula/{cedula}")
@@ -51,13 +57,21 @@ public class ClienteController {
     }
 
     @GetMapping("/find/{id}")
-    public Cliente mostrarInfoCliente(@PathVariable("id") Long id) {
-        return clienteService.findById(id);
+    public ResponseEntity<Cliente> mostrarInfoCliente(@PathVariable("id") Long id) {
+        Cliente cliente = clienteService.findById(id);
+        if(cliente == null){
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
 
     @GetMapping("/find")
-    public Cliente mostrarInfoCliente2(@RequestParam("id") Long id) {
-        return clienteService.findById(id);
+    public ResponseEntity<Cliente> mostrarInfoCliente2(@RequestParam("id") Long id) {
+
+        Cliente cliente = clienteService.findById(id);
+
+        return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
     }
 
     @GetMapping("/findVeterinario")
@@ -73,21 +87,35 @@ public class ClienteController {
     }
 
     @PostMapping("/add")
-    public Cliente agregarCliente(@RequestBody Cliente cliente) {
-        cliente.setEstado("Inactivo");
-        clienteService.save(cliente);
-        return cliente;
+    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
+        Cliente nuevoCliente = clienteService.save(cliente);
+        if(cliente == null){
+            return new ResponseEntity<Cliente>(nuevoCliente, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<Cliente>(nuevoCliente, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void borrarCliente(@PathVariable("id") Long id) {
+    public ResponseEntity<String> borrarCliente(@PathVariable("id") Long id) {
         clienteService.delete(id);
+        return new ResponseEntity<>("DELETED", HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/update/{id}")
+    /*@GetMapping("/update/{id}")
     public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("cliente", clienteService.findById(id));
         return "/updateClientes";
+    }*/
+
+    @GetMapping("/update/{id}")
+    public ResponseEntity<Cliente> mostrarFormularioUpdate(@RequestBody Cliente cliente, @PathVariable("id") Long id) {
+        Cliente clienteFind = clienteService.findById(id);
+        cliente.setId(clienteFind.getId());
+        Cliente clienteActualiado = clienteService.update(cliente);
+        return new ResponseEntity<>(clienteActualiado, HttpStatus.OK);        
+        //model.addAttribute("cliente", clienteService.findById(id));
+        //return "/updateClientes";
     }
 
     @PutMapping("/update/{id}")

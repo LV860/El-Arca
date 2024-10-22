@@ -14,9 +14,9 @@ public interface ClienteService {
 
     public void delete(Long id);
 
-    public void update(Cliente cliente);
+    public Cliente update(Cliente cliente);
 
-    public void save(Cliente cliente);
+    public Cliente save(Cliente cliente);
 
     public Collection<Cliente> findClienteByNombre(String nombre);
 
