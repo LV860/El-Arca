@@ -3,7 +3,11 @@ package com.example.demo.Servicio;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -14,19 +18,25 @@ import com.example.demo.entidad.Droga;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.Veterinario;
+import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.servicio.DrogaService;
 import com.example.demo.servicio.TratamientoService;
+import com.example.demo.servicio.TratamientoServiceImpl;
+
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-//@ActiveProfiles("test")
-public class TratamientoServicioTest {
 
-    @Autowired
-    private TratamientoService tratamientoService;
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
+public class TratamientoServicioTestMock {
+
+    @InjectMocks
+    private TratamientoServiceImpl tratamientoService;
+
+    @Mock
+    TratamientoRepository tratamientoRepository;
 
     private Veterinario veterinario;
     private Mascota mascota1;
@@ -37,36 +47,40 @@ public class TratamientoServicioTest {
 
     @BeforeEach
     public void setUp() {
-        veterinario = new Veterinario("11111111", "pass123", "Cirugía", "url1", "Dr. Pérez", "Activo");
-
-        mascota1 = new Mascota("Firulais", "Labrador", 3, 30.5, "Ninguna", "urlImagen1", 123456789L, "Activo");
-        mascota2 = new Mascota("Max", "Bulldog", 5, 25.0, "Alergias", "urlImagen2", 987654321L, "Activo");
-
-        droga = new Droga("Aspirina", 10.0f, 15.0f, 100, 50);
-
-        tratamiento1 = new Tratamiento(50.0f, "2024-10-21", veterinario, mascota1, droga);
-        tratamiento2 = new Tratamiento(75.0f, "2024-10-22", veterinario, mascota2, droga);
+        
     }
 
     @Test
     public void tratamientoServicioTest_crearTratamiento_Tratamiento() {
+        //Arrange
+        Tratamiento tratamiento = new Tratamiento(180.0f, "2024-09-15", veterinario, mascota1, droga);
+        when(tratamientoRepository.save(tratamiento)).thenReturn(
+            tratamiento
+            );
+
         // Act
-        Tratamiento nuevoTratamiento1 = tratamientoService.crearTratamiento(tratamiento1);
-        Tratamiento nuevoTratamiento2 = tratamientoService.crearTratamiento(tratamiento2);
+        Tratamiento nuevoTratamiento = tratamientoService.crearTratamiento(tratamiento);
 
         // Assert
-        Assertions.assertThat(nuevoTratamiento1).isNotNull();
-        Assertions.assertThat(nuevoTratamiento2).isNotNull();
+        Assertions.assertThat(nuevoTratamiento).isNotNull();
     }
 
     @Test
     public void TratamientoService_findAll_TratamientoList() {
+        //Arrange
+        when(tratamientoRepository.findAll()).thenReturn(
+            List.of(
+                new Tratamiento(180.0f, "2024-09-15", veterinario, mascota1, droga),
+                new Tratamiento(180.0f, "2024-09-30", veterinario, mascota1, droga)
+            )
+        );
+
         // Act
         List<Tratamiento> tratamientos = tratamientoService.findAll();
 
         // Assert
         Assertions.assertThat(tratamientos).isNotNull();
-        Assertions.assertThat(tratamientos.size()).isEqualTo(10);
+        Assertions.assertThat(tratamientos.size()).isEqualTo(2);
     }
 
 }
