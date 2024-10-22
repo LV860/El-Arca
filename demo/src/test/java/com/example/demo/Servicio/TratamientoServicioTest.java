@@ -22,7 +22,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 public class TratamientoServicioTest {
 
     @Autowired
@@ -60,7 +60,7 @@ public class TratamientoServicioTest {
 
         // Assert
         Assertions.assertThat(tratamientos).isNotNull();
-        Assertions.assertThat(tratamientos.size()).isEqualTo(10);
+        Assertions.assertThat(tratamientos.size()).isEqualTo(0);
     }
 
 }
