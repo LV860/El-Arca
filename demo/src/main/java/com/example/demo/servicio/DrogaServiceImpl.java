@@ -16,6 +16,11 @@ public class DrogaServiceImpl implements DrogaService {
     private DrogaRepository repoJPADroga;
 
     @Override
+    public Droga crearDroga(Droga droga){
+        return repoJPADroga.save(droga);
+    }
+
+    @Override
     public Droga findById(Long id) {
         return repoJPADroga.findById(id).orElse(null);
     }

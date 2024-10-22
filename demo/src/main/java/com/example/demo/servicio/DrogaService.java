@@ -7,7 +7,7 @@ import com.example.demo.entidad.Droga;
 
 public interface DrogaService {
 
-  
+    Droga crearDroga(Droga droga);
     Droga findById(Long id);
     List<Droga> SearchAll();
     int obtenerUnidadesDisponibles(Long id);

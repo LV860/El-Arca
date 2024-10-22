@@ -19,7 +19,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
     List<Cliente> findClienteByEstado(String estado);
     Cliente findByCedula(Long cedula);
 
-    @Query("SELECT c FROM Cliente c WHERE c.veterinario.id = :veterinarioId")
-    List<Cliente> findClientesByVeterinarioId(@Param("veterinarioId") Long id);
+    //@Query("SELECT c FROM Cliente c WHERE c.veterinario.id = :veterinarioId")
+    //List<Cliente> findClientesByVeterinarioId(@Param("veterinarioId") Long id);
 
 }

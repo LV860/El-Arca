@@ -11,9 +11,13 @@ import com.example.demo.entidad.Tratamiento;
 
 public interface TratamientoService {
 
+    Tratamiento crearTratamiento(Tratamiento tratamiento);
+
     Tratamiento findById(Long id);
 
     Collection<Tratamiento> SearchAll();
+
+    List<Tratamiento> findAll();
 
     void delete(Long id);
 

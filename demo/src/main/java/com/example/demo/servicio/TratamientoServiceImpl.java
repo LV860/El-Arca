@@ -29,6 +29,15 @@ public class TratamientoServiceImpl implements TratamientoService {
     @Autowired
     private MascotaRepository repoMascotaJPA;
 
+    @Override
+    public Tratamiento crearTratamiento(Tratamiento tratamiento){
+        return repoJPATratamiento.save(tratamiento);
+    }
+
+    @Override
+    public List<Tratamiento> findAll(){
+        return repoJPATratamiento.findAll();
+    }
 
     @Override
     public Tratamiento findById(Long id) {
