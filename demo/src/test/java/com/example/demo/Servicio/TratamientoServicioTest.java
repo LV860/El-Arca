@@ -37,12 +37,6 @@ public class TratamientoServicioTest {
 
     @BeforeEach
     public void setUp() {
-        veterinario = new Veterinario("11111111", "pass123", "Cirugía", "url1", "Dr. Pérez", "Activo");
-
-        mascota1 = new Mascota("Firulais", "Labrador", 3, 30.5, "Ninguna", "urlImagen1", 123456789L, "Activo");
-        mascota2 = new Mascota("Max", "Bulldog", 5, 25.0, "Alergias", "urlImagen2", 987654321L, "Activo");
-
-        droga = new Droga("Aspirina", 10.0f, 15.0f, 100, 50);
 
         tratamiento1 = new Tratamiento(50.0f, "2024-10-21", veterinario, mascota1, droga);
         tratamiento2 = new Tratamiento(75.0f, "2024-10-22", veterinario, mascota2, droga);
