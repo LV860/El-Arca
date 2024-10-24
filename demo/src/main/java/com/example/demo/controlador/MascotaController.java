@@ -3,6 +3,8 @@ package com.example.demo.controlador;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,58 +35,62 @@ public class MascotaController {
     @Autowired
     MascotaService mascotaService;
 
-    @GetMapping("/all")
+     @GetMapping("/all")
     @Operation(summary = "Mostrar todas las mascotas")
-    public List<Mascota> mostrarMascotas() {
-        // model.addAttribute("mascotas", mascotaService.SearchAll());
-        // return "/tabla_Mascotas";
-        return mascotaService.SearchAll();
+    public ResponseEntity<List<Mascota>> mostrarMascotas() {
+        List<Mascota> lista = mascotaService.SearchAll();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public Mascota mostrarInfoMascota(@PathVariable("id") Long id) {
-        // model.addAttribute("mascota", mascotaService.SearchById(id));
-        // return "/mostrarMascotaPage";
-        return mascotaService.SearchById(id);
+    public ResponseEntity<Mascota> mostrarInfoMascota(@PathVariable("id") Long id) {
+        Mascota mascota = mascotaService.SearchById(id);
+        if (mascota == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(mascota, HttpStatus.OK);
     }
 
     @GetMapping("/find")
-    public Mascota mostrarInfoMascota2(@RequestParam("id") Long id) {
-        // model.addAttribute("mascota", mascotaService.SearchById(id));
-        // return "/mostrarMascotaPage";
-        return mascotaService.SearchById(id);
-    }
-
-    @GetMapping("/add")
-    public String mostrarFormularioCrearMascota(Model model) {
-        Mascota mascota = new Mascota();
-        model.addAttribute("mascota", mascota);
-        return "/addMascota";
+    public ResponseEntity<Mascota> mostrarInfoMascota2(@RequestParam("id") Long id) {
+        Mascota mascota = mascotaService.SearchById(id);
+        if (mascota == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(mascota, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public void agregarMascota(@RequestBody Mascota mascota) {
+    public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota) {
         mascota.setEstado("En tratamiento");
-        mascotaService.save(mascota);
-        // Antes la mascota venía directamente del form, ahora viene del cuerpo de la
-        // petición
+        Mascota nuevaMascota = mascotaService.save(mascota);
+        if (nuevaMascota == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(nuevaMascota, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void borrarMascota(@PathVariable("id") Long id) {
+    public ResponseEntity<String> borrarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteById(id);
-    }
-
-    @GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("mascota", mascotaService.SearchById(id));
-        return "/updateMascota";
+        return new ResponseEntity<>("DELETED", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update/{id}")
-    public void updateMascota(@RequestBody Mascota mascota) {
-        mascotaService.update(mascota);
+    public ResponseEntity<Mascota> updateMascota(@RequestBody Mascota mascota) {
+        Mascota mascotaActualizada = mascotaService.update(mascota);
+        if (mascotaActualizada == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(mascotaActualizada, HttpStatus.OK);
     }
+
+
+    /*@PutMapping("/update/{id}")
+    public Mascota updateMascota(@RequestBody Mascota mascota) {
+        mascotaService.update(mascota);
+        return mascota;
+    }*/
 
     @GetMapping("/search")
     public String searchMascotas(@RequestParam("query") String query,

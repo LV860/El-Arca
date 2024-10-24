@@ -11,8 +11,8 @@ public interface MascotaService {
     public Mascota SearchById(Long id);
     public List<Mascota> SearchAll();
     public void deleteById(Long id);
-    public void update(Mascota mascota);
-    public void save(Mascota mascota);
+    public Mascota update(Mascota mascota);
+    public Mascota save(Mascota mascota);
     public Collection<Mascota> findMascotaByNombre(String nombre);
     public Collection<Mascota> findMascotaByRaza(String raza);
     public Collection<Mascota> findMascotaByEnfermedad(String enfermedad);

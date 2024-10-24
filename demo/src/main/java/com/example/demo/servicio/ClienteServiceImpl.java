@@ -23,6 +23,11 @@ public class ClienteServiceImpl implements ClienteService {
     private MascotaService mascotaService;
 
     @Override
+    public Cliente crearCliente(Cliente cliente){
+        return clienteRepositoryJPA.save(cliente);
+    }
+
+    @Override
     public Cliente findById(Long id) {
         return clienteRepositoryJPA.findById(id).orElse(null);
     }
@@ -30,6 +35,11 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public List<Cliente> SearchAll() {
         return clienteRepositoryJPA.findAll();
+    }
+
+    @Override
+    public void eliminarCliente(Long id){
+        clienteRepositoryJPA.deleteById(id);
     }
 
     @Override

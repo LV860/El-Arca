@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface ClienteService {
 
+    Cliente crearCliente(Cliente cliente);
+
     Cliente findById(Long id);
 
     List<Cliente> SearchAll();
+
+    public void eliminarCliente(Long id);
 
     public void delete(Long id);
 

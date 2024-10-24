@@ -49,7 +49,7 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void update(Mascota mascota) {
+    public Mascota update(Mascota mascota) {
         // Vuelve a buscar la mascota original antes de ser editada para obtener la
         // cedula del dueño
         mascota.setCedulaDuenho(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCedulaDuenho());
@@ -64,10 +64,12 @@ public class MascotaServiceImpl implements MascotaService {
             }
         }
         clienteRepositoryJPA.save(cliente);
+
+        return mascota;
     }
 
     @Override
-    public void save(Mascota mascota) {
+    public Mascota save(Mascota mascota) {
         List<Cliente> clientes = clienteRepositoryJPA.findClienteByCedula(mascota.getCedulaDuenho());
 
         if (!clientes.isEmpty()) {
@@ -87,6 +89,9 @@ public class MascotaServiceImpl implements MascotaService {
         } else {
             throw new RuntimeException("No se encontro el cliente con la cédula: " + mascota.getCedulaDuenho());
         }
+
+
+        return mascota;
     }
 
     @Override
