@@ -26,6 +26,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ClientePerfilTest {
 
+    private final String BASE_URL = "http://localhost:4200";
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -47,7 +48,7 @@ public class ClientePerfilTest {
     @Test
     public void SystemTest_perfilCliente_NombreCliente() {
 
-        driver.get("http://localhost:4200/perfilCliente/123456789");
+        driver.get(BASE_URL + "/perfilCliente/123456789");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"nameSpan\"]")));
         WebElement liNombre = driver.findElement(By.xpath("//*[@id=\"nameSpan\"]"));
