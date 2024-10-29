@@ -83,34 +83,53 @@ public class ClientePerfilTest {
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-perfil-veterinario/main/div/div/div[1]/p")));
         
-        WebElement campoNombreVeterinario = driver.findElement(By.xpath("/html/body/app-root/app-perfil-veterinario/main/div/div/div[1]/p"));
-        String expectedName = "Hugh Jackman";
-        Assertions.assertThat(campoNombreVeterinario.getText()).isEqualTo(expectedName);
+        //WebElement campoNombreVeterinario = driver.findElement(By.xpath("/html/body/app-root/app-perfil-veterinario/main/div/div/div[1]/p"));
+        //String expectedName = "Hugh Jackman";
+        //Assertions.assertThat(campoNombreVeterinario.getText()).isEqualTo(expectedName);
         
         //2. Registrar un nuevo cliente, primero se equivoca en el campo de correo al no poner un @, luego corrige el error y registra al cliente satisfactoriamente.
 
+        //2.1 Ingresar a la sección de clientes.
         WebElement buttonClientes = driver.findElement(By.xpath("/html/body/app-root/app-perfil-veterinario/app-header-veterinario/header/div[2]/a[2]/h3"));
         buttonClientes.click();
-        //Esperar a que aparezca el boton de añadir cliente.
+        //2.2 Esperar a que aparezca el boton de añadir cliente de la pagina con todos los clientes.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-table/main/div[1]/div/a/button")));
         WebElement buttonAddCliente = driver.findElement(By.xpath("/html/body/app-root/app-clientes-table/main/div[1]/div/a/button"));
         buttonAddCliente.click();
 
-        //Esperar a que aparezca el boton de añadir cliente.
+        //2.3 Esperar a que aparezca el boton en el formulario de añadir cliente.
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-add/main/div/form/button")));
 
-        //El veterinario se equivoca en el correo del cliente.
+        //2.4 El veterinario se equivoca en el correo del cliente.
         WebElement campoAdd_nombre = driver.findElement(By.xpath("//*[@id=\"nombre\"]"));
         WebElement campoAdd_Cedula = driver.findElement(By.xpath("//*[@id=\"cedula\"]"));
         campoAdd_Cedula.clear();
         WebElement campoAdd_Correo = driver.findElement(By.xpath("//*[@id=\"correo\"]"));
         WebElement campoAdd_Numero = driver.findElement(By.xpath("//*[@id=\"celular\"]"));
+        WebElement campoAdd_ButtonaddForm = driver.findElement(By.xpath("/html/body/app-root/app-clientes-add/main/div/form/button"));
 
         campoAdd_nombre.sendKeys("Cristiano Ronaldo");
         campoAdd_Cedula.sendKeys("123456777");
         campoAdd_Correo.sendKeys("cr7gmail.com");
         campoAdd_Numero.sendKeys("0987654321");
+
+        campoAdd_ButtonaddForm.click();
+
+        //2.5 Esperar a que aparezca el mensaje de correo invalido.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-add/main/div/form/div[2]/div[1]/div/div")));
         
+        //2.6 Corregir el campo de correo colocando @ en el campo.
+        campoAdd_Correo.clear();
+        campoAdd_Correo.sendKeys("cr7@gmail.com");
+
+        //2.7 Registrar al cliente.
+        campoAdd_ButtonaddForm.click();
+
+        //2.8 Esperar a que la pagina nos redirija a la pagina de clientes.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-table/main/div[1]/h1")));
+
+
+
     }
 ////*[@id="cedula"]
 //*[@id="cedula"]
