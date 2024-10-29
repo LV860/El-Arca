@@ -50,6 +50,9 @@ public class ClientePerfilTest {
     @Test
     public void SystemTest_loginVeterinario_IngresoFallido() {
         
+
+        //1. Ingresar a la página de login de veterinario, fallar primer login, ingreso al segundo.
+
         driver.get("http://localhost:4200/loginVeterinario");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"cedula\"]")));
@@ -84,6 +87,29 @@ public class ClientePerfilTest {
         String expectedName = "Hugh Jackman";
         Assertions.assertThat(campoNombreVeterinario.getText()).isEqualTo(expectedName);
         
+        //2. Registrar un nuevo cliente, primero se equivoca en el campo de correo al no poner un @, luego corrige el error y registra al cliente satisfactoriamente.
+
+        WebElement buttonClientes = driver.findElement(By.xpath("/html/body/app-root/app-perfil-veterinario/app-header-veterinario/header/div[2]/a[2]/h3"));
+        buttonClientes.click();
+        //Esperar a que aparezca el boton de añadir cliente.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-table/main/div[1]/div/a/button")));
+        WebElement buttonAddCliente = driver.findElement(By.xpath("/html/body/app-root/app-clientes-table/main/div[1]/div/a/button"));
+        buttonAddCliente.click();
+
+        //Esperar a que aparezca el boton de añadir cliente.
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-clientes-add/main/div/form/button")));
+
+        //El veterinario se equivoca en el correo del cliente.
+        WebElement campoAdd_nombre = driver.findElement(By.xpath("//*[@id=\"nombre\"]"));
+        WebElement campoAdd_Cedula = driver.findElement(By.xpath("//*[@id=\"cedula\"]"));
+        campoAdd_Cedula.clear();
+        WebElement campoAdd_Correo = driver.findElement(By.xpath("//*[@id=\"correo\"]"));
+        WebElement campoAdd_Numero = driver.findElement(By.xpath("//*[@id=\"celular\"]"));
+
+        campoAdd_nombre.sendKeys("Cristiano Ronaldo");
+        campoAdd_Cedula.sendKeys("123456777");
+        campoAdd_Correo.sendKeys("cr7gmail.com");
+        campoAdd_Numero.sendKeys("0987654321");
         
     }
 ////*[@id="cedula"]
@@ -127,10 +153,10 @@ public class ClientePerfilTest {
         Assertions.assertThat(liMascotas.size()).isEqualTo(2);
     }
 
-    
+    /* 
     @AfterEach
     void tearDown() {
         driver.quit();
     }
-        
+        */
 }

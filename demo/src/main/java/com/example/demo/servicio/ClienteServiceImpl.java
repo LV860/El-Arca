@@ -14,6 +14,8 @@ import com.example.demo.repositorio.MascotaRepository;
 
 import jakarta.validation.OverridesAttribute;
 
+import java.util.Optional;
+
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
@@ -61,9 +63,11 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente save(Cliente cliente) {
-        cliente.setMascotas(clienteRepositoryJPA.findById(cliente.getId()).get().getMascotas());
-        clienteRepositoryJPA.save(cliente);
-        return cliente;
+        Optional<Cliente> existingCliente = clienteRepositoryJPA.findById(cliente.getId());
+        if (existingCliente.isPresent()) {
+            cliente.setMascotas(existingCliente.get().getMascotas());
+        }
+        return clienteRepositoryJPA.save(cliente);
     }
 
     @Override
