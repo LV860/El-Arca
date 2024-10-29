@@ -48,6 +48,47 @@ public class ClientePerfilTest {
     }
 
     @Test
+    public void SystemTest_loginVeterinario_IngresoFallido() {
+        
+        driver.get("http://localhost:4200/loginVeterinario");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"cedula\"]")));
+
+        String cedula = "678901239";
+        String password = "123456789";
+
+        WebElement inputCedula = driver.findElement(By.xpath("//*[@id=\"cedula\"]"));
+        WebElement inputPassword = driver.findElement(By.xpath("//*[@id=\"contra\"]"));
+        WebElement buttonLogin = driver.findElement(By.xpath("//html//body//app-root//app-inicio-veterinario//main//section//form//button"));
+
+        inputCedula.sendKeys(cedula);
+        inputPassword.sendKeys(password);
+        buttonLogin.click();
+        
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//html//body//app-root//app-inicio-veterinario//main//section//div//p")));
+        
+        password = "abc";
+
+        //Vaciar campos
+        inputCedula.clear();
+        inputPassword.clear();
+        
+        inputCedula.sendKeys(cedula);
+        inputPassword.sendKeys(password);
+        buttonLogin.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/app-root/app-perfil-veterinario/main/div/div/div[1]/p")));
+        
+        WebElement campoNombreVeterinario = driver.findElement(By.xpath("/html/body/app-root/app-perfil-veterinario/main/div/div/div[1]/p"));
+        String expectedName = "Hugh Jackman";
+        Assertions.assertThat(campoNombreVeterinario.getText()).isEqualTo(expectedName);
+        
+        
+    }
+////*[@id="cedula"]
+//*[@id="cedula"]
+    @Test
     public void SystemTest_perfilCliente_NombreCliente() {
 
         driver.get(BASE_URL + "/perfilCliente/123456789");
@@ -86,8 +127,10 @@ public class ClientePerfilTest {
         Assertions.assertThat(liMascotas.size()).isEqualTo(2);
     }
 
+    
     @AfterEach
     void tearDown() {
         driver.quit();
     }
+        
 }
