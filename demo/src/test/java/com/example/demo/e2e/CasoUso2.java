@@ -93,7 +93,7 @@ public class CasoUso2 {
                 .findElement(By.xpath("/html/body/app-root/app-mascotas-tratamiento/main/div/form/button[1]"));
 
         precioTratamiento.sendKeys("500");
-        idDroga.sendKeys("1");
+        idDroga.sendKeys("11");
         fechaTratamiento.sendKeys("30/10/2024");
         saveTreatmentButton.click();
 
@@ -109,52 +109,63 @@ public class CasoUso2 {
         WebElement mascotaMax = driver.findElement(
                 By.xpath("/html/body/app-root/app-mascotas-table/main/section[3]/table/tbody/tr/td[8]/button[3]"));
         mascotaMax.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("/html/body/app-root/app-mascotas-tratamiento/main/div/form/button[2]")));
         WebElement historialMascota = driver
                 .findElement(By.xpath("/html/body/app-root/app-mascotas-tratamiento/main/div/form/button[2]"));
         historialMascota.click();
 
-        /*
-         * // 5. Iniciar sesión como administrador para verificar ganancias y cantidad
-         * de
-         * // tratamientos
-         * WebElement buttonCerrarSesion =
-         * driver.findElement(By.xpath("//button[@id='btnLogout']"));
-         * buttonCerrarSesion.click();
-         * 
-         * wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-         * "//button[@id='btnLoginAdmin']")));
-         * WebElement adminLoginButton =
-         * driver.findElement(By.xpath("//button[@id='btnLoginAdmin']"));
-         * adminLoginButton.click();
-         * 
-         * wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedula")));
-         * WebElement adminCedula = driver.findElement(By.id("cedula"));
-         * WebElement adminPassword = driver.findElement(By.id("contra"));
-         * WebElement buttonLoginAdmin = driver.findElement(By.id("btnInicioAdmin"));
-         * 
-         * adminCedula.sendKeys("admin");
-         * adminPassword.sendKeys("adminpass");
-         * buttonLoginAdmin.click();
-         * 
-         * // 6. Verificar las ganancias y la cantidad de medicamentos suministrados
-         * wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-         * "//main//div[@id='dashboard']")));
-         * 
-         * WebElement totalMedicamentos =
-         * driver.findElement(By.id("totalMedicamentos"));
-         * WebElement totalGanancias = driver.findElement(By.id("totalGanancias"));
-         * 
-         * // Verificar valores esperados (reemplaza con los valores correctos en base a
-         * // los datos)
-         * Assertions.assertThat(totalMedicamentos.getText()).isEqualTo("1"); // Cambia
-         * según el conteo esperado
-         * Assertions.assertThat(totalGanancias.getText()).isEqualTo("5000"); // Cambia
-         * según la ganancia esperada
-         */
+        
+         // 5. Iniciar sesión como administrador para verificar ganancias y cantidad
+         // de tratamientos
+
+         // Navegar directamente a la página de login de Administrador
+         driver.get(BASE_URL + "/loginAdmin");
+         
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+         "/html/body/app-root/app-inicio-admi/main/section/form/button")));
+         
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("usuario")));
+         WebElement adminCedula = driver.findElement(By.id("usuario"));
+         WebElement adminPassword = driver.findElement(By.id("contra"));
+         WebElement buttonLoginAdmin = driver.findElement(By.xpath("/html/body/app-root/app-inicio-admi/main/section/form/button"));
+         
+         adminCedula.sendKeys("admin");
+         adminPassword.sendKeys("a123");
+         buttonLoginAdmin.click();
+          
+         // 6. Verificar las ganancias y la cantidad de medicamentos suministrados
+
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+         "/html/body/app-root/app-perfil-admi/app-header-admin/header/div[2]/a[5]/h3")));
+
+         WebElement dashboardAdmin = driver.findElement(By.xpath("/html/body/app-root/app-perfil-admi/app-header-admin/header/div[2]/a[5]/h3"));
+         dashboardAdmin.click();
+
+         //wait.until(ExpectedConditions.presenceOfElementLocated(By.id("//*[@id="query"]")));
+     
+         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("query")));
+
+         WebElement idDrogaUsada = driver.findElement(By.id("query"));
+         WebElement consultarUnidades = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[1]/div[2]/app-unidades-droga/form/button"));
+         idDrogaUsada.sendKeys("1");
+         consultarUnidades.click();
+
+         //WebElement totalMedicamentos = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[1]/div[2]/app-unidades-droga/svg/g[1]/text"));
+         WebElement totalGanancias = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[2]/div[2]/app-ventas-ganancias/div[2]/div[2]"));
+         
+          
+         // Verificar valores esperados (reemplaza con los valores correctos en base a
+         // los datos)
+         //Assertions.assertThat(totalMedicamentos.getText()).isEqualTo("1"); 
+         // Cambia según el conteo esperado
+         Assertions.assertThat(totalGanancias.getText()).isEqualTo("$ 515,350"); 
+         // Cambia según la ganancia esperada
+         
     }
 
-    @AfterEach
+    /*@AfterEach
     void tearDown() {
         driver.quit();
-    }
+    }*/
 }
