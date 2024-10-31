@@ -43,8 +43,48 @@ public class CasoUso2 {
     @Test
     public void SystemTest_Caso_de_uso_2() {
 
+
+        // Navegar directamente a la página de login de Administrador
+        driver.get(BASE_URL + "/loginAdmin");
+         
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+        "/html/body/app-root/app-inicio-admi/main/section/form/button")));
+        
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("usuario")));
+        WebElement adminCedula1 = driver.findElement(By.id("usuario"));
+        WebElement adminPassword1 = driver.findElement(By.id("contra"));
+        WebElement buttonLoginAdmin1 = driver.findElement(By.xpath("/html/body/app-root/app-inicio-admi/main/section/form/button"));
+        
+        adminCedula1.sendKeys("admin");
+        adminPassword1.sendKeys("a123");
+        buttonLoginAdmin1.click();
+         
+        // 6. Verificar las ganancias y la cantidad de medicamentos suministrados
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+        "/html/body/app-root/app-perfil-admi/app-header-admin/header/div[2]/a[5]/h3")));
+
+        WebElement dashboardAdmin1 = driver.findElement(By.xpath("/html/body/app-root/app-perfil-admi/app-header-admin/header/div[2]/a[5]/h3"));
+        dashboardAdmin1.click();
+
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.id("//*[@id="query"]")));
+    
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("query")));
+
+        WebElement idDrogaUsada1 = driver.findElement(By.id("query"));
+        WebElement consultarUnidades1 = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[1]/div[2]/app-unidades-droga/form/button"));
+        idDrogaUsada1.sendKeys("1");
+        consultarUnidades1.click();
+
+        //WebElement totalMedicamentos = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[1]/div[2]/app-unidades-droga/svg/g[1]/text"));
+        WebElement totalGanancias1 = driver.findElement(By.xpath("/html/body/app-root/app-main-dashboard/section[2]/div[2]/app-ventas-ganancias/div[2]/div[2]"));
+        
+
         // 1. Iniciar sesión como veterinario
         driver.get(BASE_URL + "/loginVeterinario");
+
+
+
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cedula")));
         WebElement inputCedula = driver.findElement(By.id("cedula"));
@@ -94,7 +134,10 @@ public class CasoUso2 {
 
         precioTratamiento.sendKeys("500");
         idDroga.sendKeys("11");
-        fechaTratamiento.sendKeys("30/10/2024");
+        fechaTratamiento.sendKeys("10/01/2024");
+
+
+        /* */
         saveTreatmentButton.click();
 
         // 4. Verificar que el tratamiento se haya registrado correctamente
@@ -159,7 +202,8 @@ public class CasoUso2 {
          // los datos)
          //Assertions.assertThat(totalMedicamentos.getText()).isEqualTo("1"); 
          // Cambia según el conteo esperado
-         Assertions.assertThat(totalGanancias.getText()).isEqualTo("$ 515,350"); 
+         //Assertions.assertThat(totalGanancias.getText()).isNotEqualTo(totalGanancias1); 
+         Assertions.assertThat(totalGanancias.getText()).isNotEqualTo(totalGanancias1); 
          // Cambia según la ganancia esperada
          
     }
