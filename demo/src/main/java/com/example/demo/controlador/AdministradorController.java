@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entidad.Administrador;
-import com.example.demo.entidad.Cliente;
+//import com.example.demo.entidad.Cliente;
 import com.example.demo.servicio.AdministradorService;
-import com.example.demo.servicio.ClienteService;
-import com.example.demo.servicio.VeterinarioService;
+//import com.example.demo.servicio.ClienteService;
+//import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 

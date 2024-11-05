@@ -3,8 +3,14 @@ package com.example.demo.entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Administrador {
     private String usuario;
     private String contrasena;
@@ -21,52 +27,5 @@ public class Administrador {
         this.usuario = usuario;
         this.contrasena = contrasena;
     }
-
-
-    public Administrador(String usuario, String contrasena, Long id) {
-        this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.id = id;
-    }
-
-
-    public Administrador() {        
-
-    }
-
-    
-
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-
-    public String getContrasenia() {
-        return contrasena;
-    }
-
-
-    public void setContrasenia(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-
-    
 
 }

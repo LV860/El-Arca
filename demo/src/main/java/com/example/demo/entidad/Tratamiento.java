@@ -6,13 +6,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
 
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tratamiento {
 
     private float Precio;
@@ -43,10 +49,6 @@ public class Tratamiento {
     private Droga droga;
 
 
-
-    public Tratamiento() {
-    }
-
     public Tratamiento(Long id, float Precio, String Fecha, Long veterinarioIdLong, Long mascotaIdLong, Long drogaIdLong) {        
         this.id = id;
         this.Precio = Precio;
@@ -64,80 +66,5 @@ public class Tratamiento {
         this.droga = droga;
     }
 
-    public float getPrecio() {
-        return Precio;
-    }
-
-    public void setPrecio(float precio) {
-        Precio = precio;
-    }
-
-    public String getFecha() {
-        return Fecha;
-    }
-
-    public void setFecha(String fecha) {
-        Fecha = fecha;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
-    }
-
-    public Veterinario getVeterinario() {
-        return veterinario;
-    }
-
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
-    }
-
-    public Droga getDroga() {
-        return droga;
-    }
-
-    public void setDroga(Droga droga) {
-        this.droga = droga;
-    }
-
-    public Long getMascotaIdLong() {
-        return mascotaIdLong;
-    }
-
-    public void setMascotaIdLong(Long mascotaIdLong) {
-        this.mascotaIdLong = mascotaIdLong;
-    }
-
-    public Long getVeterinarioIdLong() {
-        return veterinarioIdLong;
-    }
-
-    public void setVeterinarioIdLong(Long veterinarioIdLong) {
-        this.veterinarioIdLong = veterinarioIdLong;
-    }
-
-    public Long getDrogaIdLong() {
-        return drogaIdLong;
-    }
-
-    public void setDrogaIdLong(Long drogaIdLong) {
-        this.drogaIdLong = drogaIdLong;
-    }
-
-    
-
-    
     
 }

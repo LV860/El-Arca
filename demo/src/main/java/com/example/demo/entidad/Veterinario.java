@@ -3,13 +3,23 @@ package com.example.demo.entidad;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Veterinario {
     private String cedula;
     private String contrasena;
@@ -25,7 +35,7 @@ public class Veterinario {
 
 
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
@@ -43,12 +53,6 @@ public class Veterinario {
     }
 
 
-
-    public Veterinario() {
-    }
-
-
-
     public Veterinario(String cedula, String contrasena, String especialidad, String urlImagen,
             String nombre, String estado) {
         this.cedula = cedula;
@@ -61,68 +65,6 @@ public class Veterinario {
         this.nombre = nombre;
     }
 
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-
-
-    public String getEstado() {
-        return estado;
-    }
-
-
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    
+   
     
 }

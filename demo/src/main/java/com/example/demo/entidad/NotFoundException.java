@@ -1,19 +1,17 @@
 package com.example.demo.entidad;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class NotFoundException extends RuntimeException {
 
     private String cedula;
 
-    public NotFoundException(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getCedula() {    
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
+    
 
 }

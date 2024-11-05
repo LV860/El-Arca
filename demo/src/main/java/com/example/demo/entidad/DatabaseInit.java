@@ -1,5 +1,9 @@
 package com.example.demo.entidad;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+//import java.util.List;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -21,11 +25,6 @@ import com.example.demo.repositorio.TratamientoRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -60,29 +59,196 @@ public class DatabaseInit implements ApplicationRunner {
         administradorRepository.save(new Administrador("admin", "a123"));
 
 
-        
-        veterinarioRepository.save(new Veterinario("678901239", "abc", "Cirugia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s","Hugh Jackman", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("123456789", "pass123", "Cirugia", "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg", "Ana Martínez", "Activo"));
-        veterinarioRepository.save(new Veterinario("987654321", "mypassword", "Dermatología", "https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg", "Luis García", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("112233445", "securepass", "Odontología", "https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg", "María Fernández", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("556677889", "vet1234", "Cardiología", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s", "Carlos López", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("998877665", "mypetpass", "Neumología", "https://pixnio.com/free-images/2017/11/30/2017-11-30-18-37-25.jpg", "Lucía Sánchez", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("223344556", "password1", "Endocrinología", "https://s2.abcstatics.com/Media/200912/14/davidmeca--300x180.jpg", "Javier Rodríguez", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("334455667", "animal123", "Rehabilitación", "https://i.pinimg.com/736x/c8/e9/72/c8e972106158f5dd52b0b20c6292f089.jpg", "Isabel Morales", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("445566778", "vetsecure", "Gastroenterología", "https://www.okchicas.com/wp-content/uploads/2016/01/Qu%C3%A9-dice-tu-rostro-de-ti-3.jpg", "Roberto Pérez", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("556677889", "petcare", "Neurocirugía", "https://thumbs.dreamstime.com/b/personas-negras-afroamericanas-hermosas-de-la-cara-de-la-mujer-ov-aislado-46936285.jpg", "Elena Gómez", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("667788990", "mypet123", "Oftalmología", "https://img.freepik.com/fotos-premium/concepto-personas-mujeres-retratos-cara-mujer-joven-sonriente-feliz_380164-119771.jpg", "Manuel Díaz", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("778899001", "veterinario", "Medicina Interna", "https://i.pinimg.com/236x/3d/a5/66/3da56663f134d5c630511f7ca4135852.jpg", "Sofía Ruiz", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("889900112", "v3tpass", "Cirugía General", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_nbSpPNMYYd3Q-qgYh6DUtnJjkVbnfilXA&s", "Fernando Fernández", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("990011223", "animalcare", "Oncología", "https://tenimage.es/wp-content/uploads/2014/10/Fotolia_triangular.jpg", "Carmen Torres", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("101112233", "vetpass", "Emergencias", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s", "Ángel Romero", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("112233445", "mypassword1", "Podología", "https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg", "Laura Ortega", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("223344556", "animal1234", "Genética", "https://i.pinimg.com/236x/27/31/76/2731763ea1512156ce5162d9f19860b3.jpg", "Jorge Morales", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("334455667", "securevet", "Alergología", "https://thumbs.dreamstime.com/z/cara-sonriente-de-persona-bastante-minoritaria-una-joven-hembra-asi%C3%A1tica-adulta-219032346.jpg", "Patricia Vargas", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("445566778", "petpassword", "Terapias", "https://i.pinimg.com/originals/cf/c1/d8/cfc1d8b69811d4bacb1377e39d5a74c9.jpg", "Ricardo López", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("556677889", "v3tsecure", "Pediatría", "https://png.pngtree.com/background/20230912/original/pngtree-young-woman-face-serious-people-woman-photo-picture-image_5054394.jpg", "Mónica Jiménez", "Inactivo"));
-        veterinarioRepository.save(new Veterinario("667788990", "secure1234", "Toxicología", "https://i3.wp.com/previews.123rf.com/images/rawpixel/rawpixel1702/rawpixel170210473/71263896-hombres-cara-de-la-sonrisa-concepto-expresi%C3%B3n-retrato.jpg", "Victoria Alonso", "Inactivo"));
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("678901239")
+                .contrasena("abc")
+                .especialidad("Cirugia")
+                .urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s")
+                .nombre("Hugh Jackman")
+                .estado("Inactivo")
+                .build());
 
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("123456789")
+                .contrasena("pass123")
+                .especialidad("Cirugia")
+                .urlImagen("https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg")
+                .nombre("Ana Martínez")
+                .estado("Activo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("987654321")
+                .contrasena("mypassword")
+                .especialidad("Dermatología")
+                .urlImagen("https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg")
+                .nombre("Luis García")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("112233445")
+                .contrasena("securepass")
+                .especialidad("Odontología")
+                .urlImagen("https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg")
+                .nombre("María Fernández")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("556677889")
+                .contrasena("vet1234")
+                .especialidad("Cardiología")
+                .urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s")
+                .nombre("Carlos López")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("998877665")
+                .contrasena("mypetpass")
+                .especialidad("Neumología")
+                .urlImagen("https://pixnio.com/free-images/2017/11/30/2017-11-30-18-37-25.jpg")
+                .nombre("Lucía Sánchez")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("223344556")
+                .contrasena("password1")
+                .especialidad("Endocrinología")
+                .urlImagen("https://s2.abcstatics.com/Media/200912/14/davidmeca--300x180.jpg")
+                .nombre("Javier Rodríguez")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("334455667")
+                .contrasena("animal123")
+                .especialidad("Rehabilitación")
+                .urlImagen("https://i.pinimg.com/736x/c8/e9/72/c8e972106158f5dd52b0b20c6292f089.jpg")
+                .nombre("Isabel Morales")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("445566778")
+                .contrasena("vetsecure")
+                .especialidad("Gastroenterología")
+                .urlImagen("https://www.okchicas.com/wp-content/uploads/2016/01/Qu%C3%A9-dice-tu-rostro-de-ti-3.jpg")
+                .nombre("Roberto Pérez")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("556677889")
+                .contrasena("petcare")
+                .especialidad("Neurocirugía")
+                .urlImagen("https://thumbs.dreamstime.com/b/personas-negras-afroamericanas-hermosas-de-la-cara-de-la-mujer-ov-aislado-46936285.jpg")
+                .nombre("Elena Gómez")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("667788990")
+                .contrasena("mypet123")
+                .especialidad("Oftalmología")
+                .urlImagen("https://img.freepik.com/fotos-premium/concepto-personas-mujeres-retratos-cara-mujer-joven-sonriente-feliz_380164-119771.jpg")
+                .nombre("Manuel Díaz")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("778899001")
+                .contrasena("veterinario")
+                .especialidad("Medicina Interna")
+                .urlImagen("https://i.pinimg.com/236x/3d/a5/66/3da56663f134d5c630511f7ca4135852.jpg")
+                .nombre("Sofía Ruiz")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("889900112")
+                .contrasena("v3tpass")
+                .especialidad("Cirugía General")
+                .urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_nbSpPNMYYd3Q-qgYh6DUtnJjkVbnfilXA&s")
+                .nombre("Fernando Fernández")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("990011223")
+                .contrasena("animalcare")
+                .especialidad("Oncología")
+                .urlImagen("https://tenimage.es/wp-content/uploads/2014/10/Fotolia_triangular.jpg")
+                .nombre("Carmen Torres")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("101112233")
+                .contrasena("vetpass")
+                .especialidad("Emergencias")
+                .urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s")
+                .nombre("Ángel Romero")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("112233445")
+                .contrasena("mypassword1")
+                .especialidad("Podología")
+                .urlImagen("https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg")
+                .nombre("Laura Ortega")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("223344556")
+                .contrasena("animal1234")
+                .especialidad("Genética")
+                .urlImagen("https://i.pinimg.com/236x/27/31/76/2731763ea1512156ce5162d9f19860b3.jpg")
+                .nombre("Jorge Morales")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("334455667")
+                .contrasena("securevet")
+                .especialidad("Alergología")
+                .urlImagen("https://thumbs.dreamstime.com/z/cara-sonriente-de-persona-bastante-minoritaria-una-joven-hembra-asi%C3%A1tica-adulta-219032346.jpg")
+                .nombre("Patricia Vargas")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("445566778")
+                .contrasena("petpassword")
+                .especialidad("Terapias")
+                .urlImagen("https://i.pinimg.com/originals/cf/c1/d8/cfc1d8b69811d4bacb1377e39d5a74c9.jpg")
+                .nombre("Ricardo López")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("556677889")
+                .contrasena("v3tsecure")
+                .especialidad("Pediatría")
+                .urlImagen("https://png.pngtree.com/background/20230912/original/pngtree-young-woman-face-serious-people-woman-photo-picture-image_5054394.jpg")
+                .nombre("Mónica Jiménez")
+                .estado("Inactivo")
+                .build());
+
+        veterinarioRepository.save(Veterinario.builder()
+                .cedula("667788990")
+                .contrasena("secure1234")
+                .especialidad("Toxicología")
+                .urlImagen("https://i3.wp.com/previews.123rf.com/images/rawpixel/rawpixel1702/rawpixel170210473/71263896-hombres-cara-de-la-sonrisa-concepto-expresi%C3%B3n-retrato.jpg")
+                .nombre("Victoria Alonso")
+                .estado("Inactivo")
+                .build());
+
+        
         
 
         clienteRepository.save(new Cliente(123456789L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"));

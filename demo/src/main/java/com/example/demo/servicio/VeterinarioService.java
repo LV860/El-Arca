@@ -12,7 +12,7 @@ public interface VeterinarioService {
     List<Veterinario> SearchAll();
     void delete(Long id);
     void update(Veterinario veterinario);
-    void save(Veterinario veterinario);
+    Veterinario save(Veterinario veterinario);
     Veterinario findByCedula(String cedula);
     int obtenerCantidadVeterinariosActivos();
     int obtenerCantidadVeterinariosInactivos();

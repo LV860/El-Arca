@@ -2,10 +2,12 @@ package com.example.demo.servicio;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Tratamiento;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.TratamientoRepository;
@@ -52,8 +54,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     }
 
     @Override
-    public void save(Veterinario veterinario) {
-        repoJPA.save(veterinario);
+     public Veterinario save(Veterinario veterinario) {
+        
+        return repoJPA.save(veterinario);
     }
 
     @Override

@@ -6,7 +6,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Mascota {
     
     //Nuevo para id's
@@ -52,78 +60,6 @@ public class Mascota {
         this.cedulaDuenho = cedulaDuenho;
         this.estado = estado;
     }
-
-
-    
-    public Mascota() {
-        // Constructor vacío necesario para Thymeleaf y otras instancias
-    }
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getRaza() {
-        return raza;
-    }
-    public void setRaza(String raza) {
-        this.raza = raza;
-    }
-    public int getEdad() {
-        return edad;
-    }
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-    public double getPeso() {
-        return peso;
-    }
-    public void setPeso(double peso) {
-        this.peso = peso;
-    }
-    public String getEnfermedad() {
-        return enfermedad;
-    }
-    public void setEnfermedad(String enfermedad) {
-        this.enfermedad = enfermedad;
-    }
-    public String getUrlImagen() {
-        return urlImagen;
-    }
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
-    }
-    public Long getCedulaDuenho() {
-        return cedulaDuenho;
-    }
-    public void setCedulaDuenho(Long cedulaDuenho) {
-        this.cedulaDuenho = cedulaDuenho;
-    }   
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     
 
     

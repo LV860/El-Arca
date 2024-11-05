@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,15 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.support.SessionStatus;
+//import org.springframework.web.bind.support.SessionStatus;
 
+import com.example.demo.DTOs.ClienteDTO;
+import com.example.demo.DTOs.ClienteMapper;
+import com.example.demo.DTOs.VeterinarioDTO;
+import com.example.demo.DTOs.VeterinarioMapper;
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,14 +90,36 @@ public class ClienteController {
         return "/createClientes";
     }
 
+
     @PostMapping("/add")
-    public ResponseEntity<Cliente> agregarCliente(@RequestBody Cliente cliente) {
-        Cliente nuevoCliente = clienteService.save(cliente);
-        if(cliente == null){
-            return new ResponseEntity<Cliente>(nuevoCliente, HttpStatus.BAD_REQUEST);
+    public ResponseEntity agregarCliente(@RequestBody Cliente cliente) {
+        if (cliente == null) {
+            return new ResponseEntity<String>("No se pudo agregar el cliente", HttpStatus.NOT_FOUND);
+        }
+        Cliente newCliente = clienteService.save(cliente);
+        ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(newCliente);
+        if (newCliente == null) {
+            return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<Cliente>(nuevoCliente, HttpStatus.CREATED);
+        return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity loginCliente(@RequestBody Cliente cliente) {
+        
+        Cliente clienteEncontrado = clienteService.findByCedula(cliente.getCedula());
+
+        if (clienteEncontrado == null) {
+            return new ResponseEntity<String>("No se encontro el cliente", HttpStatus.NOT_FOUND);
+        }
+
+        ClienteDTO clienteDto = ClienteMapper.INSTANCE.convert(clienteEncontrado);
+        if (clienteEncontrado.getCedula().equals(cliente.getCedula())) {
+            return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
@@ -133,6 +159,7 @@ public class ClienteController {
 
     }
 
+    /* 
     @GetMapping("/perfil")
     public List<Veterinario> perfilVeterinario(Model model) {
         return (List<Veterinario>) veterinarioService.SearchAll();
@@ -216,4 +243,7 @@ public class ClienteController {
                 return "/veterinarioClientes";
         }
     }
+
+    */
+
 }
