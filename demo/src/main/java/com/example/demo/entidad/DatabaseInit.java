@@ -3,6 +3,7 @@ package com.example.demo.entidad;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 //import java.util.List;
 import java.util.List;
 
@@ -10,18 +11,22 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import com.example.demo.repositorio.AdministradorRepository;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.DrogaRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.RolRepository;
 import com.example.demo.repositorio.TratamientoRepository;
+import com.example.demo.repositorio.UserRepository;
 import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -51,8 +56,22 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     DrogaRepository drogaRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RolRepository rolRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+
+
+        rolRepository.save(new Rol("ADMIN"));
+        rolRepository.save(new Rol("DUEÑO"));
+        rolRepository.save(new Rol("VETERINARIO"));
 
 
 
@@ -250,58 +269,72 @@ public class DatabaseInit implements ApplicationRunner {
 
         
         
+        
 
-        clienteRepository.save(new Cliente(123456789L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"));
-        clienteRepository.save(new Cliente(987654321L, "juan.garcia@gmail.com", "3023456789", "Juan García", "Activo"));
-        clienteRepository.save(new Cliente(102345678L, "maria.lopez@gmail.com", "3034567890", "María López", "Activo"));
-        clienteRepository.save(new Cliente(234567890L, "pedro.martinez@gmail.com", "3045678901", "Pedro Martínez", "Activo"));
-        clienteRepository.save(new Cliente(345678901L, "luisa.ramirez@gmail.com", "3056789012", "Luisa Ramírez", "Activo"));
-        clienteRepository.save(new Cliente(456789012L, "carlos.gomez@gmail.com", "3067890123", "Carlos Gómez", "Activo"));
-        clienteRepository.save(new Cliente(567890123L, "sofia.mora@gmail.com", "3078901234", "Sofía Mora", "Activo"));
-        clienteRepository.save(new Cliente(678901234L, "david.herrera@gmail.com", "3089012345", "David Herrera", "Activo"));
-        clienteRepository.save(new Cliente(789012345L, "natalia.mendoza@gmail.com", "3090123456", "Natalia Mendoza", "Activo"));
-        clienteRepository.save(new Cliente(890123456L, "jorge.flores@gmail.com", "3101234567", "Jorge Flores", "Activo"));
-        clienteRepository.save(new Cliente(901234567L, "valentina.ortiz@gmail.com", "3112345678", "Valentina Ortiz", "Activo"));
-        clienteRepository.save(new Cliente(234567891L, "alvaro.castro@gmail.com", "3123456789", "Álvaro Castro", "Activo"));
-        clienteRepository.save(new Cliente(345678902L, "laura.martinez@gmail.com", "3134567890", "Laura Martínez", "Activo"));
-        clienteRepository.save(new Cliente(456789013L, "martin.cano@gmail.com", "3145678901", "Martín Cano", "Activo"));
-        clienteRepository.save(new Cliente(567890124L, "carla.uribe@gmail.com", "3156789012", "Carla Uribe", "Activo"));
-        clienteRepository.save(new Cliente(678901235L, "esteban.vera@gmail.com", "3167890123", "Esteban Vera", "Activo"));
-        clienteRepository.save(new Cliente(789012346L, "camila.suarez@gmail.com", "3178901234", "Camila Suárez", "Activo"));
-        clienteRepository.save(new Cliente(890123457L, "oscar.rodriqez@gmail.com", "3189012345", "Óscar Rodríguez", "Activo"));
-        clienteRepository.save(new Cliente(901234568L, "juliana.valencia@gmail.com", "3190123456", "Juliana Valencia", "Activo"));
-        clienteRepository.save(new Cliente(234567892L, "andres.carrillo@gmail.com", "3201234567", "Andrés Carrillo", "Activo"));
-        clienteRepository.save(new Cliente(345678903L, "veronica.salazar@gmail.com", "3212345678", "Verónica Salazar", "Activo"));
-        clienteRepository.save(new Cliente(456789014L, "gustavo.jimenez@gmail.com", "3223456789", "Gustavo Jiménez", "Activo"));
-        clienteRepository.save(new Cliente(567890125L, "daniela.torres@gmail.com", "3234567890", "Daniela Torres", "Activo"));
-        clienteRepository.save(new Cliente(678901236L, "sebastian.murillo@gmail.com", "3245678901", "Sebastián Murillo", "Activo"));
-        clienteRepository.save(new Cliente(789012347L, "angela.romero@gmail.com", "3256789012", "Ángela Romero", "Activo"));
-        clienteRepository.save(new Cliente(890123458L, "nicolas.pineda@gmail.com", "3267890123", "Nicolás Pineda", "Activo"));
-        clienteRepository.save(new Cliente(901234569L, "martha.silva@gmail.com", "3278901234", "Martha Silva", "Activo"));
-        clienteRepository.save(new Cliente(102345680L, "alexander.rios@gmail.com", "3289012345", "Alexander Ríos", "Activo"));
-        clienteRepository.save(new Cliente(234567893L, "paola.garzon@gmail.com", "3290123456", "Paola Garzón", "Activo"));
-        clienteRepository.save(new Cliente(345678904L, "jose.mendoza@gmail.com", "3301234567", "José Mendoza", "Activo"));
-        clienteRepository.save(new Cliente(456789015L, "elena.moreno@gmail.com", "3312345678", "Elena Moreno", "Activo"));
-        clienteRepository.save(new Cliente(567890126L, "samuel.estrella@gmail.com", "3323456789", "Samuel Estrella", "Activo"));
-        clienteRepository.save(new Cliente(678901237L, "carolina.ortega@gmail.com", "3334567890", "Carolina Ortega", "Activo"));
-        clienteRepository.save(new Cliente(789012348L, "javier.martinez@gmail.com", "3345678901", "Javier Martínez", "Activo"));
-        clienteRepository.save(new Cliente(890123459L, "catalina.vargas@gmail.com", "3356789012", "Catalina Vargas", "Activo"));
-        clienteRepository.save(new Cliente(901234570L, "martin.fernandez@gmail.com", "3367890123", "Martín Fernández", "Activo"));
-        clienteRepository.save(new Cliente(102345681L, "isabella.castano@gmail.com", "3378901234", "Isabella Castaño", "Activo"));
-        clienteRepository.save(new Cliente(234567894L, "manuel.palomino@gmail.com", "3389012345", "Manuel Palomino", "Activo"));
-        clienteRepository.save(new Cliente(345678905L, "lina.quintero@gmail.com", "3390123456", "Lina Quintero", "Activo"));
-        clienteRepository.save(new Cliente(456789016L, "santiago.garcia@gmail.com", "3401234567", "Santiago García", "Activo"));
-        clienteRepository.save(new Cliente(567890127L, "silvia.morales@gmail.com", "3412345678", "Silvia Morales", "Activo"));
-        clienteRepository.save(new Cliente(678901238L, "juanita.morales@gmail.com", "3423456789", "Juanita Morales", "Activo"));
-        clienteRepository.save(new Cliente(789012349L, "fabian.garcia@gmail.com", "3434567890", "Fabian García", "Activo"));
-        clienteRepository.save(new Cliente(890123460L, "maria.flores@gmail.com", "3445678901", "María Flores", "Activo"));
-        clienteRepository.save(new Cliente(901234571L, "roberto.moreno@gmail.com", "3456789012", "Roberto Moreno", "Activo"));
-        clienteRepository.save(new Cliente(102345682L, "valeria.perez@gmail.com", "3467890123", "Valeria Pérez", "Activo"));
-        clienteRepository.save(new Cliente(234567895L, "raul.bermudez@gmail.com", "3478901234", "Raúl Bermúdez", "Activo"));
-        clienteRepository.save(new Cliente(345678906L, "gloria.ramirez@gmail.com", "3489012345", "Gloria Ramírez", "Activo"));
-        clienteRepository.save(new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"));
-        clienteRepository.save(new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
+        // Crea una lista con los clientes a guardar
+        List<Cliente> clientes = Arrays.asList(
+                new Cliente(123456789L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"),
+                new Cliente(987654321L, "juan.garcia@gmail.com", "3023456789", "Juan García", "Activo"),
+                new Cliente(102345678L, "maria.lopez@gmail.com", "3034567890", "María López", "Activo"),
+                new Cliente(234567890L, "pedro.martinez@gmail.com", "3045678901", "Pedro Martínez", "Activo"),
+                new Cliente(345678901L, "luisa.ramirez@gmail.com", "3056789012", "Luisa Ramírez", "Activo"),
+                new Cliente(456789012L, "carlos.gomez@gmail.com", "3067890123", "Carlos Gómez", "Activo"),
+                new Cliente(567890123L, "sofia.mora@gmail.com", "3078901234", "Sofía Mora", "Activo"),
+                new Cliente(678901234L, "david.herrera@gmail.com", "3089012345", "David Herrera", "Activo"),
+                new Cliente(789012345L, "natalia.mendoza@gmail.com", "3090123456", "Natalia Mendoza", "Activo"),
+                new Cliente(890123456L, "jorge.flores@gmail.com", "3101234567", "Jorge Flores", "Activo"),
+                new Cliente(901234567L, "valentina.ortiz@gmail.com", "3112345678", "Valentina Ortiz", "Activo"),
+                new Cliente(234567891L, "alvaro.castro@gmail.com", "3123456789", "Álvaro Castro", "Activo"),
+                new Cliente(345678902L, "laura.martinez@gmail.com", "3134567890", "Laura Martínez", "Activo"),
+                new Cliente(456789013L, "martin.cano@gmail.com", "3145678901", "Martín Cano", "Activo"),
+                new Cliente(567890124L, "carla.uribe@gmail.com", "3156789012", "Carla Uribe", "Activo"),
+                new Cliente(678901235L, "esteban.vera@gmail.com", "3167890123", "Esteban Vera", "Activo"),
+                new Cliente(789012346L, "camila.suarez@gmail.com", "3178901234", "Camila Suárez", "Activo"),
+                new Cliente(890123457L, "oscar.rodriqez@gmail.com", "3189012345", "Óscar Rodríguez", "Activo"),
+                new Cliente(901234568L, "juliana.valencia@gmail.com", "3190123456", "Juliana Valencia", "Activo"),
+                new Cliente(234567892L, "andres.carrillo@gmail.com", "3201234567", "Andrés Carrillo", "Activo"),
+                new Cliente(345678903L, "veronica.salazar@gmail.com", "3212345678", "Verónica Salazar", "Activo"),
+                new Cliente(456789014L, "gustavo.jimenez@gmail.com", "3223456789", "Gustavo Jiménez", "Activo"),
+                new Cliente(567890125L, "daniela.torres@gmail.com", "3234567890", "Daniela Torres", "Activo"),
+                new Cliente(678901236L, "sebastian.murillo@gmail.com", "3245678901", "Sebastián Murillo", "Activo"),
+                new Cliente(789012347L, "angela.romero@gmail.com", "3256789012", "Ángela Romero", "Activo"),
+                new Cliente(890123458L, "nicolas.pineda@gmail.com", "3267890123", "Nicolás Pineda", "Activo"),
+                new Cliente(901234569L, "martha.silva@gmail.com", "3278901234", "Martha Silva", "Activo"),
+                new Cliente(102345680L, "alexander.rios@gmail.com", "3289012345", "Alexander Ríos", "Activo"),
+                new Cliente(234567893L, "paola.garzon@gmail.com", "3290123456", "Paola Garzón", "Activo"),
+                new Cliente(345678904L, "jose.mendoza@gmail.com", "3301234567", "José Mendoza", "Activo"),
+                new Cliente(456789015L, "elena.moreno@gmail.com", "3312345678", "Elena Moreno", "Activo"),
+                new Cliente(567890126L, "samuel.estrella@gmail.com", "3323456789", "Samuel Estrella", "Activo"),
+                new Cliente(678901237L, "carolina.ortega@gmail.com", "3334567890", "Carolina Ortega", "Activo"),
+                new Cliente(789012348L, "javier.martinez@gmail.com", "3345678901", "Javier Martínez", "Activo"),
+                new Cliente(890123459L, "catalina.vargas@gmail.com", "3356789012", "Catalina Vargas", "Activo"),
+                new Cliente(901234570L, "martin.fernandez@gmail.com", "3367890123", "Martín Fernández", "Activo"),
+                new Cliente(102345681L, "isabella.castano@gmail.com", "3378901234", "Isabella Castaño", "Activo"),
+                new Cliente(234567894L, "manuel.palomino@gmail.com", "3389012345", "Manuel Palomino", "Activo"),
+                new Cliente(345678905L, "lina.quintero@gmail.com", "3390123456", "Lina Quintero", "Activo"),
+                new Cliente(456789016L, "santiago.garcia@gmail.com", "3401234567", "Santiago García", "Activo"),
+                new Cliente(567890127L, "silvia.morales@gmail.com", "3412345678", "Silvia Morales", "Activo"),
+                new Cliente(678901238L, "juanita.morales@gmail.com", "3423456789", "Juanita Morales", "Activo"),
+                new Cliente(789012349L, "fabian.garcia@gmail.com", "3434567890", "Fabian García", "Activo"),
+                new Cliente(890123460L, "maria.flores@gmail.com", "3445678901", "María Flores", "Activo"),
+                new Cliente(901234571L, "roberto.moreno@gmail.com", "3456789012", "Roberto Moreno", "Activo"),
+                new Cliente(102345682L, "valeria.perez@gmail.com", "3467890123", "Valeria Pérez", "Activo"),
+                new Cliente(234567895L, "raul.bermudez@gmail.com", "3478901234", "Raúl Bermúdez", "Activo"),
+                new Cliente(345678906L, "gloria.ramirez@gmail.com", "3489012345", "Gloria Ramírez", "Activo"),
+                new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"),
+                new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo")
+        );
 
+        //Cliente clienteSave;
+        UserEntity userEntitySaveCliente;
+        
+        
+        for (Cliente cliente : clientes) {
+            userEntitySaveCliente = saveCliente(cliente); 
+            cliente.setUserEntity(userEntitySaveCliente);       
+            clienteRepository.save(cliente);
+        }
+    
        
         
         mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 123456789L, "Inactiva"));
@@ -502,6 +535,16 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
         return drogas;
+    }
+
+    private UserEntity saveCliente (Cliente cliente) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(cliente.getCedula().toString());
+        userEntity.setPassword(passwordEncoder.encode("123"));
+        Rol rol = rolRepository.findByName("CLIENTE").get(0);
+        userEntity.setRoles(List.of(rol));
+        
+        return userRepository.save(userEntity);
     }
     
 }

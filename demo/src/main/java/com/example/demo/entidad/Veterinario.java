@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Veterinario {
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserEntity userEntity;
     private String cedula;
     private String contrasena;
     private String especialidad;
