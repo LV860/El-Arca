@@ -15,12 +15,13 @@ public class Rol {
     private Long id;
     private String name;
 
-
-
     public Rol(String name) {
 
         this.name = name;
-        
+
     }
-    
+
+    public Rol() {
+    }
+
 }

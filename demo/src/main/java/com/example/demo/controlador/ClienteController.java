@@ -24,7 +24,10 @@ import com.example.demo.DTOs.ClienteMapper;
 import com.example.demo.DTOs.VeterinarioDTO;
 import com.example.demo.DTOs.VeterinarioMapper;
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.UserEntity;
 import com.example.demo.entidad.Veterinario;
+import com.example.demo.repositorio.UserRepository;
+import com.example.demo.security.CustomUserDetailService;
 import com.example.demo.servicio.ClienteService;
 import com.example.demo.servicio.VeterinarioService;
 
@@ -45,6 +48,12 @@ public class ClienteController {
     @Autowired
     private VeterinarioService veterinarioService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
+
     @GetMapping("/all")
     @Operation(summary = "Mostrar todas los clientes")
     public ResponseEntity<List<Cliente>> listarClientes(Model model) {
@@ -56,14 +65,14 @@ public class ClienteController {
     }
 
     @GetMapping("/findCedula/{cedula}")
-    public Cliente findByCedula(@PathVariable("cedula") Long cedula){
+    public Cliente findByCedula(@PathVariable("cedula") Long cedula) {
         return clienteService.findByCedula(cedula);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Cliente> mostrarInfoCliente(@PathVariable("id") Long id) {
         Cliente cliente = clienteService.findById(id);
-        if(cliente == null){
+        if (cliente == null) {
             return new ResponseEntity<Cliente>(cliente, HttpStatus.NOT_FOUND);
         }
 
@@ -90,24 +99,41 @@ public class ClienteController {
         return "/createClientes";
     }
 
-
     @PostMapping("/add")
     public ResponseEntity agregarCliente(@RequestBody Cliente cliente) {
-        if (cliente == null) {
-            return new ResponseEntity<String>("No se pudo agregar el cliente", HttpStatus.NOT_FOUND);
-        }
-        Cliente newCliente = clienteService.save(cliente);
-        ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(newCliente);
-        if (newCliente == null) {
-            return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.BAD_REQUEST);
+        /*
+         * if (cliente == null) {
+         * return new ResponseEntity<String>("No se pudo agregar el cliente",
+         * HttpStatus.NOT_FOUND);
+         * }
+         * Cliente newCliente = clienteService.save(cliente);
+         * ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(newCliente);
+         * if (newCliente == null) {
+         * return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.BAD_REQUEST);
+         * }
+         * 
+         * return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.CREATED);
+         */
+
+        if (userRepository.existsByUsername(cliente.getCedula().toString())) {
+            return new ResponseEntity<String>("Este cliente ya existe", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.CREATED);
+        UserEntity userEntity = customUserDetailService.ClienteToUser(cliente);
+        cliente.setUserEntity(userEntity);
+        Cliente clienteDB = clienteService.save(cliente);
+        ClienteDTO newCliente = ClienteMapper.INSTANCE.convert(clienteDB);
+        if (newCliente == null) {
+            return new ResponseEntity<ClienteDTO>(newCliente, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<ClienteDTO>(newCliente, HttpStatus.CREATED);
+
     }
 
     @PostMapping("/login")
     public ResponseEntity loginCliente(@RequestBody Cliente cliente) {
-        
+
         Cliente clienteEncontrado = clienteService.findByCedula(cliente.getCedula());
 
         if (clienteEncontrado == null) {
@@ -117,7 +143,7 @@ public class ClienteController {
         ClienteDTO clienteDto = ClienteMapper.INSTANCE.convert(clienteEncontrado);
         if (clienteEncontrado.getCedula().equals(cliente.getCedula())) {
             return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.BAD_REQUEST);
         }
     }
@@ -128,20 +154,23 @@ public class ClienteController {
         return new ResponseEntity<>("DELETED", HttpStatus.NO_CONTENT);
     }
 
-    /*@GetMapping("/update/{id}")
-    public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("cliente", clienteService.findById(id));
-        return "/updateClientes";
-    }*/
+    /*
+     * @GetMapping("/update/{id}")
+     * public String mostrarFormularioUpdate(@PathVariable("id") Long id, Model
+     * model) {
+     * model.addAttribute("cliente", clienteService.findById(id));
+     * return "/updateClientes";
+     * }
+     */
 
     @GetMapping("/update/{id}")
     public ResponseEntity<Cliente> mostrarFormularioUpdate(@RequestBody Cliente cliente, @PathVariable("id") Long id) {
         Cliente clienteFind = clienteService.findById(id);
         cliente.setId(clienteFind.getId());
         Cliente clienteActualiado = clienteService.update(cliente);
-        return new ResponseEntity<>(clienteActualiado, HttpStatus.OK);        
-        //model.addAttribute("cliente", clienteService.findById(id));
-        //return "/updateClientes";
+        return new ResponseEntity<>(clienteActualiado, HttpStatus.OK);
+        // model.addAttribute("cliente", clienteService.findById(id));
+        // return "/updateClientes";
     }
 
     @PutMapping("/update/{id}")
@@ -159,91 +188,97 @@ public class ClienteController {
 
     }
 
-    /* 
-    @GetMapping("/perfil")
-    public List<Veterinario> perfilVeterinario(Model model) {
-        return (List<Veterinario>) veterinarioService.SearchAll();
-    }
-
-    @PostMapping("/perfil")
-    public String mostrarPerfil(@ModelAttribute Veterinario veterinario, HttpSession session, Model model) {
-        try {
-            Veterinario user = veterinarioService.findById(veterinario.getId());
-
-            if (user != null) {
-                session.setAttribute("veterinario", user); // Store in session
-
-                model.addAttribute("veterinario", user);
-                return "/perfilVeterinario";
-            } else {
-                model.addAttribute("error", "No se encontró el veterinario con los datos proporcionados.");
-                return "/loginVeterinarioError";
-            }
-        } catch (Exception e) {
-            // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
-            // error
-            System.err.println("Ocurrió un error: " + e.getMessage());
-            model.addAttribute("error", "Ocurrió un error al intentar mostrar el perfil del veterinario.");
-            return "/loginVeterinarioError";
-        }
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session, SessionStatus sessionStatus) {
-        session.invalidate(); // Invalidate the session
-        // Mostrar un mensaje de error si no se encuentra el veterinario
-        return "redirect:/home/landingPage"; // Redirect to login page
-    }
-
-    @GetMapping("/search")
-    // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
-    // error
-    public String searchClientes(@RequestParam("query") String query,
-            @RequestParam("filterBy") String filterBy,
-            Model model) {
-
-        // Determine which filter to use
-        switch (filterBy) {
-            case "todos":
-                model.addAttribute("clientes", clienteService.SearchAll());
-                return "/veterinarioClientes";
-
-            case "id":
-                try {
-                    // Convert query to Long for ID search
-                    model.addAttribute("clientes", clienteService.findById(Long.parseLong(query)));
-                } catch (NumberFormatException e) {
-                    // Handle invalid number format
-                    model.addAttribute("clientes", clienteService.SearchAll());
-                }
-                return "/veterinarioClientes";
-
-            case "nombre":
-                model.addAttribute("clientes", clienteService.findClienteByNombre(query));
-                return "/veterinarioClientes";
-
-            case "correo":
-                model.addAttribute("clientes", clienteService.findClienteByCorreo(query));
-                return "/veterinarioClientes";
-
-            case "telefono":
-                model.addAttribute("clientes", clienteService.findClienteByCelular(query));
-                return "/veterinarioClientes";
-
-            case "inactivo":
-                model.addAttribute("clientes", clienteService.findClienteByEstado("Inactivo"));
-                return "veterinarioClientes";
-
-            case "activo":
-                model.addAttribute("clientes", clienteService.findClienteByEstado("Activo"));
-                return "veterinarioClientes";
-
-            default:
-                model.addAttribute("clientes", clienteService.SearchAll());
-                return "/veterinarioClientes";
-        }
-    }
-
-    */
+    /*
+     * @GetMapping("/perfil")
+     * public List<Veterinario> perfilVeterinario(Model model) {
+     * return (List<Veterinario>) veterinarioService.SearchAll();
+     * }
+     * 
+     * @PostMapping("/perfil")
+     * public String mostrarPerfil(@ModelAttribute Veterinario veterinario,
+     * HttpSession session, Model model) {
+     * try {
+     * Veterinario user = veterinarioService.findById(veterinario.getId());
+     * 
+     * if (user != null) {
+     * session.setAttribute("veterinario", user); // Store in session
+     * 
+     * model.addAttribute("veterinario", user);
+     * return "/perfilVeterinario";
+     * } else {
+     * model.addAttribute("error",
+     * "No se encontró el veterinario con los datos proporcionados.");
+     * return "/loginVeterinarioError";
+     * }
+     * } catch (Exception e) {
+     * // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
+     * // error
+     * System.err.println("Ocurrió un error: " + e.getMessage());
+     * model.addAttribute("error",
+     * "Ocurrió un error al intentar mostrar el perfil del veterinario.");
+     * return "/loginVeterinarioError";
+     * }
+     * }
+     * 
+     * @GetMapping("/logout")
+     * public String logout(HttpSession session, SessionStatus sessionStatus) {
+     * session.invalidate(); // Invalidate the session
+     * // Mostrar un mensaje de error si no se encuentra el veterinario
+     * return "redirect:/home/landingPage"; // Redirect to login page
+     * }
+     * 
+     * @GetMapping("/search")
+     * // Manejar la excepción, por ejemplo, registrándola o mostrando un mensaje de
+     * // error
+     * public String searchClientes(@RequestParam("query") String query,
+     * 
+     * @RequestParam("filterBy") String filterBy,
+     * Model model) {
+     * 
+     * // Determine which filter to use
+     * switch (filterBy) {
+     * case "todos":
+     * model.addAttribute("clientes", clienteService.SearchAll());
+     * return "/veterinarioClientes";
+     * 
+     * case "id":
+     * try {
+     * // Convert query to Long for ID search
+     * model.addAttribute("clientes",
+     * clienteService.findById(Long.parseLong(query)));
+     * } catch (NumberFormatException e) {
+     * // Handle invalid number format
+     * model.addAttribute("clientes", clienteService.SearchAll());
+     * }
+     * return "/veterinarioClientes";
+     * 
+     * case "nombre":
+     * model.addAttribute("clientes", clienteService.findClienteByNombre(query));
+     * return "/veterinarioClientes";
+     * 
+     * case "correo":
+     * model.addAttribute("clientes", clienteService.findClienteByCorreo(query));
+     * return "/veterinarioClientes";
+     * 
+     * case "telefono":
+     * model.addAttribute("clientes", clienteService.findClienteByCelular(query));
+     * return "/veterinarioClientes";
+     * 
+     * case "inactivo":
+     * model.addAttribute("clientes",
+     * clienteService.findClienteByEstado("Inactivo"));
+     * return "veterinarioClientes";
+     * 
+     * case "activo":
+     * model.addAttribute("clientes", clienteService.findClienteByEstado("Activo"));
+     * return "veterinarioClientes";
+     * 
+     * default:
+     * model.addAttribute("clientes", clienteService.SearchAll());
+     * return "/veterinarioClientes";
+     * }
+     * }
+     * 
+     */
 
 }
