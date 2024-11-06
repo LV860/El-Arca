@@ -5,6 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -53,6 +57,9 @@ public class ClienteController {
 
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @GetMapping("/all")
     @Operation(summary = "Mostrar todas los clientes")
@@ -133,19 +140,28 @@ public class ClienteController {
 
     @PostMapping("/login")
     public ResponseEntity loginCliente(@RequestBody Cliente cliente) {
+        /*
+         * Cliente clienteEncontrado = clienteService.findByCedula(cliente.getCedula());
+         * 
+         * if (clienteEncontrado == null) {
+         * return new ResponseEntity<String>("No se encontro el cliente",
+         * HttpStatus.NOT_FOUND);
+         * }
+         * 
+         * ClienteDTO clienteDto = ClienteMapper.INSTANCE.convert(clienteEncontrado);
+         * if (clienteEncontrado.getCedula().equals(cliente.getCedula())) {
+         * return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.OK);
+         * } else {
+         * return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.BAD_REQUEST);
+         * }
+         */
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(cliente.getCedula(), "123"));
+        // tiene un atributo que es la autenticacion y es donde guardare la
+        // autenticacion
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Cliente clienteEncontrado = clienteService.findByCedula(cliente.getCedula());
-
-        if (clienteEncontrado == null) {
-            return new ResponseEntity<String>("No se encontro el cliente", HttpStatus.NOT_FOUND);
-        }
-
-        ClienteDTO clienteDto = ClienteMapper.INSTANCE.convert(clienteEncontrado);
-        if (clienteEncontrado.getCedula().equals(cliente.getCedula())) {
-            return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<ClienteDTO>(clienteDto, HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<String>("Cliente ingresa con exito", HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

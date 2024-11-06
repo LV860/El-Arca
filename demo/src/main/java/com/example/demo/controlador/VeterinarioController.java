@@ -7,6 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,6 +48,9 @@ public class VeterinarioController {
 
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @GetMapping("/all")
     @Operation(summary = "Mostrar todas los clientes")
@@ -95,20 +102,32 @@ public class VeterinarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity loingVeterinario(@RequestBody Veterinario veterinario) {
+    public ResponseEntity loginVeterinario(@RequestBody Veterinario veterinario) {
 
-        Veterinario vet = veterinarioService.findByCedula(veterinario.getCedula());
+        /*
+         * Veterinario vet = veterinarioService.findByCedula(veterinario.getCedula());
+         * 
+         * if (vet == null) {
+         * return new ResponseEntity<String>("No se encontro el veterinario",
+         * HttpStatus.NOT_FOUND);
+         * }
+         * 
+         * VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(vet);
+         * if (vet.getContrasena().equals(veterinario.getContrasena())) {
+         * return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
+         * } else {
+         * return new ResponseEntity<VeterinarioDTO>(veterinarioDTO,
+         * HttpStatus.BAD_REQUEST);
+         * }
+         */
 
-        if (vet == null) {
-            return new ResponseEntity<String>("No se encontro el veterinario", HttpStatus.NOT_FOUND);
-        }
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(veterinario.getCedula(), veterinario.getContrasena()));
+        // tiene un atributo que es la autenticacion y es donde guardare la
+        // autenticacion
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(vet);
-        if (vet.getContrasena().equals(veterinario.getContrasena())) {
-            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<String>("Veterinario ingresa con exito", HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
