@@ -7,8 +7,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entidad.Rol;
+import com.example.demo.entidad.UserEntity;
 
 public interface RolRepository extends JpaRepository<Rol, Long> {
-    List<Rol> findByName(String name);
+     Optional<Rol> findByName(String name);
 }
 
