@@ -80,6 +80,23 @@ public class ClienteController {
         return clienteService.findByCedula(cedula);
     }
 
+    @GetMapping("/details")
+    public ResponseEntity<ClienteDTO> buscarCliente() {
+        // Un usuario que llega ala url ya está autenticado
+        Cliente cliente = clienteService.findByCedula(
+                // guarda un objeto de autenticacion y este objeto tiene los datos
+                // Puedo acceder a el desde cualquier lado de la aplicacion
+                Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
+
+        ClienteDTO clienteDTO = ClienteMapper.INSTANCE.convert(cliente);
+
+        if (cliente == null) {
+            return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<ClienteDTO>(clienteDTO, HttpStatus.OK);
+
+    }
+
     @GetMapping("/find/{id}")
     public ResponseEntity<Cliente> mostrarInfoCliente(@PathVariable("id") Long id) {
         Cliente cliente = clienteService.findById(id);

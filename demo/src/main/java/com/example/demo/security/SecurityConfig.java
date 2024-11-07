@@ -28,9 +28,18 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/h2/**").permitAll()
+                        .requestMatchers("/veterinario/login").permitAll()
+                        .requestMatchers("/clientes/login").permitAll()
+                        .requestMatchers("/admin/login").permitAll()
+                        .requestMatchers("/veterinario/find/**").hasAuthority("VETERINARIO")
+                        .requestMatchers("/clientes/find/**").hasAuthority("DUEÑO")
+                        .requestMatchers("/admin/find/**").hasAuthority("ADMIN")
+                        .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
+                        .requestMatchers("/clientes/details").hasAuthority("DUEÑO")
+                        .requestMatchers("/admin/details").hasAuthority("ADMIN")
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
-                http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

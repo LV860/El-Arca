@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DTOs.VeterinarioDTO;
 import com.example.demo.DTOs.VeterinarioMapper;
+import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.UserEntity;
 //import com.example.demo.entidad.Administrador;
 //import com.example.demo.entidad.Cliente;
@@ -60,6 +61,23 @@ public class VeterinarioController {
     @Operation(summary = "Mostrar todas los clientes")
     public List<Veterinario> listarVeterinario() {
         return veterinarioService.SearchAll();
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<VeterinarioDTO> buscarVeterinario() {
+        // Un usuario que llega ala url ya está autenticado
+        Veterinario veterinario = veterinarioService.findByCedula(
+                // guarda un objeto de autenticacion y este objeto tiene los datos
+                // Puedo acceder a el desde cualquier lado de la aplicacion
+                SecurityContextHolder.getContext().getAuthentication().getName());
+
+        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
+
+        if (veterinario == null) {
+            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
+
     }
 
     @GetMapping("/find/{id}")

@@ -31,8 +31,6 @@ import com.example.demo.repositorio.VeterinarioRepository;
 
 import jakarta.transaction.Transactional;
 
-
-
 @Controller
 @Transactional
 @Profile("default")
@@ -68,54 +66,90 @@ public class DatabaseInit implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
-
         rolRepository.save(new Rol("ADMIN"));
         rolRepository.save(new Rol("DUEÑO"));
         rolRepository.save(new Rol("VETERINARIO"));
-
 
         Administrador adminSave = new Administrador("admin", "admin123");
         UserEntity userEntity = saveAdmin(adminSave);
         adminSave.setUserEntity(userEntity);
         administradorRepository.save(adminSave);
-        
-
 
         List<Veterinario> veterinarios = Arrays.asList(
-                Veterinario.builder().cedula("678901239").contrasena("abc").especialidad("Cirugía").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s").nombre("Hugh Jackman").estado("Inactivo").build(),
-                Veterinario.builder().cedula("123456789").contrasena("pass123").especialidad("Cirugía").urlImagen("https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg").nombre("Ana Martínez").estado("Activo").build(),
-                Veterinario.builder().cedula("987654321").contrasena("mypassword").especialidad("Dermatología").urlImagen("https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg").nombre("Luis García").estado("Inactivo").build(),
-                Veterinario.builder().cedula("112233445").contrasena("securepass").especialidad("Odontología").urlImagen("https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg").nombre("María Fernández").estado("Inactivo").build(),
-                Veterinario.builder().cedula("556677889").contrasena("vet1234").especialidad("Cardiología").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s").nombre("Carlos López").estado("Inactivo").build(),
-                Veterinario.builder().cedula("998877665").contrasena("mypetpass").especialidad("Neumología").urlImagen("https://pixnio.com/free-images/2017/11/30/2017-11-30-18-37-25.jpg").nombre("Lucía Sánchez").estado("Inactivo").build(),
-                Veterinario.builder().cedula("223344556").contrasena("password1").especialidad("Endocrinología").urlImagen("https://s2.abcstatics.com/Media/200912/14/davidmeca--300x180.jpg").nombre("Javier Rodríguez").estado("Inactivo").build(),
-                Veterinario.builder().cedula("334455667").contrasena("animal123").especialidad("Rehabilitación").urlImagen("https://i.pinimg.com/736x/c8/e9/72/c8e972106158f5dd52b0b20c6292f089.jpg").nombre("Isabel Morales").estado("Inactivo").build(),
-                Veterinario.builder().cedula("445566778").contrasena("vetsecure").especialidad("Gastroenterología").urlImagen("https://www.okchicas.com/wp-content/uploads/2016/01/Qu%C3%A9-dice-tu-rostro-de-ti-3.jpg").nombre("Roberto Pérez").estado("Inactivo").build(),
-                Veterinario.builder().cedula("556677889").contrasena("petcare").especialidad("Neurocirugía").urlImagen("https://thumbs.dreamstime.com/b/personas-negras-afroamericanas-hermosas-de-la-cara-de-la-mujer-ov-aislado-46936285.jpg").nombre("Elena Gómez").estado("Inactivo").build(),
-                Veterinario.builder().cedula("667788990").contrasena("mypet123").especialidad("Oftalmología").urlImagen("https://img.freepik.com/fotos-premium/concepto-personas-mujeres-retratos-cara-mujer-joven-sonriente-feliz_380164-119771.jpg").nombre("Manuel Díaz").estado("Inactivo").build(),
-                Veterinario.builder().cedula("778899001").contrasena("veterinario").especialidad("Medicina Interna").urlImagen("https://i.pinimg.com/236x/3d/a5/66/3da56663f134d5c630511f7ca4135852.jpg").nombre("Sofía Ruiz").estado("Inactivo").build(),
-                Veterinario.builder().cedula("889900112").contrasena("v3tpass").especialidad("Cirugía General").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_nbSpPNMYYd3Q-qgYh6DUtnJjkVbnfilXA&s").nombre("Fernando Fernández").estado("Inactivo").build(),
-                Veterinario.builder().cedula("990011223").contrasena("animalcare").especialidad("Oncología").urlImagen("https://tenimage.es/wp-content/uploads/2014/10/Fotolia_triangular.jpg").nombre("Carmen Torres").estado("Inactivo").build(),
-                Veterinario.builder().cedula("101112233").contrasena("vetpass").especialidad("Emergencias").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s").nombre("Ángel Romero").estado("Inactivo").build(),
-                Veterinario.builder().cedula("112233445").contrasena("mypassword1").especialidad("Podología").urlImagen("https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg").nombre("Laura Ortega").estado("Inactivo").build(),
-                Veterinario.builder().cedula("223344556").contrasena("animal1234").especialidad("Genética").urlImagen("https://i.pinimg.com/236x/27/31/76/2731763ea1512156ce5162d9f19860b3.jpg").nombre("Jorge Morales").estado("Inactivo").build(),
-                Veterinario.builder().cedula("334455667").contrasena("securevet").especialidad("Alergología").urlImagen("https://thumbs.dreamstime.com/z/cara-sonriente-de-persona-bastante-minoritaria-una-joven-hembra-asi%C3%A1tica-adulta-219032346.jpg").nombre("Patricia Vargas").estado("Inactivo").build(),
-                Veterinario.builder().cedula("445566778").contrasena("petpassword").especialidad("Terapias").urlImagen("https://i.pinimg.com/originals/cf/c1/d8/cfc1d8b69811d4bacb1377e39d5a74c9.jpg").nombre("Ricardo López").estado("Inactivo").build(),
-                Veterinario.builder().cedula("556677889").contrasena("v3tsecure").especialidad("Pediatría").urlImagen("https://png.pngtree.com/background/20230912/original/pngtree-young-woman-face-serious-people-woman-photo-picture-image_5054394.jpg").nombre("Mónica Jiménez").estado("Inactivo").build(),
-                Veterinario.builder().cedula("667788990").contrasena("secure1234").especialidad("Toxicología").urlImagen("https://i3.wp.com/previews.123rf.com/images/rawpixel/rawpixel1702/rawpixel170210473/71263896-hombres-cara-de-la-sonrisa-concepto-expresi%C3%B3n-retrato.jpg").nombre("Victoria Alonso").estado("Inactivo").build()
-        );
+                Veterinario.builder().cedula("678901239").contrasena("abc").especialidad("Cirugía").urlImagen(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s")
+                        .nombre("Hugh Jackman").estado("Inactivo").build(),
+                Veterinario.builder().cedula("123456789").contrasena("pass123").especialidad("Cirugía").urlImagen(
+                        "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg")
+                        .nombre("Ana Martínez").estado("Activo").build(),
+                Veterinario.builder().cedula("987654321").contrasena("mypassword").especialidad("Dermatología")
+                        .urlImagen("https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg")
+                        .nombre("Luis García").estado("Inactivo").build(),
+                Veterinario.builder().cedula("112233445").contrasena("securepass").especialidad("Odontología")
+                        .urlImagen("https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg")
+                        .nombre("María Fernández").estado("Inactivo").build(),
+                Veterinario.builder().cedula("556677889").contrasena("vet1234").especialidad("Cardiología").urlImagen(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s")
+                        .nombre("Carlos López").estado("Inactivo").build(),
+                Veterinario.builder().cedula("998877665").contrasena("mypetpass").especialidad("Neumología")
+                        .urlImagen("https://pixnio.com/free-images/2017/11/30/2017-11-30-18-37-25.jpg")
+                        .nombre("Lucía Sánchez").estado("Inactivo").build(),
+                Veterinario.builder().cedula("223344556").contrasena("password1").especialidad("Endocrinología")
+                        .urlImagen("https://s2.abcstatics.com/Media/200912/14/davidmeca--300x180.jpg")
+                        .nombre("Javier Rodríguez").estado("Inactivo").build(),
+                Veterinario.builder().cedula("334455667").contrasena("animal123").especialidad("Rehabilitación")
+                        .urlImagen("https://i.pinimg.com/736x/c8/e9/72/c8e972106158f5dd52b0b20c6292f089.jpg")
+                        .nombre("Isabel Morales").estado("Inactivo").build(),
+                Veterinario.builder().cedula("445566778").contrasena("vetsecure").especialidad("Gastroenterología")
+                        .urlImagen(
+                                "https://www.okchicas.com/wp-content/uploads/2016/01/Qu%C3%A9-dice-tu-rostro-de-ti-3.jpg")
+                        .nombre("Roberto Pérez").estado("Inactivo").build(),
+                Veterinario.builder().cedula("556677889").contrasena("petcare").especialidad("Neurocirugía").urlImagen(
+                        "https://thumbs.dreamstime.com/b/personas-negras-afroamericanas-hermosas-de-la-cara-de-la-mujer-ov-aislado-46936285.jpg")
+                        .nombre("Elena Gómez").estado("Inactivo").build(),
+                Veterinario.builder().cedula("667788990").contrasena("mypet123").especialidad("Oftalmología").urlImagen(
+                        "https://img.freepik.com/fotos-premium/concepto-personas-mujeres-retratos-cara-mujer-joven-sonriente-feliz_380164-119771.jpg")
+                        .nombre("Manuel Díaz").estado("Inactivo").build(),
+                Veterinario.builder().cedula("778899001").contrasena("veterinario").especialidad("Medicina Interna")
+                        .urlImagen("https://i.pinimg.com/236x/3d/a5/66/3da56663f134d5c630511f7ca4135852.jpg")
+                        .nombre("Sofía Ruiz").estado("Inactivo").build(),
+                Veterinario.builder().cedula("889900112").contrasena("v3tpass").especialidad("Cirugía General")
+                        .urlImagen(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9_nbSpPNMYYd3Q-qgYh6DUtnJjkVbnfilXA&s")
+                        .nombre("Fernando Fernández").estado("Inactivo").build(),
+                Veterinario.builder().cedula("990011223").contrasena("animalcare").especialidad("Oncología")
+                        .urlImagen("https://tenimage.es/wp-content/uploads/2014/10/Fotolia_triangular.jpg")
+                        .nombre("Carmen Torres").estado("Inactivo").build(),
+                Veterinario.builder().cedula("101112233").contrasena("vetpass").especialidad("Emergencias").urlImagen(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s")
+                        .nombre("Ángel Romero").estado("Inactivo").build(),
+                Veterinario.builder().cedula("112233445").contrasena("mypassword1").especialidad("Podología")
+                        .urlImagen("https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg")
+                        .nombre("Laura Ortega").estado("Inactivo").build(),
+                Veterinario.builder().cedula("223344556").contrasena("animal1234").especialidad("Genética")
+                        .urlImagen("https://i.pinimg.com/236x/27/31/76/2731763ea1512156ce5162d9f19860b3.jpg")
+                        .nombre("Jorge Morales").estado("Inactivo").build(),
+                Veterinario.builder().cedula("334455667").contrasena("securevet").especialidad("Alergología").urlImagen(
+                        "https://thumbs.dreamstime.com/z/cara-sonriente-de-persona-bastante-minoritaria-una-joven-hembra-asi%C3%A1tica-adulta-219032346.jpg")
+                        .nombre("Patricia Vargas").estado("Inactivo").build(),
+                Veterinario.builder().cedula("445566778").contrasena("petpassword").especialidad("Terapias")
+                        .urlImagen("https://i.pinimg.com/originals/cf/c1/d8/cfc1d8b69811d4bacb1377e39d5a74c9.jpg")
+                        .nombre("Ricardo López").estado("Inactivo").build(),
+                Veterinario.builder().cedula("556677889").contrasena("v3tsecure").especialidad("Pediatría").urlImagen(
+                        "https://png.pngtree.com/background/20230912/original/pngtree-young-woman-face-serious-people-woman-photo-picture-image_5054394.jpg")
+                        .nombre("Mónica Jiménez").estado("Inactivo").build(),
+                Veterinario.builder().cedula("667788990").contrasena("secure1234").especialidad("Toxicología")
+                        .urlImagen(
+                                "https://i3.wp.com/previews.123rf.com/images/rawpixel/rawpixel1702/rawpixel170210473/71263896-hombres-cara-de-la-sonrisa-concepto-expresi%C3%B3n-retrato.jpg")
+                        .nombre("Victoria Alonso").estado("Inactivo").build());
 
         UserEntity userEntitySaveVeterinario;
-        
-        
+
         for (Veterinario veterinario : veterinarios) {
-                userEntitySaveVeterinario = saveVeterinario(veterinario); 
-                veterinario.setUserEntity(userEntitySaveVeterinario);       
-                veterinarioRepository.save(veterinario);
+            userEntitySaveVeterinario = saveVeterinario(veterinario);
+            veterinario.setUserEntity(userEntitySaveVeterinario);
+            veterinarioRepository.save(veterinario);
         }
-        
-        
-        
 
         // Crea una lista con los clientes a guardar
         List<Cliente> clientes = Arrays.asList(
@@ -168,123 +202,316 @@ public class DatabaseInit implements ApplicationRunner {
                 new Cliente(234567895L, "raul.bermudez@gmail.com", "3478901234", "Raúl Bermúdez", "Activo"),
                 new Cliente(345678906L, "gloria.ramirez@gmail.com", "3489012345", "Gloria Ramírez", "Activo"),
                 new Cliente(456789017L, "andrea.carrillo@gmail.com", "3490123456", "Andrea Carrillo", "Activo"),
-                new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo")
-        );
+                new Cliente(567890128L, "santiago.perez@gmail.com", "3501234567", "Santiago Pérez", "Inactivo"));
 
-        //Cliente clienteSave;
+        // Cliente clienteSave;
         UserEntity userEntitySaveCliente;
-        
-        
+
         for (Cliente cliente : clientes) {
-            userEntitySaveCliente = saveCliente(cliente); 
-            cliente.setUserEntity(userEntitySaveCliente);       
+            userEntitySaveCliente = saveCliente(cliente);
+            cliente.setUserEntity(userEntitySaveCliente);
             clienteRepository.save(cliente);
         }
-    
-       
-        
-        mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 123456789L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Bella", "Beagle", 5, 15.0, "Otitis", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 987654321L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Charlie", "Bulldog", 3, 25.0, "Dermatitis", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 102345678L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Lucy", "Poodle", 2, 10.0, "Enfermedad renal", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 234567890L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Max", "German Shepherd", 6, 35.0, "Displasia de cadera", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 345678901L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Daisy", "Cocker Spaniel", 4, 14.0, "-", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 456789012L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Milo", "Chihuahua", 3, 3.0, "Problemas dentales", "https://images.ctfassets.net/550nf1gumh01/1JK6iiirhoZG3RtyKZDrS7/c7f3eca5c3fdfd9a94143301fe5669a3/iStock-1313232209.jpg?q=90&w=1240", 567890123L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Siberian Husky", 5, 28.0, "Hipo", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 678901234L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Golden Retriever", 7, 30.0, "Epilepsia", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012345L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Dachshund", 4, 9.0, "Problemas en la columna", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 890123456L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "Yorkshire", 3, 4.0, "Leucemia", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 901234567L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Bailey", "Rottweiler", 6, 40.0, "Hip displasia", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 234567891L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Boxer", 5, 27.0, "Cardiopatía", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 345678902L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Pug", 4, 9.0, "Problemas respiratorios", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 456789013L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "Shih Tzu", 3, 6.0, "Cataratas", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 567890124L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Jake", "Border Collie", 6, 22.0, "Enfermedad gastrointestinal", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 678901235L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Pomeranian", 2, 4.0, "Nerviosismo", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 789012346L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Jack", "Australian Shepherd", 4, 24.0, "Eczema", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 890123457L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Sophie", "French Bulldog", 5, 12.0, "Enfermedad cardíaca", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234568L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Lola", "Great Dane", 6, 50.0, "Problemas de articulaciones", "https://adiestrar-perros.com/wp-content/uploads/2021/08/gran-danes-en-el-campo.jpg", 234567892L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Teddy", "Boston Terrier", 3, 9.0, "Problemas de piel", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 345678903L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Sam", "Dalmatian", 7, 27.0, "Alergia a los alimentos", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 456789014L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Ruby", "Havanese", 4, 8.0, "Cálculos renales", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 567890125L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Buddy", "Akita", 5, 33.0, "Problemas digestivos", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 678901236L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Milo", "Maltese", 2, 4.5, "-", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012347L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Bella", "Bichon Frise", 3, 5.0, "Alergias", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 890123458L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Charlie", "Pekingese", 6, 6.5, "Problemas respiratorios", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 901234569L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Saint Bernard", 5, 60.0, "Enfermedad cardíaca", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 102345680L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Lucy", "Weimaraner", 4, 28.0, "Problemas óseos", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 234567893L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Schnauzer", 3, 12.0, "Cáncer", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 345678904L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Cavalier King Charles Spaniel", 4, 10.0, "Problemas de corazón", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 456789015L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Irish Setter", 5, 28.0, "Alergias", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 567890126L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Daisy", "Papillon", 3, 5.0, "Problemas de piel", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 678901237L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Jack", "Chesapeake Bay Retriever", 4, 32.0, "Problemas de estómago", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Chesapeake_Bay_Retriever1.jpg/800px-Chesapeake_Bay_Retriever1.jpg", 789012348L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "Old English Sheepdog", 5, 34.0, "Problemas de piel", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 890123459L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Toby", "Norwegian Elkhound", 6, 26.0, "Problemas articulares", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234570L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Sophie", "Lhasa Apso", 3, 7.0, "Cálculos urinarios", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 102345681L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Lola", "Whippet", 5, 15.0, "Problemas digestivos", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 234567894L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Teddy", "Puli", 6, 11.0, "Enfermedad renal", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 345678905L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Basenji", 2, 9.0, "Alergia alimentaria", "https://www.thesprucepets.com/thmb/OesXBEbQ66yLpy_ciEGcA6Nh9ME=/2123x0/filters:no_upscale():strip_icc()/2.PhotographsbyMariaitinaBasenji-d728578d5f81415cb8fe799149d49489.jpg", 456789016L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "American Bulldog", 4, 35.0, "Problemas de cadera", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 567890127L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Basset Hound", 7, 23.0, "Problemas respiratorios", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 678901238L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Hound", 3, 17.0, "Nerviosismo", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 789012349L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "French Bulldog", 4, 12.0, "Problemas gastrointestinales", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 890123460L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Buddy", "Italian Greyhound", 5, 8.0, "Problemas en la piel", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 901234571L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Shetland Sheepdog", 6, 24.0, "Problemas articulares", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 102345682L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Schnauzer", 4, 11.0, "Problemas dentales", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 234567895L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Bull Terrier", 5, 30.0, "Cáncer", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 345678906L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "Jack Russell Terrier", 3, 6.0, "Problemas digestivos", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 456789017L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Pekingese", 4, 9.0, "Cálculos renales", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 567890128L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Sophie", "Australian Cattle Dog", 3, 22.0, "-", "https://as2.ftcdn.net/v2/jpg/00/45/24/35/1000_F_45243551_VzCoEIqsbrDUtJ5d7tjdOnbO9CLZlpk7.jpg", 123456789L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Rocky", "Akita", 4, 33.0, "Problemas articulares", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 987654321L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Charlie", "Labrador", 5, 30.0, "Enfermedad renal", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 102345678L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Daisy", "Shiba Inu", 6, 25.0, "Problemas respiratorios", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 234567890L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Chihuahua", 2, 5.0, "Alergias", "https://images.ctfassets.net/550nf1gumh01/1JK6iiirhoZG3RtyKZDrS7/c7f3eca5c3fdfd9a94143301fe5669a3/iStock-1313232209.jpg?q=90&w=1240", 345678901L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Collie", 5, 27.0, "Problemas cardíacos", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 456789012L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Pomeranian", 3, 4.5, "Problemas de piel", "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg", 567890123L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "Boxer", 6, 29.0, "Problemas de estómago", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 678901234L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Bichon Frise", 4, 7.0, "Enfermedad de piel", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012345L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Jack", "Beagle", 5, 16.0, "Problemas dentales", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 890123456L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Toby", "Schnauzer", 6, 12.0, "Problemas articulares", "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg", 901234567L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "Dalmatian", 4, 22.0, "Problemas de piel", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 234567891L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Great Dane", 5, 55.0, "Problemas respiratorios", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678902L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Siberian Husky", 4, 30.0, "Hip displasia", "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg", 456789013L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "French Bulldog", 6, 12.0, "Enfermedad cardíaca", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 567890124L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Toby", "German Shepherd", 3, 34.0, "-", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 678901235L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Bella", "Cavalier King Charles Spaniel", 4, 14.0, "Alergias", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 789012346L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Irish Setter", 5, 29.0, "-", "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg", 890123457L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Mia", "Australian Shepherd", 6, 25.0, "Enfermedad renal", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 901234568L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Pug", 4, 9.0, "Problemas respiratorios", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 234567892L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Pekingese", 2, 7.0, "Problemas dentales", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678903L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "Cocker Spaniel", 5, 12.0, "-", "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 456789014L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Sophie", "Akita", 6, 36.0, "Enfermedad cardíaca", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 567890125L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Jack", "Boxer", 3, 30.0, "Alergias alimentarias", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 678901236L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Chihuahua", 4, 5.0, "Problemas dentales", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 789012347L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Maggie", "Schnauzer", 6, 14.0, "Enfermedad renal", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 890123458L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Papillon", 3, 5.0, "Problemas digestivos", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234569L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Bella", "Poodle", 5, 11.0, "Cálculos renales", "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg", 102345680L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Great Dane", 6, 60.0, "Problemas articulares", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 234567893L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Zoe", "Cavalier King Charles Spaniel", 4, 15.0, "Problemas cardíacos", "https://emprendedores.es/wp-content/uploads/iStock-172866178-e1633008973869-1024x575.jpg", 345678904L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "Boston Terrier", 3, 9.0, "Problemas dentales", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 456789015L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Siberian Husky", 5, 28.0, "Problemas respiratorios", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 567890126L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Beagle", 4, 16.0, "Enfermedad gastrointestinal", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 678901237L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Shih Tzu", 6, 9.0, "Cálculos urinarios", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 789012348L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "Boxer", 3, 27.0, "-", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 890123459L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Luna", "Pomeranian", 4, 5.5, "-", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 901234570L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Sophie", "Pekingese", 5, 9.0, "-", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 102345681L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Jack", "Labrador", 6, 34.0, "-", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 234567894L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Daisy", "Cocker Spaniel", 3, 15.0, "Problemas de piel", "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678905L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Chloe", "Maltese", 4, 4.0, "Problemas dentales", "https://images.squarespace-cdn.com/content/v1/625ee79ee923a609e4bf10fa/62b6dd01-3c5a-4243-ad24-26fa8d7fbbae/maltese-sitting-on-sofa.png", 456789016L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Dachshund", 5, 10.0, "Cálculos renales", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 567890127L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Yorkshire", 3, 6.0, "Enfermedad renal", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 678901238L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Oscar", "French Bulldog", 5, 12.0, "Problemas respiratorios", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 789012349L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Sophie", "Shih Tzu", 4, 7.0, "Problemas digestivos", "https://dogtime.com/wp-content/uploads/sites/12/2011/01/GettyImages-178920540-e1689348859523.jpg?w=1024", 890123460L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Luna", "Whippet", 6, 15.0, "Cálculos urinarios", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 901234571L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Rocky", "Havanese", 3, 8.0, "-", "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 102345682L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Chloe", "Pekingese", 4, 9.0, "Alergias", "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630", 234567895L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Riley", "Boston Terrier", 5, 11.0, "Problemas respiratorios", "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/08134610/Boston-Terrier-head-portrait-outdoors1.jpg", 345678906L, "En tratamiento"));
-        mascotaRepository.save(new Mascota("Mia", "Shiba Inu", 3, 8.0, "-", "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg", 456789017L, "Inactiva"));
-        mascotaRepository.save(new Mascota("Jack", "Collie", 6, 25.0, "-", "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg", 567890128L, "Inactiva"));
 
-
+        mascotaRepository.save(new Mascota("Rex", "Labrador", 4, 32.0, "-",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                123456789L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Bella", "Beagle", 5, 15.0, "Otitis",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                987654321L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Charlie", "Bulldog", 3, 25.0, "Dermatitis",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                102345678L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Lucy", "Poodle", 2, 10.0, "Enfermedad renal",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 234567890L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Max", "German Shepherd", 6, 35.0, "Displasia de cadera",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                345678901L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Daisy", "Cocker Spaniel", 4, 14.0, "-",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 456789012L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Milo", "Chihuahua", 3, 3.0, "Problemas dentales",
+                "https://images.ctfassets.net/550nf1gumh01/1JK6iiirhoZG3RtyKZDrS7/c7f3eca5c3fdfd9a94143301fe5669a3/iStock-1313232209.jpg?q=90&w=1240",
+                567890123L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Siberian Husky", 5, 28.0, "Hipo",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                678901234L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Golden Retriever", 7, 30.0, "Epilepsia",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012345L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Dachshund", 4, 9.0, "Problemas en la columna",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                890123456L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "Yorkshire", 3, 4.0, "Leucemia",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                901234567L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Bailey", "Rottweiler", 6, 40.0, "Hip displasia",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 234567891L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Boxer", 5, 27.0, "Cardiopatía",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                345678902L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Pug", 4, 9.0, "Problemas respiratorios",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                456789013L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "Shih Tzu", 3, 6.0, "Cataratas",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 567890124L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Jake", "Border Collie", 6, 22.0, "Enfermedad gastrointestinal",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 678901235L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Pomeranian", 2, 4.0, "Nerviosismo",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                789012346L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Jack", "Australian Shepherd", 4, 24.0, "Eczema",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                890123457L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Sophie", "French Bulldog", 5, 12.0, "Enfermedad cardíaca",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234568L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Lola", "Great Dane", 6, 50.0, "Problemas de articulaciones",
+                "https://adiestrar-perros.com/wp-content/uploads/2021/08/gran-danes-en-el-campo.jpg", 234567892L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Teddy", "Boston Terrier", 3, 9.0, "Problemas de piel",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 345678903L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Sam", "Dalmatian", 7, 27.0, "Alergia a los alimentos",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                456789014L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Ruby", "Havanese", 4, 8.0, "Cálculos renales",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                567890125L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Buddy", "Akita", 5, 33.0, "Problemas digestivos",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                678901236L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Milo", "Maltese", 2, 4.5, "-",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012347L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Bella", "Bichon Frise", 3, 5.0, "Alergias",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                890123458L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Charlie", "Pekingese", 6, 6.5, "Problemas respiratorios",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                901234569L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Saint Bernard", 5, 60.0, "Enfermedad cardíaca",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                102345680L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Lucy", "Weimaraner", 4, 28.0, "Problemas óseos",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 234567893L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Schnauzer", 3, 12.0, "Cáncer",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                345678904L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Cavalier King Charles Spaniel", 4, 10.0, "Problemas de corazón",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                456789015L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Irish Setter", 5, 28.0, "Alergias",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 567890126L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Daisy", "Papillon", 3, 5.0, "Problemas de piel",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                678901237L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Jack", "Chesapeake Bay Retriever", 4, 32.0, "Problemas de estómago",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Chesapeake_Bay_Retriever1.jpg/800px-Chesapeake_Bay_Retriever1.jpg",
+                789012348L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "Old English Sheepdog", 5, 34.0, "Problemas de piel",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                890123459L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Toby", "Norwegian Elkhound", 6, 26.0, "Problemas articulares",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234570L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Sophie", "Lhasa Apso", 3, 7.0, "Cálculos urinarios",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                102345681L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Lola", "Whippet", 5, 15.0, "Problemas digestivos",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 234567894L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Teddy", "Puli", 6, 11.0, "Enfermedad renal",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                345678905L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Basenji", 2, 9.0, "Alergia alimentaria",
+                "https://www.thesprucepets.com/thmb/OesXBEbQ66yLpy_ciEGcA6Nh9ME=/2123x0/filters:no_upscale():strip_icc()/2.PhotographsbyMariaitinaBasenji-d728578d5f81415cb8fe799149d49489.jpg",
+                456789016L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "American Bulldog", 4, 35.0, "Problemas de cadera",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                567890127L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Basset Hound", 7, 23.0, "Problemas respiratorios",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 678901238L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Hound", 3, 17.0, "Nerviosismo",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                789012349L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "French Bulldog", 4, 12.0, "Problemas gastrointestinales",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                890123460L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Buddy", "Italian Greyhound", 5, 8.0, "Problemas en la piel",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 901234571L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Shetland Sheepdog", 6, 24.0, "Problemas articulares",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 102345682L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Schnauzer", 4, 11.0, "Problemas dentales",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                234567895L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Bull Terrier", 5, 30.0, "Cáncer",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                345678906L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "Jack Russell Terrier", 3, 6.0, "Problemas digestivos",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                456789017L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Pekingese", 4, 9.0, "Cálculos renales",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                567890128L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Sophie", "Australian Cattle Dog", 3, 22.0, "-",
+                "https://as2.ftcdn.net/v2/jpg/00/45/24/35/1000_F_45243551_VzCoEIqsbrDUtJ5d7tjdOnbO9CLZlpk7.jpg",
+                123456789L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Rocky", "Akita", 4, 33.0, "Problemas articulares",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                987654321L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Charlie", "Labrador", 5, 30.0, "Enfermedad renal",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 102345678L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Daisy", "Shiba Inu", 6, 25.0, "Problemas respiratorios",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                234567890L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Chihuahua", 2, 5.0, "Alergias",
+                "https://images.ctfassets.net/550nf1gumh01/1JK6iiirhoZG3RtyKZDrS7/c7f3eca5c3fdfd9a94143301fe5669a3/iStock-1313232209.jpg?q=90&w=1240",
+                345678901L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Collie", 5, 27.0, "Problemas cardíacos",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 456789012L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Pomeranian", 3, 4.5, "Problemas de piel",
+                "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg",
+                567890123L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "Boxer", 6, 29.0, "Problemas de estómago",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                678901234L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Bichon Frise", 4, 7.0, "Enfermedad de piel",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 789012345L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Jack", "Beagle", 5, 16.0, "Problemas dentales",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                890123456L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Toby", "Schnauzer", 6, 12.0, "Problemas articulares",
+                "https://www.abc.es/xlsemanal/wp-content/uploads/sites/5/2024/04/estudio-cerebro-perros-parecido-humanos-reconocer-palabras-a.jpg",
+                901234567L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "Dalmatian", 4, 22.0, "Problemas de piel",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                234567891L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Great Dane", 5, 55.0, "Problemas respiratorios",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678902L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Siberian Husky", 4, 30.0, "Hip displasia",
+                "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg",
+                456789013L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "French Bulldog", 6, 12.0, "Enfermedad cardíaca",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                567890124L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Toby", "German Shepherd", 3, 34.0, "-",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 678901235L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Bella", "Cavalier King Charles Spaniel", 4, 14.0, "Alergias",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                789012346L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Irish Setter", 5, 29.0, "-",
+                "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg",
+                890123457L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Mia", "Australian Shepherd", 6, 25.0, "Enfermedad renal",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 901234568L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Pug", 4, 9.0, "Problemas respiratorios",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 234567892L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Pekingese", 2, 7.0, "Problemas dentales",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678903L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "Cocker Spaniel", 5, 12.0, "-",
+                "https://s1.elespanol.com/2022/04/05/actualidad/662693884_223269248_1024x576.jpg", 456789014L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Sophie", "Akita", 6, 36.0, "Enfermedad cardíaca",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                567890125L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Jack", "Boxer", 3, 30.0, "Alergias alimentarias",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                678901236L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Chihuahua", 4, 5.0, "Problemas dentales",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                789012347L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Maggie", "Schnauzer", 6, 14.0, "Enfermedad renal",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 890123458L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Papillon", 3, 5.0, "Problemas digestivos",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 901234569L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Bella", "Poodle", 5, 11.0, "Cálculos renales",
+                "https://www.lavanguardia.com/files/og_thumbnail/files/fp/uploads/2023/08/11/64d616bc0ed58.r_d.3943-2629-1521.jpeg",
+                102345680L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Great Dane", 6, 60.0, "Problemas articulares",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                234567893L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Zoe", "Cavalier King Charles Spaniel", 4, 15.0, "Problemas cardíacos",
+                "https://emprendedores.es/wp-content/uploads/iStock-172866178-e1633008973869-1024x575.jpg", 345678904L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "Boston Terrier", 3, 9.0, "Problemas dentales",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                456789015L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Siberian Husky", 5, 28.0, "Problemas respiratorios",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 567890126L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Beagle", 4, 16.0, "Enfermedad gastrointestinal",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                678901237L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Shih Tzu", 6, 9.0, "Cálculos urinarios",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 789012348L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "Boxer", 3, 27.0, "-",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 890123459L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Luna", "Pomeranian", 4, 5.5, "-",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 901234570L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Sophie", "Pekingese", 5, 9.0, "-",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                102345681L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Jack", "Labrador", 6, 34.0, "-",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                234567894L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Daisy", "Cocker Spaniel", 3, 15.0, "Problemas de piel",
+                "https://georgiainjurylawyer.com/wp-content/uploads/2022/11/pitbull.jpg", 345678905L,
+                "En tratamiento"));
+        mascotaRepository.save(new Mascota("Chloe", "Maltese", 4, 4.0, "Problemas dentales",
+                "https://images.squarespace-cdn.com/content/v1/625ee79ee923a609e4bf10fa/62b6dd01-3c5a-4243-ad24-26fa8d7fbbae/maltese-sitting-on-sofa.png",
+                456789016L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Dachshund", 5, 10.0, "Cálculos renales",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                567890127L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Yorkshire", 3, 6.0, "Enfermedad renal",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                678901238L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Oscar", "French Bulldog", 5, 12.0, "Problemas respiratorios",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                789012349L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Sophie", "Shih Tzu", 4, 7.0, "Problemas digestivos",
+                "https://dogtime.com/wp-content/uploads/sites/12/2011/01/GettyImages-178920540-e1689348859523.jpg?w=1024",
+                890123460L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Luna", "Whippet", 6, 15.0, "Cálculos urinarios",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                901234571L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Rocky", "Havanese", 3, 8.0, "-",
+                "https://s3.abcstatics.com/media/familia/2022/04/06/perrook-k0o--1248x698@abc.jpg", 102345682L,
+                "Inactiva"));
+        mascotaRepository.save(new Mascota("Chloe", "Pekingese", 4, 9.0, "Alergias",
+                "https://dogtime.com/wp-content/uploads/sites/12/2024/01/GettyImages-590608307.jpg?resize=1200,630",
+                234567895L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Riley", "Boston Terrier", 5, 11.0, "Problemas respiratorios",
+                "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/08134610/Boston-Terrier-head-portrait-outdoors1.jpg",
+                345678906L, "En tratamiento"));
+        mascotaRepository.save(new Mascota("Mia", "Shiba Inu", 3, 8.0, "-",
+                "https://www.ngenespanol.com/wp-content/uploads/2022/08/estudio-ayuda-a-conocer-origen-de-los-perros-1280x720.jpg",
+                456789017L, "Inactiva"));
+        mascotaRepository.save(new Mascota("Jack", "Collie", 6, 25.0, "-",
+                "https://as01.epimg.net/diarioas/imagenes/2022/05/29/actualidad/1653826510_995351_1653826595_noticia_normal.jpg",
+                567890128L, "Inactiva"));
 
         List<Cliente> asociar = clienteRepository.findAll();
         List<Mascota> mascotasAsociar = mascotaRepository.findAll();
@@ -298,11 +525,9 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
 
-
         // Cargar datos del excel
         List<Droga> drogas = readExcelFile("MEDICAMENTOS_VETERINARIA.xlsx");
         drogaRepository.saveAll(drogas);
-
 
         tratamientoRepository.save(new Tratamiento(1L, 150.0f, "2024-01-10", 1L, 1L, 1L));
         tratamientoRepository.save(new Tratamiento(2L, 200.0f, "2024-01-15", 2L, 2L, 2L));
@@ -313,12 +538,9 @@ public class DatabaseInit implements ApplicationRunner {
         tratamientoRepository.save(new Tratamiento(7L, 140.0f, "2024-10-15", 7L, 7L, 7L));
         tratamientoRepository.save(new Tratamiento(8L, 190.0f, "2024-04-01", 8L, 8L, 8L));
         tratamientoRepository.save(new Tratamiento(9L, 250.0f, "2024-10-10", 9L, 9L, 9L));
-        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01",10L,10L, 10L));
+        tratamientoRepository.save(new Tratamiento(10L, 170.0f, "2024-05-01", 10L, 10L, 10L));
 
-
-
-
-        //Unir droga a tratamientos
+        // Unir droga a tratamientos
         List<Tratamiento> asociarTratamiento = tratamientoRepository.findAll();
         List<Droga> drogasAsociar = drogaRepository.findAll();
         for (int j = 0; j < drogasAsociar.size(); j++) {
@@ -332,9 +554,7 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
 
-
-
-        //Unir cliente a tratamientos
+        // Unir cliente a tratamientos
         asociarTratamiento = tratamientoRepository.findAll();
         List<Mascota> mascotasAsociar2 = mascotaRepository.findAll();
 
@@ -347,7 +567,7 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
 
-        //Unir Veterinario a tratamientos
+        // Unir Veterinario a tratamientos
         asociarTratamiento = tratamientoRepository.findAll();
         List<Veterinario> veterinariosAsociar = veterinarioRepository.findAll();
 
@@ -360,18 +580,16 @@ public class DatabaseInit implements ApplicationRunner {
             }
         }
 
-
-
-
     }
 
     private List<Droga> readExcelFile(String fileName) throws IOException {
         List<Droga> drogas = new ArrayList<>();
         try (InputStream is = new ClassPathResource(fileName).getInputStream();
-             Workbook workbook = new XSSFWorkbook(is)) {
+                Workbook workbook = new XSSFWorkbook(is)) {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
-                if (row.getRowNum() == 0) continue; // Skip header row
+                if (row.getRowNum() == 0)
+                    continue; // Skip header row
                 String nombre = row.getCell(0).getStringCellValue();
                 float precioVenta = (float) row.getCell(1).getNumericCellValue();
                 float precioCompra = (float) row.getCell(2).getNumericCellValue();
@@ -383,26 +601,25 @@ public class DatabaseInit implements ApplicationRunner {
         return drogas;
     }
 
-    private UserEntity saveCliente (Cliente cliente) {
+    private UserEntity saveCliente(Cliente cliente) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(cliente.getCedula().toString());
         userEntity.setPassword(passwordEncoder.encode("123"));
         Rol rol = rolRepository.findByName("DUEÑO").get();
         userEntity.setRoles(List.of(rol));
-        
+
         return userRepository.save(userEntity);
     }
 
-    private UserEntity saveAdmin (Administrador administrador) {
+    private UserEntity saveAdmin(Administrador administrador) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(administrador.getUsuario());
         userEntity.setPassword(passwordEncoder.encode(administrador.getContrasena()));
         Rol rol = rolRepository.findByName("ADMIN").get();
         userEntity.setRoles(List.of(rol));
-        
+
         return userRepository.save(userEntity);
     }
-
 
     private UserEntity saveVeterinario(Veterinario veterinario) {
         UserEntity userEntity = new UserEntity();
@@ -410,8 +627,8 @@ public class DatabaseInit implements ApplicationRunner {
         userEntity.setPassword(passwordEncoder.encode(veterinario.getContrasena()));
         Rol rol = rolRepository.findByName("VETERINARIO").get();
         userEntity.setRoles(List.of(rol));
-        
+
         return userRepository.save(userEntity);
     }
-    
+
 }
