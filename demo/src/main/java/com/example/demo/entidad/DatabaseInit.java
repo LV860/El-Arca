@@ -83,7 +83,7 @@ public class DatabaseInit implements ApplicationRunner {
 
         List<Veterinario> veterinarios = Arrays.asList(
                 Veterinario.builder().cedula("678901239").contrasena("abc").especialidad("Cirugía").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s").nombre("Hugh Jackman").estado("Inactivo").build(),
-                Veterinario.builder().cedula("123456789").contrasena("pass123").especialidad("Cirugía").urlImagen("https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg").nombre("Ana Martínez").estado("Activo").build(),
+                Veterinario.builder().cedula("213456789").contrasena("pass123").especialidad("Cirugía").urlImagen("https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg").nombre("Ana Martínez").estado("Activo").build(),
                 Veterinario.builder().cedula("987654321").contrasena("mypassword").especialidad("Dermatología").urlImagen("https://img.freepik.com/foto-gratis/retrato-hombre-blanco-aislado_53876-40306.jpg").nombre("Luis García").estado("Inactivo").build(),
                 Veterinario.builder().cedula("112233445").contrasena("securepass").especialidad("Odontología").urlImagen("https://img.europapress.es/fotoweb/fotonoticia_20150331134913-15031252329_1200.jpg").nombre("María Fernández").estado("Inactivo").build(),
                 Veterinario.builder().cedula("556677889").contrasena("vet1234").especialidad("Cardiología").urlImagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXDyRLdorIOSn29uGUqgasHRe7nnU3t5m7oQ&s").nombre("Carlos López").estado("Inactivo").build(),

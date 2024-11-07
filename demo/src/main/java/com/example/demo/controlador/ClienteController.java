@@ -160,7 +160,7 @@ public class ClienteController {
          * }
          */
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(cliente.getCedula(), "123"));
+                new UsernamePasswordAuthenticationToken(cliente.getCedula().toString(), "123"));
         // tiene un atributo que es la autenticacion y es donde guardare la
         // autenticacion
         SecurityContextHolder.getContext().setAuthentication(authentication);
