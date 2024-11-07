@@ -79,7 +79,7 @@ public class DatabaseInit implements ApplicationRunner {
                 Veterinario.builder().cedula("678901239").contrasena("abc").especialidad("Cirugía").urlImagen(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s")
                         .nombre("Hugh Jackman").estado("Inactivo").build(),
-                Veterinario.builder().cedula("123456789").contrasena("pass123").especialidad("Cirugía").urlImagen(
+                Veterinario.builder().cedula("213456789").contrasena("pass123").especialidad("Cirugía").urlImagen(
                         "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg")
                         .nombre("Ana Martínez").estado("Activo").build(),
                 Veterinario.builder().cedula("987654321").contrasena("mypassword").especialidad("Dermatología")
