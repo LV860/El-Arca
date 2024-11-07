@@ -9,12 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
+import com.example.demo.entidad.Rol;
+import com.example.demo.entidad.Tratamiento;
+import com.example.demo.entidad.UserEntity;
 import com.example.demo.repositorio.ClienteRepository;
 import com.example.demo.repositorio.MascotaRepository;
+import com.example.demo.repositorio.RolRepository;
+import com.example.demo.repositorio.UserRepository;
 
 import jakarta.validation.OverridesAttribute;
 
 import java.util.Optional;
+
+import java.util.NoSuchElementException;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -22,7 +29,10 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepositoryJPA;
     @Autowired
+    private UserRepository userRepositoryJPA;
+    @Autowired
     private MascotaService mascotaService;
+    
 
     @Override
     public Cliente crearCliente(Cliente cliente){
@@ -46,13 +56,21 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void delete(Long id) {
-        List<Mascota> listaMascotas = clienteRepositoryJPA.findById(id).get().getMascotas();
-        if(listaMascotas != null){
-            for (int i =0; i<listaMascotas.size(); i++){
-                mascotaService.deleteById(listaMascotas.get(i).getId());
+
+        
+        Optional<Cliente> existingCliente = clienteRepositoryJPA.findById(id);
+        if (existingCliente.isPresent()) {
+            existingCliente.get().setUserEntity(null);
+            List<Mascota> listaMascotas = existingCliente.get().getMascotas();
+            if (listaMascotas != null) {
+                for (Mascota mascota : listaMascotas) {
+                    mascotaService.deleteById(mascota.getId());
+                }
             }
+            clienteRepositoryJPA.deleteById(id);
+        } else {
+            throw new NoSuchElementException("Cliente with ID " + id + " not found");
         }
-        clienteRepositoryJPA.deleteById(id);
     }
 
     @Override

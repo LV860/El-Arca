@@ -123,7 +123,7 @@ public class DatabaseInit implements ApplicationRunner {
                 Veterinario.builder().cedula("101112233").contrasena("vetpass").especialidad("Emergencias").urlImagen(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQBz5QgsYhzNkfnWhr10roi33vNXtF8gm3FQ&s")
                         .nombre("Ángel Romero").estado("Inactivo").build(),
-                Veterinario.builder().cedula("112233445").contrasena("mypassword1").especialidad("Podología")
+                Veterinario.builder().cedula("112283445").contrasena("mypassword1").especialidad("Podología")
                         .urlImagen("https://i.pinimg.com/236x/94/52/71/945271ad2f45f571fc87ad06b3680e52.jpg")
                         .nombre("Laura Ortega").estado("Inactivo").build(),
                 Veterinario.builder().cedula("223344556").contrasena("animal1234").especialidad("Genética")

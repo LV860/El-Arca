@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/login").permitAll()
                         .requestMatchers("/veterinario/find/**").hasAuthority("VETERINARIO")
                         .requestMatchers("/clientes/find/**").hasAuthority("DUEÑO")
+                        .requestMatchers("/clientes/find/**").hasAuthority("VETERINARIO")
                         .requestMatchers("/admin/find/**").hasAuthority("ADMIN")
                         .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
                         .requestMatchers("/clientes/details").hasAuthority("DUEÑO")
