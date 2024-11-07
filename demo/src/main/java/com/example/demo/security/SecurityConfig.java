@@ -31,13 +31,18 @@ public class SecurityConfig {
                         .requestMatchers("/veterinario/login").permitAll()
                         .requestMatchers("/clientes/login").permitAll()
                         .requestMatchers("/admin/login").permitAll()
-                        .requestMatchers("/veterinario/find/**").hasAuthority("VETERINARIO")
-                        .requestMatchers("/clientes/find/**").hasAuthority("DUEÑO")
-                        .requestMatchers("/clientes/find/**").hasAuthority("VETERINARIO")
-                        .requestMatchers("/admin/find/**").hasAuthority("ADMIN")
+                        //.requestMatchers("/veterinario/find/**").hasAuthority("VETERINARIO")
+                        //.requestMatchers("/clientes/find/**").hasAuthority("DUEÑO")
+                        .requestMatchers("/mascota/**").hasAuthority("VETERINARIO")
+                        .requestMatchers("/clientes/**").hasAuthority("VETERINARIO")
+                        .requestMatchers("/mascota/**").hasAuthority("ADMIN")
+                        .requestMatchers("/clientes/**").hasAuthority("ADMIN")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
                         .requestMatchers("/clientes/details").hasAuthority("DUEÑO")
                         .requestMatchers("/admin/details").hasAuthority("ADMIN")
+                        .requestMatchers("/dashboard/**").hasAuthority("ADMIN")
+                        
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
