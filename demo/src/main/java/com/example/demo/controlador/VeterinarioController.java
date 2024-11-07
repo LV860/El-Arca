@@ -64,19 +64,19 @@ public class VeterinarioController {
     }
 
     @GetMapping("/details")
-    public ResponseEntity<VeterinarioDTO> buscarVeterinario() {
+    public ResponseEntity<Veterinario> buscarVeterinario() {
         // Un usuario que llega ala url ya está autenticado
         Veterinario veterinario = veterinarioService.findByCedula(
                 // guarda un objeto de autenticacion y este objeto tiene los datos
                 // Puedo acceder a el desde cualquier lado de la aplicacion
                 SecurityContextHolder.getContext().getAuthentication().getName());
 
-        VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
+        //VeterinarioDTO veterinarioDTO = VeterinarioMapper.INSTANCE.convert(veterinario);
 
         if (veterinario == null) {
-            return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Veterinario>(veterinario, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<VeterinarioDTO>(veterinarioDTO, HttpStatus.OK);
+        return new ResponseEntity<Veterinario>(veterinario, HttpStatus.OK);
 
     }
 

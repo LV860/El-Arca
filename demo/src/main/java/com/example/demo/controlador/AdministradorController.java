@@ -69,19 +69,19 @@ public class AdministradorController {
     }
 
     @GetMapping("/details")
-    public ResponseEntity<AdminDTO> buscarCliente() {
+    public ResponseEntity<Administrador> buscarCliente() {
         // Un usuario que llega ala url ya está autenticado
         Administrador administrador = admiService.findById(
                 // guarda un objeto de autenticacion y este objeto tiene los datos
                 // Puedo acceder a el desde cualquier lado de la aplicacion
                 Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName()));
 
-        AdminDTO adminDTO = AdminMapper.INSTANCE.convert(administrador);
+        //AdminDTO adminDTO = AdminMapper.INSTANCE.convert(administrador);
 
         if (administrador == null) {
-            return new ResponseEntity<AdminDTO>(adminDTO, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Administrador>(administrador, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<AdminDTO>(adminDTO, HttpStatus.OK);
+        return new ResponseEntity<Administrador>(administrador, HttpStatus.OK);
 
     }
 
