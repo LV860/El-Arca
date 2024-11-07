@@ -38,14 +38,19 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public void delete(Long id) {
-        Collection<Tratamiento> tratamientos = tratamientoRepositoryJPA.findByVeterinarioId(id);
-        if (!tratamientos.isEmpty()) {
-            for (Tratamiento tratamiento : tratamientos) {
-                tratamiento.setVeterinario(null);
-                tratamientoRepositoryJPA.save(tratamiento);
+        Optional<Veterinario> existingVeterinario = repoJPA.findById(id);
+        if (existingVeterinario.isPresent()) {
+            existingVeterinario.get().setUserEntity(null);
+            repoJPA.save(existingVeterinario.get());
+            Collection<Tratamiento> tratamientos = tratamientoRepositoryJPA.findByVeterinarioId(id);
+            if (!tratamientos.isEmpty()) {
+                for (Tratamiento tratamiento : tratamientos) {
+                    tratamiento.setVeterinario(null);
+                    tratamientoRepositoryJPA.save(tratamiento);
+                }
             }
+            repoJPA.deleteById(id);
         }
-        repoJPA.deleteById(id);
     }
 
     @Override
