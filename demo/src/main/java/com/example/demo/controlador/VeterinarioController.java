@@ -30,6 +30,7 @@ import com.example.demo.entidad.UserEntity;
 import com.example.demo.entidad.Veterinario;
 import com.example.demo.repositorio.UserRepository;
 import com.example.demo.security.CustomUserDetailService;
+import com.example.demo.security.JWTGenerator;
 //import com.example.demo.servicio.AdministradorService;
 import com.example.demo.servicio.VeterinarioService;
 
@@ -51,6 +52,9 @@ public class VeterinarioController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
 
     @GetMapping("/all")
     @Operation(summary = "Mostrar todas los clientes")
@@ -127,7 +131,9 @@ public class VeterinarioController {
         // autenticacion
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return new ResponseEntity<String>("Veterinario ingresa con exito", HttpStatus.OK);
+        String token = jwtGenerator.generateToken(authentication);
+
+        return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
