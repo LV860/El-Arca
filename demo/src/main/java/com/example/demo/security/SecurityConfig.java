@@ -42,7 +42,12 @@ public class SecurityConfig {
                         .requestMatchers("/admin/details").hasAuthority("ADMIN")
                         .requestMatchers("/mascota/all").hasAuthority("VETERINARIO")
                         .requestMatchers("/mascota/all").hasAuthority("ADMIN")
-                        
+                        .requestMatchers("/tratamiento/add").hasAuthority("VETERINARIO")
+                        .requestMatchers("/tratamiento/findByMascotaId/**").hasAuthority("VETERINARIO")
+                        .requestMatchers("/tratamiento/findByVeterinarioId/**").hasAuthority("VETERINARIO")
+                        .requestMatchers("/tratamiento/add").hasAuthority("ADMIN")
+                        .requestMatchers("/tratamiento/findByMascotaId/**").hasAuthority("ADMIN")
+                        .requestMatchers("/tratamiento/findByVeterinarioId/**").hasAuthority("ADMIN")
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

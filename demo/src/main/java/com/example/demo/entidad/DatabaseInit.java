@@ -70,7 +70,7 @@ public class DatabaseInit implements ApplicationRunner {
         rolRepository.save(new Rol("DUEÑO"));
         rolRepository.save(new Rol("VETERINARIO"));
 
-        Administrador adminSave = new Administrador("admin", "admin123");
+        Administrador adminSave = new Administrador("admin", "a123");
         UserEntity userEntity = saveAdmin(adminSave);
         adminSave.setUserEntity(userEntity);
         administradorRepository.save(adminSave);
