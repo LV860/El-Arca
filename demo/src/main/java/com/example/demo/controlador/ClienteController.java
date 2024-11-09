@@ -213,19 +213,29 @@ public class ClienteController {
     }
 
     @PutMapping("/update/{id}")
-    public Cliente updateCliente(@RequestBody Cliente cliente) {
-        // cliente.setCedula(id); // Asegura que el ID se mantenga al actualizar
-        // cliente.setEstado(clienteService.findById(id).getEstado()); // Asegura que el
-        // ID se mantenga al actualizar
-
+    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
-        logger.info("cliente: " + cliente.getNombre());
-        System.out.println("cliente: " + cliente.getNombre());
-        clienteService.update(cliente);
-        return cliente;
+        // Verifica si el cliente existe antes de intentar actualizarlo
+        Cliente clienteExistente = clienteService.findById(id);
+        if (clienteExistente == null) {
+            logger.warn("Cliente con ID " + id + " no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
 
+        // Asegura que el ID en la URL coincida con el ID en el cuerpo del objeto
+        cliente.setId(id); // Actualiza el ID del cliente en caso de que sea diferente
+
+        // Mantén otros campos que no se desean actualizar (si es necesario)
+        //cliente.setEstado(clienteExistente.getEstado());
+
+        // Lógica de actualización
+        clienteService.update(cliente);
+
+        logger.info("Cliente actualizado: " + cliente.getNombre());
+        return ResponseEntity.ok(cliente);
     }
+
 
     /*
      * @GetMapping("/perfil")

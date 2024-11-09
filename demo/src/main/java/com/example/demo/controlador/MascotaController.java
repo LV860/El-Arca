@@ -2,6 +2,8 @@ package com.example.demo.controlador;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entidad.Cliente;
 import com.example.demo.entidad.Mascota;
 import com.example.demo.servicio.MascotaService;
 
@@ -60,6 +63,17 @@ public class MascotaController {
         return new ResponseEntity<>(mascota, HttpStatus.OK);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Mascota> updateMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
+        Mascota mascotaExistente = mascotaService.SearchById(id);
+        if (mascotaExistente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        mascota.setId(id); // Actualiza el ID del cliente en caso de que sea diferente
+        mascotaService.update(mascota);
+        return ResponseEntity.ok(mascota);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Mascota> agregarMascota(@RequestBody Mascota mascota) {
         mascota.setEstado("En tratamiento");
@@ -76,14 +90,7 @@ public class MascotaController {
         return new ResponseEntity<>("DELETED", HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Mascota> updateMascota(@RequestBody Mascota mascota) {
-        Mascota mascotaActualizada = mascotaService.update(mascota);
-        if (mascotaActualizada == null) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(mascotaActualizada, HttpStatus.OK);
-    }
+    
 
 
     /*@PutMapping("/update/{id}")

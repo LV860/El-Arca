@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.DTOs.VeterinarioDTO;
 import com.example.demo.DTOs.VeterinarioMapper;
 import com.example.demo.entidad.Cliente;
+import com.example.demo.entidad.Mascota;
 import com.example.demo.entidad.UserEntity;
 //import com.example.demo.entidad.Administrador;
 //import com.example.demo.entidad.Cliente;
@@ -88,6 +89,18 @@ public class VeterinarioController {
     @GetMapping("/findCedula/{cedula}")
     public Veterinario findByCedula(@PathVariable("cedula") String cedula) {
         return veterinarioService.findByCedula(cedula);
+    }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Veterinario> updateVet(@PathVariable Long id, @RequestBody Veterinario veterinario) {
+        Veterinario veterinarioExistente = veterinarioService.findById(id);
+        if (veterinarioExistente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        veterinario.setId(id); // Actualiza el ID del cliente en caso de que sea diferente
+        veterinarioService.update(veterinario);
+        return ResponseEntity.ok(veterinario);
     }
 
     @PostMapping("/add")
@@ -159,13 +172,5 @@ public class VeterinarioController {
         veterinarioService.delete(id);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateCliente(@RequestBody Veterinario veterinario) {
-
-        // Logger logger = LoggerFactory.getLogger(ClienteController.class);
-        // logger.info("cliente: " + cliente.getNombre());
-        // System.out.println("cliente: " + cliente.getNombre());
-        veterinarioService.update(veterinario);
-
-    }
+    
 }

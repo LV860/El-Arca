@@ -54,16 +54,20 @@ public class MascotaServiceImpl implements MascotaService {
         // cedula del dueño
         mascota.setCedulaDuenho(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCedulaDuenho());
         mascota.setCliente(mascotaRepositoryJPA.findById(mascota.getId()).orElse(null).getCliente());
+       
         mascotaRepositoryJPA.save(mascota);
-        Cliente cliente = mascota.getCliente();
-        cliente.setEstado("Inactivo");
-        for (int i = 0; i < cliente.getMascotas().size(); i++) {
-            if (cliente.getMascotas().get(i).getEstado().equals("En tratamiento")) {
-                System.out.println(cliente.getMascotas().get(i).getEstado());
-                cliente.setEstado("Activo");
+        Cliente cliente = clienteRepositoryJPA.findClienteByCedula(mascota.getCedulaDuenho()).get(0);
+
+        if(cliente != null) {
+            cliente.setEstado("Inactivo");
+            for (int i = 0; i < cliente.getMascotas().size(); i++) {
+                if (cliente.getMascotas().get(i).getEstado().equals("En tratamiento")) {
+                    System.out.println(cliente.getMascotas().get(i).getEstado());
+                    cliente.setEstado("Activo");
+                }
             }
+            clienteRepositoryJPA.save(cliente);
         }
-        clienteRepositoryJPA.save(cliente);
 
         return mascota;
     }
