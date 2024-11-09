@@ -37,7 +37,11 @@ public class SecurityConfig {
                         .requestMatchers("/admin/find/**").hasAuthority("ADMIN")
                         .requestMatchers("/veterinario/details").hasAuthority("VETERINARIO")
                         .requestMatchers("/clientes/details").hasAuthority("DUEÑO")
+                        .requestMatchers("/dashboard/**").hasAuthority("ADMIN")
+                        .requestMatchers("/veterinario/all").hasAuthority("ADMIN")
                         .requestMatchers("/admin/details").hasAuthority("ADMIN")
+                        .requestMatchers("/mascota/all").hasAuthority("VETERINARIO")
+                        .requestMatchers("/mascota/all").hasAuthority("ADMIN")
                         
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
