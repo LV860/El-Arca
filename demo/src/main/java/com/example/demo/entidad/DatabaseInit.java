@@ -76,9 +76,9 @@ public class DatabaseInit implements ApplicationRunner {
         administradorRepository.save(adminSave);
 
         List<Veterinario> veterinarios = Arrays.asList(
-                Veterinario.builder().cedula("678901239").contrasena("abc").especialidad("Cirugía").urlImagen(
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWse0lHkT7VVmFQpPUZafYrfj-FrrbV7wGg&s")
-                        .nombre("Hugh Jackman").estado("Inactivo").build(),
+                Veterinario.builder().cedula("678901239").contrasena("abc123").especialidad("Cirugía").urlImagen(
+                        "https://png.pngtree.com/png-clipart/20231002/original/pngtree-young-afro-professional-doctor-png-image_13227671.png")
+                        .nombre("Pedro Rodríguez").estado("Inactivo").build(),
                 Veterinario.builder().cedula("213456789").contrasena("pass123").especialidad("Cirugía").urlImagen(
                         "https://iqgvblog.com/wp-content/uploads/2013/03/moda-masculina-lentes-cara-hombre-carametria-caramorfoligia-consultoria-de-imagen.jpg")
                         .nombre("Ana Martínez").estado("Activo").build(),
@@ -151,9 +151,9 @@ public class DatabaseInit implements ApplicationRunner {
             veterinarioRepository.save(veterinario);
         }
 
-        // Crea una lista con los clientes a guardar
+        // Crea una lista con los clientes a guardar 
         List<Cliente> clientes = Arrays.asList(
-                new Cliente(123456789L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"),
+                new Cliente(3208761377L, "ana.perez@gmail.com", "3012345678", "Ana Pérez", "Inactivo"),
                 new Cliente(987654321L, "juan.garcia@gmail.com", "3023456789", "Juan García", "Activo"),
                 new Cliente(102345678L, "maria.lopez@gmail.com", "3034567890", "María López", "Activo"),
                 new Cliente(234567890L, "pedro.martinez@gmail.com", "3045678901", "Pedro Martínez", "Activo"),
