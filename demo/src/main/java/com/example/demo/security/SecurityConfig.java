@@ -41,7 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/admin/details").hasAuthority("ADMIN")
                         .requestMatchers("/mascota/all").hasAnyAuthority("ADMIN", "VETERINARIO")
                         .requestMatchers("/tratamiento/add").hasAnyAuthority("VETERINARIO", "ADMIN")
-                        .requestMatchers("/tratamiento/findByMascotaId/**").hasAnyAuthority("VETERINARIO", "ADMIN")
+                        .requestMatchers("/tratamiento/findByMascotaId/**").hasAnyAuthority("VETERINARIO", "ADMIN", "DUEÑO")
                         .requestMatchers("/tratamiento/findByVeterinarioId/**").hasAnyAuthority("VETERINARIO", "ADMIN")
                         .anyRequest().permitAll())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint));
